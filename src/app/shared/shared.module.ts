@@ -9,7 +9,7 @@ import { ViewOptionsComponent } from './view-options/view-options.component';
     CommonModule,
     RouterModule
   ],
-  exports:[HeaderComponent],
+  exports:[HeaderComponent,ViewOptionsComponent],
   declarations: [HeaderComponent, ViewOptionsComponent]
 })
 export class SharedModule { }
