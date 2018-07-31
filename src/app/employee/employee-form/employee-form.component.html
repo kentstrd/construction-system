@@ -53,11 +53,24 @@
 
         <div formArrayName="addSkills">
           <div *ngFor="let contact of skillsForm.controls; let i=index" [formGroupName]="i">
-            <label for="skills">Additional Skill: </label>
-            <input type="number" class="form-control" formControlName="skill">
-
-
-            <button class="btn btn-sm btn-danger" (click)="deleteSkills()">DELETE</button>
+            <div class="btn-group float-center" dropdown>
+              <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+                Skills
+                <span class="caret"></span>
+              </button>
+              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem">
+                  <a class="dropdown-item">Action</a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-item">Another action</a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-item">Something else here</a>
+                </li>
+              </ul>
+            </div>
+            <button class="btn btn-sm btn-danger float-right" (click)="deleteSkills()">DELETE</button>
             <button class="btn btn-sm btn-warning float-right" (click)="addSkills()">Add</button>
           </div>
         </div>
