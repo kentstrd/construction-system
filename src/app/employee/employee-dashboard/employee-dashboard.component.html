@@ -1,3 +1,23 @@
-<app-employee-details>
-</app-employee-details>
-<a routerLink="/employee-form" class="btn btn-success">New Employee</a>
+<div class="container">
+  <div class="row">
+    <h1>
+      <i class="fa fa-users mb-4"></i> Employee</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="container">
+
+      <app-view-options></app-view-options>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <a routerLink="/employee-form" class="btn btn-info float-right mb-6">
+    <i class="fa fa-arrow-circle-o-right"></i> New Employee</a>
+  <app-employee-details>
+  </app-employee-details>
+</div>
