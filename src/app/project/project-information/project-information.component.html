@@ -1,3 +1,88 @@
-<p>
-  project-information works!
-</p>
+
+
+<div class="container mt-2">
+    <div class="row">
+      <div class="col">
+          <h1> <i class="fa fa-building"></i> Project Information</h1>
+      </div>
+  </div>
+</div>
+
+
+<form>
+  <div class="container col-8 p-0 mt-4 mb-2">
+      <i class="fa fa-info-circle p-2"></i>
+      <small>Profile</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+    <div class="form-group row">
+      <label for="project-name"
+      class="col-2 col-form-label">Project Name</label>
+      <input type="text" class="form-control col">
+    </div>
+
+    <div class="form-group row">
+        <label for="description"
+        class="col-2 col-form-label">Description</label>
+        <textarea name="description" class="form-control col" rows="5"></textarea>
+    </div>
+
+    <div class="form-group row">
+        <label for="date-started"
+        class="col-2 col-form-label">Date Started</label>
+        <input type="date" class="form-control col-3">
+        <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>        
+        <label for="date-ended"
+        class="col-2 col-form-label">Date Ended</label>
+        <input type="date" class="form-control col-3">
+        <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
+    </div>
+  </div>
+
+  <div class="container col-8 p-0 mt-2 mb-2">
+      <i class="fa fa-money p-2"></i>
+      <small>Cost Details</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+      <div class="form-group row">
+        <label for="total-cost"
+        class="col-2 col-form-label">Total Cost</label>
+        <input type="text" class="form-control col-4">
+      </div>
+
+      <label>Disbursements</label>
+
+      <div class="form-group">
+        <div class="row">
+            <input type="text" class="form-control offset-2 col-4">
+            <input type="date" class="form-control offset-2 col-3">
+            <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
+            <button type="button"class="close mb-2 ml-2" 
+            aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <div class="row mt-3">
+            <input type="text" class="form-control offset-2 col-4">
+            <input type="date" class="form-control offset-2 col-3">
+            <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
+            <button type="button"class="close mb-2 ml-2" 
+            aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <div class="row mt-3">
+            <button class="btn btn-link text-dark offset-10 col-1"><i class="fa fa-plus-circle"></i> Add</button>
+        </div>       
+      </div>
+    </div>
+
+    <div class="container col-9 mt-5 mb-5">
+        <button class="btn btn-info offset-9 col-1">Save</button>
+        <button class="btn btn-info ml-3 col-1">Back</button>
+    </div>
+</form>
