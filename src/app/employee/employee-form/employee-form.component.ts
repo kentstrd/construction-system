@@ -9,21 +9,28 @@ import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@ang
 export class EmployeeFormComponent implements OnInit {
   EmployeeForm: FormGroup;
 
+  availSides = [
+    { display: 'None', value: '' },
+    { display: 'buhat', value: 'agek' },
+    { display: 'LUKSO', value: 'atarubs' }
+  ];
+
   constructor(private employeeBuild: FormBuilder) {}
 
   ngOnInit() {
     this.EmployeeForm = this.employeeBuild.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      birtDate: ['', [Validators.required]],
-      Gender: ['', [Validators.required]],
-      Skills: ['', [Validators.required]],
+      firstName: new FormControl('ATARUBS'),
+      lastName: new FormControl('BOJACK'),
+      birtDate: new FormControl(new Date('1/2/2018')),
+      Gender: new FormControl('Male'),
       addSkills: this.employeeBuild.array([]),
       contact: ['', [Validators.required, Validators.minLength(10)]],
-      address: ['', [Validators.required]],
       contacts: this.employeeBuild.array([]),
       addresses: this.employeeBuild.array([])
     });
+    this.addSkills();
+
+    this.EmployeeForm.valueChanges.subscribe(console.log);
   }
 
   // GET FORMS
@@ -43,9 +50,10 @@ export class EmployeeFormComponent implements OnInit {
     return this.EmployeeForm.get('Gender');
   }
 
-  get skillsForm() {
+  get skills() {
     return this.EmployeeForm.get('addSkills') as FormArray;
   }
+
   get contacsForm() {
     return this.EmployeeForm.get('contacts') as FormArray;
   }
@@ -55,26 +63,22 @@ export class EmployeeFormComponent implements OnInit {
 
   // ADD ITEMS
   addSkills() {
-    const skill = this.employeeBuild.group({
-      skill: []
+    const addSkills = this.employeeBuild.group({
+      skill: ['']
     });
-    this.skillsForm.push(skill);
+    this.skills.push(addSkills);
   }
 
   addContact() {
     const phone = this.employeeBuild.group({
-      homeNumber: [],
-      companyNumber: []
+      numbers: ['']
     });
-
     this.contacsForm.push(phone);
   }
 
   addAddress() {
     const add = this.employeeBuild.group({
-      street: [],
-      city: [],
-      province: []
+      newaddress: ['']
     });
 
     this.addressForm.push(add);
@@ -82,7 +86,7 @@ export class EmployeeFormComponent implements OnInit {
 
   // DELETE ITEMS
   deleteSkills(index) {
-    this.skillsForm.removeAt(index);
+    this.skills.removeAt(index);
   }
 
   deleteAddress(index) {
