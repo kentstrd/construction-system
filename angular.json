@@ -28,7 +28,7 @@
               "./node_modules/font-awesome/scss/font-awesome.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": ["./node_modules/popper.js/dist/umd/popper.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
