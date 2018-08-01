@@ -24,7 +24,7 @@ export class EmployeeFormComponent implements OnInit {
       birtDate: new FormControl(new Date('1/2/2018')),
       Gender: new FormControl('Male'),
       addSkills: this.employeeBuild.array([]),
-      contact: ['', [Validators.required, Validators.minLength(10)]],
+      // contact: ['', [Validators.required, Validators.minLength(10)]],
       contacts: this.employeeBuild.array([]),
       addresses: this.employeeBuild.array([])
     });
@@ -54,7 +54,7 @@ export class EmployeeFormComponent implements OnInit {
     return this.EmployeeForm.get('addSkills') as FormArray;
   }
 
-  get contacsForm() {
+  get contacts() {
     return this.EmployeeForm.get('contacts') as FormArray;
   }
   get addressForm() {
@@ -73,7 +73,7 @@ export class EmployeeFormComponent implements OnInit {
     const phone = this.employeeBuild.group({
       numbers: ['']
     });
-    this.contacsForm.push(phone);
+    this.contacts.push(phone);
   }
 
   addAddress() {
@@ -94,7 +94,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   deleteContact(index) {
-    this.contacsForm.removeAt(index);
+    this.contacts.removeAt(index);
   }
 
   // SUBMIT
