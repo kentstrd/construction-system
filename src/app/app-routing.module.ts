@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [{ path: '**', redirectTo: 'dashboard/projects' }];
+const routes: Routes = [{ path: '**', redirectTo: 'project' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
