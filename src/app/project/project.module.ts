@@ -7,9 +7,16 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProjectInformationComponent } from './project-information/project-information.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, ProjectRoutingModule, SharedModule],
-  declarations: [ProjectDashboardComponent, ProjectInformationComponent, ProjectListComponent]
+  imports: [CommonModule,
+            FormsModule, 
+            ProjectRoutingModule, 
+            SharedModule,
+            ReactiveFormsModule],
+  declarations: [ProjectDashboardComponent, 
+                 ProjectInformationComponent, 
+                 ProjectListComponent]
 })
 export class ProjectModule {}
