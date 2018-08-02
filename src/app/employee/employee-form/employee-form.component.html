@@ -13,7 +13,7 @@
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input type="text" class="form-control" formControlName="firstName">
-          <div class="error-message" *ngIf="firstName.invalid && firstName.touched">
+          <div class="error-message text-danger" *ngIf="firstName.invalid && firstName.touched">
             Please Enter First Name
           </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="form-group">
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" formControlName="lastName">
-          <div class="error-message" *ngIf="lastName.invalid && lastName.touched">
+          <div class="error-message text-danger" *ngIf="lastName.invalid && lastName.touched">
             Please Enter Last Name
           </div>
         </div>
@@ -31,7 +31,7 @@
           <label for="birtDate">Birth Date</label>
           <input type="date" class="form-control fa fa-calendar" formControlName="birtDate">
           <i class="fa fa-calendar"></i>
-          <div class="error-message" *ngIf="birtDate.invalid && birtDate.touched">
+          <div class="error-message text-danger" *ngIf="birtDate.invalid && birtDate.touched">
             Wala ka bang BirthDay? WOW WOW GALENG!
           </div>
         </div>
@@ -45,8 +45,8 @@
               <option>FORMULA 2</option>
               <option>FORMULA 3</option>
             </select>
-            <a class="btn nav-link text-dark offset-11 col-2">
-              <i class="fa fa-plus-circle" (click)="addSkills()"></i> Add</a>
+            <a class="btn nav-link text-dark offset-11 col-2" (click)="addSkills()">
+              <i class="fa fa-plus-circle"></i> Add</a>
           </div>
         </div>
 
@@ -55,41 +55,39 @@
           <div class="form-group">
             <div class="radio">
               <label class="mr-4">
-                <input type="radio" name="Gender" value=1 formControlName="Gender" checked> Male
+                <input type="radio" name="Gender" value="Male" formControlName="Gender" checked> Male
               </label>
               <label>
-                <input type="radio" name="Gender" value=0 formControlName="Gender"> Female
+                <input type="radio" name="Gender" value="Female" formControlName="Gender"> Female
               </label>
             </div>
           </div>
         </div>
 
         <div formArrayName="contacts">
-          <label for="contact">Contacts:</label>
           <div *ngFor="let contact of contacts.controls; let i=index" [formGroupName]="i">
             <div class="form-group">
               <label>Contact</label>
-              <input type="text" formControlName="numbers" class="form-control">
+              <input type="number" formControlName="numbers" class="form-control " pattern="[0-9]+">
+              <button type="button" class="close mb-2 ml-2" aria-label="Close" (click)="deleteContact()">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <button type="button" class="close mb-2 ml-2" aria-label="Close">
-              <span aria-hidden="true" (click)="deleteAddress()">&times;</span>
-
-            </button>
           </div>
-          <a class="btn nav-link text-dark offset-11 col-2">
-            <i class="fa fa-plus-circle" (click)="addContact()"></i> Add</a>
+          <a class="btn nav-link text-dark offset-11 col-2" (click)="addContact()">
+            <i class="fa fa-plus-circle"></i> Add</a>
         </div>
 
         <div formArrayName="addresses">
           <div *ngFor="let addresses of addressForm.controls; let i=index" [formGroupName]="i">
             <label for="street">Address </label>
             <input type="text" class="form-control" formControlName="newaddress">
-            <button type="button" class="close mb-2 ml-2" aria-label="Close">
-              <span aria-hidden="true" (click)="deleteAddress()">&times;</span>
+            <button type="button" class="close mb-2 ml-2" aria-label="Close" (click)="deleteAddress()">
+              <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <a class="btn nav-link text-dark offset-11 col-2">
-            <i class="fa fa-plus-circle" (click)="addAddress()"></i> Add</a>
+          <a class="btn nav-link text-dark offset-11 col-2" (click)="addAddress()">
+            <i class="fa fa-plus-circle"></i> Add</a>
         </div>
 
       </Form>

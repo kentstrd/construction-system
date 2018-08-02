@@ -24,7 +24,10 @@ export class EmployeeFormComponent implements OnInit {
       birtDate: ['1/20/2018', Validators.required],
       Gender: ['', Validators.required],
       addSkills: this.employeeBuild.array([], Validators.required),
-      contacts: this.employeeBuild.array([], Validators.minLength(10)),
+      contacts: this.employeeBuild.array(
+        [],
+        [Validators.pattern('[0-9]{0-10}'), Validators.minLength(10)]
+      ),
       addresses: this.employeeBuild.array([], Validators.required)
     });
     this.addSkills();
