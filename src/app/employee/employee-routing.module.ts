@@ -5,10 +5,15 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 
 const routes: Routes = [
-  // { path: 'dashboard/employees', component: EmployeeDashboardComponent },
-  { path: 'employee-details', component: EmployeeDetailsComponent },
-  { path: 'employee-form', component: EmployeeFormComponent },
-  { path: 'employee', component: EmployeeDashboardComponent }
+  {
+    path: 'employee',
+    component: EmployeeDashboardComponent,
+    children: [
+      { path: '', redirectTo: 'details', pathMatch: 'full' },
+      { path: 'details', component: EmployeeDetailsComponent },
+      { path: 'form', component: EmployeeFormComponent }
+    ]
+  }
 ];
 
 @NgModule({

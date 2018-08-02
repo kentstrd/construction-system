@@ -19,16 +19,17 @@ export class EmployeeFormComponent implements OnInit {
 
   ngOnInit() {
     this.EmployeeForm = this.employeeBuild.group({
-      firstName: new FormControl('ATARUBS'),
-      lastName: new FormControl('BOJACK'),
-      birtDate: new FormControl(new Date('1/2/2018')),
-      Gender: new FormControl('Male'),
-      addSkills: this.employeeBuild.array([]),
-      // contact: ['', [Validators.required, Validators.minLength(10)]],
-      contacts: this.employeeBuild.array([]),
-      addresses: this.employeeBuild.array([])
+      firstName: ['ATARUBS', Validators.required],
+      lastName: ['mekloks', Validators.required],
+      birtDate: ['1/20/2018', Validators.required],
+      Gender: ['', Validators.required],
+      addSkills: this.employeeBuild.array([], Validators.required),
+      contacts: this.employeeBuild.array([], Validators.minLength(10)),
+      addresses: this.employeeBuild.array([], Validators.required)
     });
     this.addSkills();
+    this.addContact();
+    this.addAddress();
 
     this.EmployeeForm.valueChanges.subscribe(console.log);
   }

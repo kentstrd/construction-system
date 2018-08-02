@@ -1,31 +1,51 @@
-<table class="table table-hover">
-  <thead class="thead-light">
-    <tr>
-      <th>Name
-      </th>
-      <th>Gender</th>
-      <th>Skills</th>
-      <th>Addressess</th>
-      <th>Contact Number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <a routerLink="/employee-form">
-          <i class="fa fa-arrow-circle-o-right"></i> FULL NAME</a>
-      </td>
-      <td>MALE</td>
-      <td>
-        MADAMING SKILLS
-      </td>
-      <td>MADAMING CONTACT</td>
-      <td>MADAMING ADDRESS</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>
+        <i class="fa fa-users"></i> Employee</h1>
+    </div>
+  </div>
+  <div class="row">
+    <app-view-options class="col-6"></app-view-options>
+    <a class="nav-link text-dark ml-auto" routerLink="/employee/form">
+      <i class="fa fa-plus-circle"></i> New Employee</a>
+  </div>
 
-<ng-template #noClients>
-  <hr>
-  <h5 class="text-danger">THERE ARE NO CLIENTS TO SHOW</h5>
-</ng-template>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Name
+              </th>
+              <th>Gender</th>
+              <th>Skills</th>
+              <th>Addressess</th>
+              <th>Contact Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a routerLink="/employee/form">
+                  <i class="fa fa-arrow-circle-o-right"></i> FULL NAME</a>
+              </td>
+              <td>MALE</td>
+              <td>
+                MADAMING SKILLS
+              </td>
+              <td>MADAMING CONTACT</td>
+              <td>MADAMING ADDRESS</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noClients>
+    <hr>
+    <h5 class="text-danger">THERE ARE NO CLIENTS TO SHOW</h5>
+  </ng-template>
