@@ -29,8 +29,8 @@
           <tbody>
             <tr *ngFor="let employee of employees">
               <td>
-                <a (click)="onSelect(employee)" class="nav-link">
-                  <i class="fa fa-arrow-circle-o-right"></i> {{ employee.firstName }} {{ employee.lastName}}</a>
+                <a (click)="onSelect(employee)" class="nav-link active" routerLink="/employee/form">
+                  {{ employee.firstName }} {{ employee.lastName}}</a>
                 <!--to get the data -->
               </td>
               <td>{{ employee.Gender }}</td>
@@ -45,8 +45,3 @@
       </div>
     </div>
   </div>
-
-  <ng-template #noClients>
-    <hr>
-    <h5 class="text-danger">THERE ARE NO CLIENTS TO SHOW</h5>
-  </ng-template>
