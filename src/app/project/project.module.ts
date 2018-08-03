@@ -14,7 +14,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
             FormsModule, 
             ProjectRoutingModule, 
             SharedModule,
-            ReactiveFormsModule],
+            ReactiveFormsModule,
+          ],
   declarations: [ProjectDashboardComponent, 
                  ProjectInformationComponent, 
                  ProjectListComponent]

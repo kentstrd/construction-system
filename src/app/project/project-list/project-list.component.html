@@ -12,8 +12,19 @@
   </div>
   
 
-<div class="card-deck">
-  <div class="card border-secondary mb-3" style="max-width: 18rem;">
+<div class="card-deck" >
+  <div class="card border-secondary mb-3" style="max-width: 18rem;"
+  *ngFor="let project of projects | slice:0:4; let i=index">
+    <div class="card-header">{{project.projectProfile.projectName}} </div>
+    <div class="card-body text-secondary">
+      <h5 class="card-title">{{project.projectProfile.description}}</h5>
+      <a class="btn card-text" (click)="onView(i)" >view details</a>
+    </div>
+  </div>
+</div>
+<div class="card-deck" >
+  <div class="card border-secondary mb-3" style="max-width: 18rem;"
+  *ngFor="let project of projects | slice:4:8">
     <div class="card-header">Header </div>
     <div class="card-body text-secondary">
       <h5 class="card-title">Secondary card title</h5>

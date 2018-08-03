@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray} from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators} from '@angular/forms';
+import { ProjectService } from '../project.service';
 
 
 @Component({
@@ -9,8 +10,9 @@ import { FormGroup, FormBuilder, FormArray} from '@angular/forms';
 })
 export class ProjectInformationComponent implements OnInit {
   projectForm: FormGroup;
+  isNew: boolean = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private projectService: ProjectService) { }
 
 
   ngOnInit() {
@@ -27,8 +29,14 @@ export class ProjectInformationComponent implements OnInit {
       }),
     });
     this.addDisbursement();
-    this.projectForm.valueChanges.subscribe(console.log)
-
+    // this.projectForm.valueChanges.subscribe(console.log)
+    this.projectService.selectedProject.subscribe(project => {
+      if (project.id != null) {
+        this.isNew = false;
+        this.projectForm.value.projectProfile = project.projectProfile
+        this.projectForm.value.projectCost = project.projectCost
+      }
+    });
   }
   
   get disbursements(){
@@ -46,6 +54,28 @@ export class ProjectInformationComponent implements OnInit {
   disbursementDeleteForm(i) {
     this.disbursements.removeAt(i);
   }
-}
+
+
+  onSubmit(){
+    const newProject ={
+      id: this.generateId(),
+      projectProfile: this.projectForm.value.projectProfile,
+      projectCost: this.projectForm.value.projectCost
+      }
+      this.projectService.addProject(newProject);
+      // console.log(this.projectService.projects);
+    }
+    generateId() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = (Math.random() * 16) | 0,
+          v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    }
+  }
+
+  
+
+
 
 
