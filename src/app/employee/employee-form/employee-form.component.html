@@ -8,11 +8,25 @@
   <label>Last Name</label>
   <input type="text" name="lastName" [(ngModel)]="lastName">
 
+  <label>Skills</label>
   <select name="skills" [(ngModel)]="skills">
-    <option selected>
-      {{ this.skills }}
+    <option *ngFor="let option of skills" [value]="option">
+      {{ option }}
     </option>
   </select>
+  <label class="mr-4">
+    <input type="radio" name="Gender" value="Male" [(ngModel)]="Gender" required> Male
+  </label>
+  <label>
+    <input type="radio" name="Gender" value="Female" [(ngModel)]="Gender" required> Female
+  </label>
+
+  <label>Address</label>
+  <input type="text" name="address" [(ngModel)]="address">
+
+  <label>Contacts</label>
+  <input type="text" name="contacts" pattern="[a-z0-9_-]{8,15}$" [(ngModel)]="contacts">
+
 
   <input type="submit" value="Add Employee" class="btn btn-primary btn-sm" [disabled]="!this.firstName ">
   <button class="btn success btn-sm " [hidden]="!this.firstName ">Clear</button>

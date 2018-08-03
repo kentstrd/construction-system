@@ -10,6 +10,7 @@ import { EmployeeDetailsService } from '../services/Employee-details.service';
 })
 export class EmployeeFormComponent implements OnInit {
   @Input() EmployeeForm: FormGroup;
+  employees: Employee[];
 
   public countries = [];
   // public isButtonVisible: boolean = false;
@@ -20,9 +21,9 @@ export class EmployeeFormComponent implements OnInit {
   lastName: string;
   birthDate: any;
   Gender: string;
-  skills: string;
-  contacts: string;
-  address: string;
+  skills: Array<string>;
+  contacts: Array<string>;
+  address: Array<string>;
 
   isNew: boolean = true;
 
@@ -33,8 +34,6 @@ export class EmployeeFormComponent implements OnInit {
     this.countries = [{ value: 'AGEK' }, { value: 'LUKSO' }, { value: 'Imba' }];
     this.powers = [{ value: 'meklok' }, { value: 'lusko' }, { value: 'magmahal' }];
   }
-
-  // KNOW HOW TO MAKE THE EMPLOYEE FORM ARRAY
 
   ngOnInit() {
     this.EmployeeForm = this.employeeBuild.group({
@@ -65,9 +64,9 @@ export class EmployeeFormComponent implements OnInit {
         this.firstName = employee.firstName;
         this.lastName = employee.lastName;
         this.birthDate = employee.birthDate;
-        this.skills = employee.skills[this.skills];
-        this.contacts = employee.contacts[this.skills];
-        this.address = employee.address[this.skills];
+        this.skills = employee.skills;
+        this.contacts = employee.contacts;
+        this.address = employee.address;
       }
     });
   }
@@ -157,9 +156,9 @@ export class EmployeeFormComponent implements OnInit {
         lastName: this.lastName,
         birthDate: new Date(),
         Gender: this.Gender,
-        skills: [this.skills],
-        contacts: [this.contacts],
-        address: [this.address]
+        skills: this.skills,
+        contacts: this.contacts,
+        address: this.address
       };
       // add Emplpyee
       this.employeeDetailsService.addEmployee(newEmployee);
@@ -171,9 +170,9 @@ export class EmployeeFormComponent implements OnInit {
         lastName: this.lastName,
         birthDate: new Date(),
         Gender: this.Gender,
-        skills: [this.skills],
-        contacts: [this.contacts],
-        address: [this.address]
+        skills: this.skills,
+        contacts: this.contacts,
+        address: this.address
       };
       // update Employee
       this.employeeDetailsService.updateEmployee(updateEmployee);
