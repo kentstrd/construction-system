@@ -1,0 +1,134 @@
+<div class="container mt-2">
+  <div class="row">
+    <h1>
+      <i class="fa fa-users mb-4"></i> Employee</h1>
+  </div>
+</div>
+
+
+<Form [formGroup]="EmployeeForm" (ngSubmit)="onSubmit()">
+  <div class="container col-8 p-0 mt-4 mb-2">
+    <i class="fa fa-info-circle p-2"></i>
+    <small>Profile</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+    <div class="form-group row">
+      <label class="col-2 col-form-label" for="firstName">First Name</label>
+      <input type="text" class="form-control col-3" formControlName="firstName" required>
+      <div class="alert text-danger" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+        <div [hidden]="!firstName.errors.required">
+          Please Input First Name
+        </div>
+      </div>
+
+      <label class="col-2 col-form-label" for="lastName">Last Name</label>
+      <input type="text" class="form-control col-3" formControlName="lastName" required>
+      <div class="alert text-danger" *ngIf="lastName.errors && (lastName.dirty ||lastName.touched)">
+        <div [hidden]="!lastName.errors.required">
+          Please Input Last Name
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-2 col-form-label" for="birthDate">Birth Date</label>
+        <input type="date" class="form-control col-3 fa fa-calendar" formControlName="birthDate" required>
+        <!-- <div class="alert text-danger" *ngIf="birthDate.errors && (birthDate.dirty ||birthDate.touched)">
+        <div [hidden]="!birtDate.errors.required">
+          Wala ka bang BirthDay? WOW WOW GALENG!
+        </div>
+      </div> -->
+
+        <label class="col-2 col-form-label">Gender</label>
+        <div class="form-group mt-2">
+          <div class="radio">
+            <label class="mr-4">
+              <input type="radio" name="Gender" value="Male" formControlName="Gender" required> Male
+            </label>
+            <label>
+              <input type="radio" name="Gender" value="Female" formControlName="Gender" required> Female
+            </label>
+            <div class="alert text-danger" *ngIf="Gender.invalid">
+              Gender is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div formArrayName="addSkills">
+          <div *ngFor="let skill of skills.controls; let i=index" [formGroupName]='i'>
+            <label class="col-2 col-form-label" for="addSkills">Skills</label>
+            <select class="col-3 custom-select" formControlName="skill" required>
+              <option *ngFor="let power of powers" [value]="power.value">{{ power.value }}</option>
+            </select>
+            <!-- edit WIDTH OF SELECT -->
+            <!-- <div class="alert text-danger" *ngIf="skill.errors && (skill.dirty || skill.touched)">
+                    <div [hidden]="!skill.errors.required">
+                      Walang SKills?
+                    </div>
+                </div> -->
+            <a class="btn nav-link text-dark col-10" (click)="addSkills()">
+              <i class="fa fa-plus-circle"></i> Add</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container col-8 p-0 mt-2 mb-2">
+    <i class="fa fa-id-card p-2"></i>
+    <small>Contact Information</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+    <div class="row">
+      <div class="form-group" formArrayName="contacts">
+        <div *ngFor="let contact of contacts.controls; let i=index" [formGroupName]="i">
+          <label class="col-2 col-form-label">Contact</label>
+          <input type="number" formControlName="numbers" class="offset-2 col-8">
+
+          <!-- <button type="button" class="close mb-2 ml-2" aria-label="Close" (click)="deleteContact()">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+          <!-- <div class="text-danger" *ngIf="contacts.invalid && (contacts.dirty || contacts.touched)">
+                  AWAWS
+                </div> -->
+          <a class="btn nav-link text-dark offset-10 col-1" (click)="addContact()">
+            <i class="fa fa-plus-circle"></i> Add</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group" formArrayName="addresses">
+        <div *ngFor="let addresses of addressForm.controls; let i=index" [formGroupName]="i">
+          <label class="col-2 col-form-label" for="street">Address </label>
+          <input type="text" class="offset-2 col-8" formControlName="address">
+          <!-- <button type="button" class="close mb-2 ml-2" aria-label="Close" *ngIf="!isButtonVisible" (click)="deleteAddress()">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+        </div>
+        <div class="text-danger" *ngIf="addressForm.invalid && (addressForm.dirty || addressForm.touched)">
+          Please Input Address
+        </div>
+        <a class="btn nav-link text-dark offset-10 col-1" (click)="addAddress()">
+          <i class="fa fa-plus-circle"></i> Add</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container col-9 mt-4">
+    <button type="submit" class="btn btn-sm btn-success offset-9 col-1">Submit</button>
+    <button class="btn btn-sm btn-info ml-3 col-1">back</button>
+  </div>
+</Form>
+
+
+<div class="container">
+  <h5>{{ EmployeeForm.value | json}}</h5>
+
+</div>

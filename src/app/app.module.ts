@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ProjectModule } from './project/project.module';
 import { EmployeeModule } from './employee/employee.module';
+import { EmployeeDetailsService } from './employee/services/Employee-details.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,9 +18,13 @@ import { EmployeeModule } from './employee/employee.module';
     SharedModule,
     ProjectModule,
     EmployeeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [EmployeeDetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
