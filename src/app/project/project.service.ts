@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class ProjectService {
   projects: Project[];
+  selectedToView;
+
 
   public projectSource = new BehaviorSubject<Project>({
     id: null,
@@ -28,6 +30,7 @@ export class ProjectService {
   selectedProject = this.projectSource.asObservable();
 
   constructor() {
+    this.selectedToView = '',
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
@@ -66,7 +69,7 @@ export class ProjectService {
    }
 
 
-   addProject(project: Project) {
+  addProject(project: Project) {
     this.projects.unshift(project);
   }
   getProjects(): Observable<Project[]> {

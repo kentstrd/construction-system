@@ -7,7 +7,7 @@
   
   <div class="row">
       <app-view-options class="col-6"></app-view-options>
-      <a class="nav-link text-dark ml-auto" routerLink="/project/information" >
+      <a class="nav-link text-dark ml-auto" routerLink="/project/form" >
         <i class="fa fa-plus-circle"></i> New Project</a>
   </div>
   
@@ -18,7 +18,7 @@
     <div class="card-header">{{project.projectProfile.projectName}} </div>
     <div class="card-body text-secondary">
       <h5 class="card-title">{{project.projectProfile.description}}</h5>
-      <a class="btn card-text" (click)="onView(i)" >view details</a>
+      <a class="btn card-text" routerLink="/project/form/view" (click)="onView(i)" >view details</a>
     </div>
   </div>
 </div>

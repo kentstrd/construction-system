@@ -19,6 +19,13 @@ export class ProjectListComponent implements OnInit {
   }
 
   onView(index){
-       console.log(this.projects.map(({ id }) => id));
+    // const viewProject ={
+    //   id: this.projects[index].id,
+    //   projectProfile: this.projects[index].projectProfile,
+    //   projectCost: this.projects[index].projectCost
+    //   }
+      this.projectService.selectedToView = index;
+       console.log(this.projectService.selectedToView)
+       console.log(this.projects[this.projectService.selectedToView])
   }
 }
