@@ -160,7 +160,7 @@ export class EmployeeFormComponent implements OnInit {
         contacts: this.contacts,
         address: this.address
       };
-      // add Emplpyee
+      // add Employee
       this.employeeDetailsService.addEmployee(newEmployee);
     } else {
       // Create Employee to be Updated

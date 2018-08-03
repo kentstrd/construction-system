@@ -1,34 +1,75 @@
 <!-- Copy the form from reactive Form File-->
 
+<div class="container mt-2">
+  <div class="row">
+    <h1>
+      <i class="fa fa-users mb-4"></i> Employee</h1>
+  </div>
+</div>
 
 <form (ngSubmit)="onSubmit()">
-  <label>First Name</label>
-  <input type="text" name="firstName" [(ngModel)]="firstName">
 
-  <label>Last Name</label>
-  <input type="text" name="lastName" [(ngModel)]="lastName">
+  <div class="container col-8 p-0 mt-4 mb-2">
+    <i class="fa fa-info-circle p-2"></i>
+    <small>Profile</small>
+  </div>
 
-  <label>Skills</label>
-  <select name="skills" [(ngModel)]="skills">
-    <option *ngFor="let option of skills" [value]="option">
-      {{ option }}
-    </option>
-  </select>
-  <label class="mr-4">
-    <input type="radio" name="Gender" value="Male" [(ngModel)]="Gender" required> Male
-  </label>
-  <label>
-    <input type="radio" name="Gender" value="Female" [(ngModel)]="Gender" required> Female
-  </label>
+  <div class="container border border-secondary col-8 p-5">
+    <div class="form-group row">
+      <label class="col-2">First Name</label>
+      <input class="col-3 form-control mb-4" type="text" name="firstName" [(ngModel)]="firstName">
 
-  <label>Address</label>
-  <input type="text" name="address" [(ngModel)]="address">
-
-  <label>Contacts</label>
-  <input type="text" name="contacts" pattern="[a-z0-9_-]{8,15}$" [(ngModel)]="contacts">
+      <label class="col-2">Last Name</label>
+      <input class="col-4 form-control mb-4" type="text" name="lastName" [(ngModel)]="lastName">
 
 
-  <input type="submit" value="Add Employee" class="btn btn-primary btn-sm" [disabled]="!this.firstName ">
-  <button class="btn success btn-sm " [hidden]="!this.firstName ">Clear</button>
+      <label class="col-2 form-label" for="birthDate">Birth Date</label>
+      <input type="date" class="form-control col-3" [(ngModel)]="birthDate" required>
+
+      <label class="col-2 col-form-label">Gender</label>
+      <div class="form-group mt-2">
+        <div class="radio">
+
+          <label class="mr-4">
+            <input type="radio" class="ml-2" name="Gender" value="Male" [(ngModel)]="Gender" required> Male
+          </label>
+          <label>
+            <input type="radio" name="Gender" value="Female" [(ngModel)]="Gender" required> Female
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 col-form-label">Skills</label>
+      <select class="col-3 custom-select" name="skills" [(ngModel)]="skills">
+        <option *ngFor="let option of skills" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="container col-8 p-0 mt-2 mb-2">
+    <i class="fa fa-id-card p-2"></i>
+    <small>Contact Information</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Address</label>
+      <input class="col-4 form-control" type="text" name="address" [(ngModel)]="address">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Contacts</label>
+      <input class="col-4 form-control" type="text" name="contacts" pattern="[a-z0-9_-]{8,15}$" [(ngModel)]="contacts">
+    </div>
+  </div>
+
+
+  <div class="container col-9 mt-4">
+    <input type="submit" class="btn btn-sm btn-success offset-9 col-1" value="Add">
+    <button class="btn btn-sm btn-info ml-3 col-1">back</button>
+  </div>
 
 </form>
