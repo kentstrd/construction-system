@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
 import { ProjectService } from '../project.service';
 
 
@@ -9,13 +9,28 @@ import { ProjectService } from '../project.service';
   styleUrls: ['./project-information.component.scss']
 })
 export class ProjectInformationComponent implements OnInit {
+  form: FormGroup = new FormGroup({});
+  formProps = [];
   projectForm: FormGroup;
   isNew: boolean = true;
+  data:{};
+  
 
-  constructor(private fb: FormBuilder, private projectService: ProjectService) { }
+  constructor(private fb: FormBuilder, private projectService: ProjectService) { 
+    this.data = this.projectService.project;
+  }
 
 
   ngOnInit() {
+    // const formDataObj = {};
+    // for (const prop of Object.keys(this.data)){
+    //   formDataObj[prop] = new FormControl(this.data[prop])
+    //   this.formProps.push(prop)
+    // }
+    // this.form = new FormGroup(formDataObj)
+
+
+
     this.projectForm = this.fb.group({
       projectProfile: this.fb.group({
         projectName: [''],

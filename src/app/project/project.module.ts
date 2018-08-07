@@ -8,18 +8,23 @@ import { SharedModule } from '../shared/shared.module';
 import { ProjectInformationComponent } from './project-information/project-information.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ProjectFormViewComponent } from './project-form-view/project-form-view.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { ProjectFormViewComponent } from './project-form-view/project-form-view.component';
 
 @NgModule({
-  imports: [CommonModule,
+  imports: [
+            CommonModule,
             FormsModule, 
             ProjectRoutingModule, 
             SharedModule,
             ReactiveFormsModule,
           ],
-  declarations: [ProjectDashboardComponent, 
+  declarations: [
+                 ProjectDashboardComponent, 
                  ProjectInformationComponent, 
-                 ProjectListComponent, ProjectFormViewComponent, ProjectFormComponent]
+                 ProjectListComponent,
+                 ProjectFormComponent,
+                 ProjectFormViewComponent
+                ]
 })
 export class ProjectModule {}

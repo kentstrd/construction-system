@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Project } from './project';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class ProjectService {
   projects: Project[];
   selectedToView;
+  project:{};
+
 
 
   public projectSource = new BehaviorSubject<Project>({
@@ -30,6 +33,10 @@ export class ProjectService {
   selectedProject = this.projectSource.asObservable();
 
   constructor() {
+    this.project={
+      projectName:'building project',
+      age:'12'
+    }
     this.selectedToView = '',
     this.projects = [
       {
@@ -62,9 +69,8 @@ export class ProjectService {
             cost: '123124',
             date: new Date('1/23/1901'),
         }
-    }
-  }
-
+       }
+     }
     ]
    }
 

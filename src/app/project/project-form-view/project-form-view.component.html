@@ -59,11 +59,22 @@
     </div>
 
     <label>Disbursements</label>
-    <div>
-       <!-- <div class="form-group"
-       *ngIf="projects[this.selectedIndex].projectCost.disbursement > 0">
+    {{disbursements.length}}
+    <div class="form-group" *ngIf="disbursements.length == undefined">
+        <div class="row mb-2">
+           <input type="text"
+            class="form-control offset-2 col-4 "
+            value="{{projects[this.selectedIndex].projectCost.disbursement.cost}}">
+            <input type="text"
+            class="form-control offset-2 col-3"
+            value="{{projects[this.selectedIndex].projectCost.disbursement.date}}">              
+            <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
+         </div>             
+      </div> 
+
+       <div class="form-group" *ngIf="disbursements.length != undefined">
          <div class="row mb-2" 
-         *ngFor="let disbursement of projects[this.selectedIndex].projectCost.disbursement; 
+         *ngFor="let disbursement of disbursements; 
          let i=index">
             <input type="text"
              class="form-control offset-2 col-4 "
@@ -73,19 +84,8 @@
              value="{{projects[this.selectedIndex].projectCost.disbursement[i].date}}">              
              <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
           </div>             
-       </div> -->
-       <div class="form-group">
-         <div class="row mb-2">
-            <input type="text"
-             class="form-control offset-2 col-4 "
-             value="{{projects[this.selectedIndex].projectCost.disbursement.cost}}">
-             <input type="text"
-             class="form-control offset-2 col-3"
-             value="{{projects[this.selectedIndex].projectCost.disbursement.date}}">              
-             <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
-          </div>             
-       </div>          
-    </div>
+       </div>         
+
 
   </div>
 

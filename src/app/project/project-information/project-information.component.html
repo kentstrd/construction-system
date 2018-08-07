@@ -7,6 +7,14 @@
           </div>
       </div>
     </div>
+
+    <!-- <form [formGroup]="form">
+      <div *ngFor="let prop of formProps">
+        <input type="text"[formControlName]="prop">
+      </div>
+      
+      <pre>{{ form.value | json}}</pre>
+    </form> -->
     
     
     <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
@@ -19,9 +27,8 @@
         <div class="form-group row">
           <label for="project-name" 
           class="col-2 col-form-label">Project Name</label>
-          <input  type = "number"
-          [value]="projectForm.get('projectProfile.projectName').value 
-          | number"
+          <input  type = "text"
+          [value]="projectForm.get('projectProfile.projectName').value"
           formControlName="projectName" class="form-control col">
         </div>
     
