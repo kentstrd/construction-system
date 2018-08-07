@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
 import { ProjectService } from '../project.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,8 +17,10 @@ export class ProjectInformationComponent implements OnInit {
   data:{};
   
 
-  constructor(private fb: FormBuilder, private projectService: ProjectService) { 
-    this.data = this.projectService.project;
+  constructor( private fb: FormBuilder, 
+               private projectService: ProjectService, 
+               public router: Router) { 
+    
   }
 
 
@@ -78,6 +81,7 @@ export class ProjectInformationComponent implements OnInit {
       projectCost: this.projectForm.value.projectCost
       }
       this.projectService.addProject(newProject);
+      this.router.navigate(['/project'])
       // console.log(this.projectService.projects);
     }
     generateId() {

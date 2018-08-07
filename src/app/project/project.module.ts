@@ -10,6 +10,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectFormViewComponent } from './project-form-view/project-form-view.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ProjectFormViewComponent } from './project-form-view/project-form-view.
                  ProjectInformationComponent, 
                  ProjectListComponent,
                  ProjectFormComponent,
-                 ProjectFormViewComponent
+                 ProjectFormViewComponent,
+                 UpdateComponent
                 ]
 })
 export class ProjectModule {}

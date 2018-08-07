@@ -5,6 +5,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectInformationComponent } from './project-information/project-information.component';
 import { ProjectFormViewComponent } from './project-form-view/project-form-view.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'list', component: ProjectListComponent },
       { path: 'form', component: ProjectFormComponent, children:[
         {path: '', component: ProjectInformationComponent},
-        {path: 'view', component: ProjectFormViewComponent}
+        {path: 'view', component: ProjectFormViewComponent},
+        {path: 'edit', component: UpdateComponent}
       ] }
     ]
   }

@@ -8,8 +8,7 @@ import { Validators } from '@angular/forms';
 })
 export class ProjectService {
   projects: Project[];
-  selectedToView;
-  project:{};
+  selected;
 
 
 
@@ -33,25 +32,21 @@ export class ProjectService {
   selectedProject = this.projectSource.asObservable();
 
   constructor() {
-    this.project={
-      projectName:'building project',
-      age:'12'
-    }
-    this.selectedToView = '',
+    this.selected = [],
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
         projectProfile: {
           projectName: 'Building Project',
           description: 'Building Project no.1',
-          dateStarted: new Date('1/23/1901'),
-          dateEnded: new Date('1/23/1902'),
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
       },
         projectCost: {
           totalCost: 123124,
           disbursement: {
               cost: '123124',
-              date: new Date('1/23/1901'),
+              date: '1997-07-23',
           }
       }
     },
@@ -60,14 +55,14 @@ export class ProjectService {
       projectProfile: {
         projectName: 'Building Project',
         description: 'Building Project no.2',
-        dateStarted: new Date('1/23/1901'),
-        dateEnded: new Date('1/23/1902'),
+        dateStarted: '1997-07-13',
+        dateEnded: '2001-01-17',
     },
       projectCost: {
         totalCost: 123124,
         disbursement: {
             cost: '123124',
-            date: new Date('1/23/1901'),
+            date: '1997-07-13',
         }
        }
      }
@@ -80,5 +75,12 @@ export class ProjectService {
   }
   getProjects(): Observable<Project[]> {
     return of(this.projects);
+  }
+  updateProject(project: Project) {
+    this.projects.forEach((current, index) => {
+      if (project.id === current.id) {
+        this.projects[index] = project
+      }
+    });
   }
 }

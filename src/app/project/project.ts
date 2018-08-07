@@ -3,14 +3,14 @@ export class Project {
     projectProfile: {
         projectName: string
         description: string
-        dateStarted: Date
-        dateEnded: Date
+        dateStarted: string
+        dateEnded: string
     }
     projectCost: {
         totalCost: number
         disbursement:  {
             cost: string
-            date: Date
+            date: string
         }
     }
   }

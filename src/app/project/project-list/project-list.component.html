@@ -15,7 +15,11 @@
 <div class="card-deck" >
   <div class="card border-secondary mb-3" style="max-width: 18rem;"
   *ngFor="let project of projects | slice:0:4; let i=index">
-    <div class="card-header">{{project.projectProfile.projectName}} </div>
+    <div class="card-header text-secondary p-1 pl-2 pt-2">
+     <small> {{project.projectProfile.projectName}} </small>
+    <a class="btn float-right text-secondary p-0" routerLink="/project/form/edit" (click)="onEdit(i)" >
+     <h4 class="p-0 m-0"> <i class="fa fa-edit"></i></h4></a>      
+    </div>
     <div class="card-body text-secondary">
       <h5 class="card-title">{{project.projectProfile.description}}</h5>
       <a class="btn card-text" routerLink="/project/form/view" (click)="onView(i)" >view details</a>
@@ -24,12 +28,16 @@
 </div>
 <div class="card-deck" >
   <div class="card border-secondary mb-3" style="max-width: 18rem;"
-  *ngFor="let project of projects | slice:4:8">
-    <div class="card-header">Header </div>
-    <div class="card-body text-secondary">
-      <h5 class="card-title">Secondary card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
+  *ngFor="let project of projects | slice:4:8; let i=index">
+  <div class="card-header text-secondary p-1 pl-2 pt-2">
+      <small> {{project.projectProfile.projectName}} </small>
+     <a class="btn float-right text-secondary p-0" routerLink="/project/form/edit" (click)="onEdit(i + 4)" >
+      <h4 class="p-0 m-0"> <i class="fa fa-edit"></i></h4></a>      
+     </div>
+  <div class="card-body text-secondary">
+    <h5 class="card-title">{{project.projectProfile.description}}</h5>
+    <a class="btn card-text" routerLink="/project/form/view" (click)="onView(i + 4)" >view details</a>
+  </div>
   </div>
 </div>
 <app-pagination class="float-right"></app-pagination>

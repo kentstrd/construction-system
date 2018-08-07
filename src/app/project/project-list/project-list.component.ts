@@ -18,14 +18,16 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
+  onEdit(index){
+    this.projectService.selected = this.projects[index];
+  }
+
   onView(index){
     // const viewProject ={
     //   id: this.projects[index].id,
     //   projectProfile: this.projects[index].projectProfile,
     //   projectCost: this.projects[index].projectCost
     //   }
-      this.projectService.selectedToView = index;
-       console.log(this.projectService.selectedToView)
-       console.log(this.projects[this.projectService.selectedToView])
+      this.projectService.selected = this.projects[index];
   }
 }
