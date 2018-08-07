@@ -26,12 +26,12 @@ export class EmployeeDetailsService {
       {
         id: '1',
         firstName: 'Jonas',
-        lastName: 'bonax',
+        lastName: 'brothers',
         birthDate: new Date('1/23/1901'),
         Gender: 'Male',
-        skills: ['lakas matulog', 'atargek', 'anoks'],
-        contacts: ['12312312312', '213123', '12321312312'],
-        address: ['ageek town', 'meshlokasdsad', 'asdasasd']
+        skills: ['Malandi', 'masiapg uminom', 'talented'],
+        contacts: ['09126322', '0926672711', '091238422'],
+        address: ['town province', 'town', 'korea']
       },
       {
         id: '2',
@@ -39,19 +39,19 @@ export class EmployeeDetailsService {
         lastName: 'joklom',
         birthDate: new Date('12/22/1903'),
         Gender: 'Female',
-        skills: ['lakas matulog', 'atargek', 'meloks'],
-        contacts: ['12312312312', '213123', '12321312312'],
-        address: ['ageek town', 'meshlokasdsad', 'asdasasd']
+        skills: ['lakas tumalon', 'kindat', 'giling'],
+        contacts: ['0912209222', '091110992', '0912384621'],
+        address: ['Ghost Town', 'England', 'Africa']
       },
       {
         id: '3',
-        firstName: 'jomlom',
-        lastName: 'mesloks',
+        firstName: 'john',
+        lastName: 'doe',
         birthDate: new Date('12/22/1920'),
-        Gender: 'male',
-        skills: ['lakas matulog', 'atargek', 'meloks'],
-        contacts: ['12312312312', '213123', '12321312312'],
-        address: ['ageek town', 'meshlokasdsad', 'asdasasd']
+        Gender: 'Male',
+        skills: ['lakas matulog', 'gulong gulong', 'ngiti'],
+        contacts: ['09202200912', '0929112011'],
+        address: ['Mindanao, Dubai']
       }
     ];
   }

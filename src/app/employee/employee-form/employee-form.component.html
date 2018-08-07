@@ -7,8 +7,8 @@
   </div>
 </div>
 
-<form (ngSubmit)="onSubmit()">
-
+<form #employeeForm="ngForm" (ngSubmit)="onSubmit()">
+  <h5>{{ employeeForm.form.valid }}</h5>
   <div class="container col-8 p-0 mt-4 mb-2">
     <i class="fa fa-info-circle p-2"></i>
     <small>Profile</small>
@@ -31,7 +31,7 @@
         <div class="radio">
 
           <label class="mr-4">
-            <input type="radio" class="ml-2" name="Gender" value="Male" [(ngModel)]="Gender" required> Male
+            <input type="radio" class="ml-2" name="Gender" value="Male" [(ngModel)]="Gender"> Male
           </label>
           <label>
             <input type="radio" name="Gender" value="Female" [(ngModel)]="Gender" required> Female
@@ -62,14 +62,21 @@
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Contacts</label>
-      <input class="col-4 form-control" type="text" name="contacts" pattern="[a-z0-9_-]{8,15}$" [(ngModel)]="contacts">
+      <input class="col-4 form-control" type="number" name="contacts" pattern="[a-z0-9_-]{8,15}$" maxlength="9" [(ngModel)]="contacts">
     </div>
   </div>
 
 
   <div class="container col-9 mt-4">
-    <input type="submit" class="btn btn-sm btn-success offset-9 col-1" value="Add">
+    <button type="button" class="btn btn-sm btn-success offset-9 col-1" value="Add" ng-click="" (click)="onSubmit()">Save</button>
     <button class="btn btn-sm btn-info ml-3 col-1" routerLink="/employee/details">back</button>
   </div>
 
+  <div FormArrayName="contacts">
+    <div *ngFor="let number of contact.controls; let i = index" formGroupName="i">
+      <input formControlName="phone">
+    </div>
+    <button class="btn btn-success" (click)="addInput()">+</button>
+
+  </div>
 </form>

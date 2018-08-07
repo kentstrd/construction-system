@@ -17,13 +17,13 @@ export class EmployeeFormComponent implements OnInit {
   public powers = [];
   isFormValid: boolean = null;
   id: string;
-  firstName: string;
-  lastName: string;
-  birthDate: any;
-  Gender: string;
-  skills: Array<string>;
-  contacts: Array<string>;
-  address: Array<string>;
+  firstName: string = 'John';
+  lastName: string = 'Smith';
+  birthDate: any = '1/20/2018';
+  Gender: string = 'Male';
+  skills: Array<string> = ['Higa', 'Matulog', 'Talon'];
+  contacts: Array<string> = ['09121234123'];
+  address: Array<string> = ['Manila, Metro Manila'];
 
   isNew: boolean = true;
 
@@ -36,25 +36,25 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.EmployeeForm = this.employeeBuild.group({
-      thisfirstName: ['ATARUBS', Validators.required],
-      lastName: ['mekloks', Validators.required],
-      birthDate: ['1/20/2018', Validators.required],
-      Gender: ['', Validators.required],
-      country: [''],
-      addSkills: this.employeeBuild.array([], Validators.required),
-      contacts: this.employeeBuild.array(
-        [],
-        [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.minLength(10)]
-      ),
-      addresses: this.employeeBuild.array([], Validators.required)
-    });
+    // this.EmployeeForm = this.employeeBuild.group({
+    //   thisfirstName: ['ATARUBS', Validators.required],
+    //   lastName: ['mekloks', Validators.required],
+    //   birthDate: ['1/20/2018', Validators.required],
+    //   Gender: ['', Validators.required],
+    //   country: [''],
+    //   addSkills: this.employeeBuild.array([], Validators.required),
+    //   contacts: this.employeeBuild.array(
+    //     [],
+    //     [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.minLength(10)]
+    //   ),
+    //   addresses: this.employeeBuild.array([], Validators.required)
+    // });
     // this.addSkills();
     // this.addContact();
     // this.addAddress();
     // this.addCountry();
 
-    // this.EmployeeForm.valueChanges.subscribe(console.log);
+    this.EmployeeForm.valueChanges.subscribe(console.log);
 
     // SUBSCRIBE TO THE SELECTED LOG OBSERVABLE
     this.employeeDetailsService.selectedEmployee.subscribe(employee => {

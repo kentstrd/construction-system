@@ -1,0 +1,59 @@
+<form [formGroup]="form">
+  <div class="container row mt-4">
+
+    <!-- <div class="row" *ngFor="let prop of employeeProps">
+      <label class="form-label"> {{ prop.label }}</label>
+
+      <div [ngSwitch]="prop.type">
+
+        <input class="form-control" *ngSwitchCase="'text'" [type]="prop.type" [formControlName]="prop.key">
+        <input class="form-control" type="date" *ngSwitchCase="'date'" [type]="prop.type" [formControlName]="prop.key">
+        <input class="form-control" type="number" *ngSwitchCase="'number'" [type]="prop.type" [formControlName]="prop.key">
+
+        <div *ngSwitchCase="'radio'">
+          <label class="custom-control custom-radio" *ngFor="let option of prop.options">
+            <input class="custom-control-indicator" type="radio" [name]="prop.key" [formControlName]="prop.key" [value]="option.value"> {{ option.label }}
+          </label>
+        </div>
+
+        <select class="custom-select" *ngSwitchCase="'select'" [formControlName]="prop.key">
+          <option *ngFor="let option of prop.options" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+    </div> -->
+
+
+    <label>First Name</label>
+    <input type="text" formControlName="firstName">
+
+
+    <label>Last Name</label>
+    <input type="text" formControlName="lastName">
+
+    <label>Gender</label>
+    <input type="text" formControlName="Gender">
+
+    <div formArrayName="phones">
+      <label>Contact</label>
+      <input formControlName="HomeNumber">
+      <div *ngFor="let phone of PhoneForms; let i = index;" [formGroupName]="i">
+        <input formControlName="HomeNumber">
+        <button class="btn btn-danger btn-md float-left" (click)="deleteContact()">+</button>
+
+      </div>
+      <button class="btn btn-success btn-sm float-left" (click)="addContact()">+</button>
+    </div>
+
+
+
+  </div>
+
+</form>
+<pre>{{ form.value | json }}</pre>
+<!-- <label class="">
+  <input type="radio" name="" id="" value="checkedValue" class="custom-control-input">
+  <span class="custom-control-indicator"></span>
+  <span class="custom-control-description"></span>
+</label> -->
