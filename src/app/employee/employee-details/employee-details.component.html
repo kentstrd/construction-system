@@ -27,25 +27,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let employee of employees">
               <td>
-                <a routerLink="/employee/form">
-                  <i class="fa fa-arrow-circle-o-right"></i> FULL NAME</a>
+                <a (click)="onSelect(employee)" class="nav-link active" routerLink="/employee/form">
+                  {{ employee.firstName }} {{ employee.lastName}}</a>
+                <!--to get the data -->
               </td>
-              <td>MALE</td>
+              <td>{{ employee.Gender }}</td>
               <td>
-                MADAMING SKILLS
+                {{ employee.skills }}
               </td>
-              <td>MADAMING CONTACT</td>
-              <td>MADAMING ADDRESS</td>
+              <td>{{ employee.address }}</td>
+              <td>{{ employee.contacts }}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
-  <ng-template #noClients>
-    <hr>
-    <h5 class="text-danger">THERE ARE NO CLIENTS TO SHOW</h5>
-  </ng-template>
+  <app-pagination class="float-right"></app-pagination>

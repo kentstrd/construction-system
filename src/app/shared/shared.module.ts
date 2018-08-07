@@ -6,11 +6,8 @@ import { ViewOptionsComponent } from './view-options/view-options.component';
 import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports:[PaginationComponent, HeaderComponent,ViewOptionsComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [PaginationComponent, HeaderComponent, ViewOptionsComponent],
   declarations: [HeaderComponent, ViewOptionsComponent, PaginationComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

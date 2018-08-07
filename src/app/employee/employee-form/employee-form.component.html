@@ -1,106 +1,84 @@
-<div class="container">
+<!-- Copy the form from reactive Form File-->
+
+<div class="container mt-2">
   <div class="row">
     <h1>
       <i class="fa fa-users mb-4"></i> Employee</h1>
   </div>
 </div>
 
-<div class="row">
-  <div class="col">
-    <div class="container">
-      <Form [formGroup]="EmployeeForm" (ngSubmit)="onSubmit()">
+<<form [formGroup]="form">
 
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input type="text" class="form-control" formControlName="firstName">
-          <div class="error-message" *ngIf="firstName.invalid && firstName.touched">
-            Please Enter First Name
-          </div>
+  <div class="container col-8 p-0 mt-4 mb-2">
+    <i class="fa fa-info-circle p-2"></i>
+    <small>Profile</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+    <div class="form-group row">
+      <label class="col-2">First Name</label>
+      <input class="col-3 form-control mb-4" type="text" formControlName="firstName">
+
+      <label class="col-2">Last Name</label>
+      <input class="col-4 form-control mb-4" type="text" n formControlName="lastName">
+
+
+      <label class="col-2 col-form-label">Gender</label>
+      <div class="form-group mt-2">
+        <div class="radio">
+          <label class="mr-4">
+            <input type="radio" class="ml-2" value=Male formControlName="gender"> Male
+          </label>
+          <label>
+            <input type="radio" value=Female formControlName="gender"> Female
+          </label>
         </div>
-        <h5>{{ EmployeeForm.value | json}}</h5>
-
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input type="text" class="form-control" formControlName="lastName">
-          <div class="error-message" *ngIf="lastName.invalid && lastName.touched">
-            Please Enter Last Name
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="birtDate">Birth Date</label>
-          <input type="date" class="form-control fa fa-calendar" formControlName="birtDate">
-          <i class="fa fa-calendar"></i>
-          <div class="error-message" *ngIf="birtDate.invalid && birtDate.touched">
-            Wala ka bang BirthDay? WOW WOW GALENG!
-          </div>
-        </div>
-
-        <div class="form-group" formArrayName="addSkills">
-          <div *ngFor="let skill of skills.controls; let i=index" [formGroupName]='i'>
-            <label for="addSkills">Skills</label>
-            <select class="custom-select" formControlName="skill" name="addSkills">
-              <option selected>ATARUBS</option>
-              <option>FORMULA 1</option>
-              <option>FORMULA 2</option>
-              <option>FORMULA 3</option>
-            </select>
-            <a class="btn nav-link text-dark offset-11 col-2">
-              <i class="fa fa-plus-circle" (click)="addSkills()"></i> Add</a>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Gender</label>
-          <div class="form-group">
-            <div class="radio">
-              <label class="mr-4">
-                <input type="radio" name="Gender" value=1 formControlName="Gender" checked> Male
-              </label>
-              <label>
-                <input type="radio" name="Gender" value=0 formControlName="Gender"> Female
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div formArrayName="contacts">
-          <label for="contact">Contacts:</label>
-          <div *ngFor="let contact of contacts.controls; let i=index" [formGroupName]="i">
-            <div class="form-group">
-              <label>Contact</label>
-              <input type="text" formControlName="numbers" class="form-control">
-            </div>
-            <button type="button" class="close mb-2 ml-2" aria-label="Close">
-              <span aria-hidden="true" (click)="deleteAddress()">&times;</span>
-
-            </button>
-          </div>
-          <a class="btn nav-link text-dark offset-11 col-2">
-            <i class="fa fa-plus-circle" (click)="addContact()"></i> Add</a>
-        </div>
-
-        <div formArrayName="addresses">
-          <div *ngFor="let addresses of addressForm.controls; let i=index" [formGroupName]="i">
-            <label for="street">Address </label>
-            <input type="text" class="form-control" formControlName="newaddress">
-            <button type="button" class="close mb-2 ml-2" aria-label="Close">
-              <span aria-hidden="true" (click)="deleteAddress()">&times;</span>
-            </button>
-          </div>
-          <a class="btn nav-link text-dark offset-11 col-2">
-            <i class="fa fa-plus-circle" (click)="addAddress()"></i> Add</a>
-        </div>
-
-      </Form>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 col-form-label">Skills</label>
+      <select class="col-3 custom-select" formControlName="skill">
+        <option *ngFor="let powers of skillset" [ngValue]="powers">
+          {{ powers }}
+        </option>
+      </select>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-10">
-      <button type="submit" class="btn btn-sm btn-success">Submit</button>
+  <div class="container col-8 p-0 mt-2 mb-2">
+    <i class="fa fa-id-card p-2"></i>
+    <small>Contact Information</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5">
+    <div class="form-group row">
+      <div formArrayName="address">
+        <label class="col-2 col-form-label">Address</label>
+        <div *ngFor="let address of addressForms.controls; let i = index;" [formGroupName]="i">
+          <input class="col-4 form-control" type="text" formControlName="homeaddress">
+          <button class="btn btn-danger btn-sm" *ngIf="i > 0" (click)="deleteNewAddress()">del</button>
+        </div>
+      </div>
+      <button class="btn btn-success btn-sm" (click)="addNewAddress()">+</button>
+    </div>
+
+    <div class="form-group row">
+      <div formArrayName="phones">
+        <label class="col-2 col-form-label">Contacts</label>
+        <div *ngFor="let phone of phoneForms.controls; let i = index;" [formGroupName]="i">
+          <input class="col-4 form-control" type="number" formControlName="homenumber">
+          <button class="btn btn-danger btn-md float-left" (click)="deleteContact()" *ngIf="i > 0">del</button>
+        </div>
+
+      </div>
+      <button class="btn btn-success btn-sm float-left" (click)="addContact()">+</button>
     </div>
   </div>
-</div>
+
+
+  <div class="container col-9 mt-4">
+    <button type="button" class="btn btn-sm btn-success offset-9 col-1" value="Add" ng-click="" (click)="onSubmit()">Save</button>
+    <button class="btn btn-sm btn-info ml-3 col-1" routerLink="/employee/details">back</button>
+  </div>
+  <span>{{ this.form.value | json }}</span>
+  </form>
