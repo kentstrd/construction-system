@@ -18,6 +18,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
     this.employee = this.sampleService.getEmployees();
   }
+
   onSelect(employee: Employee) {
     this.sampleService.setEmployee(employee);
     console.log(employee);

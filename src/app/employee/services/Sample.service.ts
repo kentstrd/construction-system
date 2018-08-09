@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 
-import { Employee, Contact, Address } from '../models/sample';
+import { Employee } from '../models/sample';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,6 @@ import { Employee, Contact, Address } from '../models/sample';
 export class SampleServices {
   public employeeSubject: Subject<any> = new Subject();
   employees: Employee[];
-  contact: Contact[];
-  address: Address[];
 
   public employeesSource = new BehaviorSubject<Employee>({
     id: null,
@@ -23,6 +21,7 @@ export class SampleServices {
   });
 
   selectedEmployee = this.employeesSource.asObservable();
+  store = this.employeeSubject.asObservable();
 
   constructor() {
     this.employees = [
@@ -56,7 +55,7 @@ export class SampleServices {
   //   }
   // }
 
-  getEmployees() {
+  public getEmployees() {
     console.log('GETTING EMPLOYEES FROM SERVICE...');
     return this.employees;
   }

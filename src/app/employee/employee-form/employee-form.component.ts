@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { SampleServices } from '../services/Sample.service';
-import { Employee } from '../models/sample';
+import { Employee, Contact } from '../models/sample';
+import { Address } from '../models/employee';
 
 @Component({
   selector: 'app-employee-form',
@@ -11,29 +12,52 @@ import { Employee } from '../models/sample';
 })
 export class EmployeeFormComponent implements OnInit {
   skillset: string[] = ['STRONG', 'SMART', 'ATHLETIC'];
-  default: string = 'SMART';
+  default: string = 'STRONG';
+
+  id: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  skill: string;
+  address: Address[];
+  contact: Contact[];
 
   form: FormGroup;
-  employees: Employee[] = [];
-
+  employees: Employee[];
+  public employee;
   constructor(private fb: FormBuilder, private sampleServices: SampleServices) {}
 
   ngOnInit() {
+    // Subscribe to the selectedEmployee
+    this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
+      if (employee.id != null) {
+        this.id = employee.id;
+        this.firstName = employee.firstName;
+        this.lastName = employee.lastName;
+        this.gender = employee.gender;
+        this.skill = employee.skill;
+        this.address = employee.address;
+        this.contact = employee.contact;
+      }
+    });
+    // SAMPLE VALUE CHANGES
+    // this.form.valueChanges.subscribe({
+
+    // });
     // subscribe to subject on initialization
     this.sampleServices.employeeSubject.subscribe({
       next: employees => this.displayEmployee(employees),
       error: error => console.log(error)
     });
-
     // INITIALIZE EMPLOYEE
     // this.sampleServices.getEmployees();
 
     // reactive Form
     this.form = this.fb.group({
-      firstName: '',
-      lastName: '',
-      skill: '',
-      gender: 'Male',
+      firstName: [this.firstName],
+      lastName: [this.lastName],
+      skill: [this.skill],
+      gender: [this.gender],
       phones: this.fb.array([]),
       address: this.fb.array([])
     });
