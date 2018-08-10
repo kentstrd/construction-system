@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray} from '@angular/forms';
 import { ProjectService } from '../project.service';
 import { Router } from '@angular/router';
 
@@ -12,53 +12,64 @@ import { Router } from '@angular/router';
 export class ProjectInformationComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   formProps = [];
-  projectForm: FormGroup;
+  public projectForm: FormGroup;
   isNew: boolean = true;
   data:{};
+  ProjectType;
   
 
   constructor( private fb: FormBuilder, 
                private projectService: ProjectService, 
                public router: Router) { 
-    
-  }
-
+            }
 
   ngOnInit() {
-    // const formDataObj = {};
-    // for (const prop of Object.keys(this.data)){
-    //   formDataObj[prop] = new FormControl(this.data[prop])
-    //   this.formProps.push(prop)
-    // }
-    // this.form = new FormGroup(formDataObj)
-
-
-
     this.projectForm = this.fb.group({
-      projectProfile: this.fb.group({
         projectName: [''],
         description:[''],
         dateStarted:[''],
-        dateEnded:['']
-      }),
-      projectCost: this.fb.group({
+        dateEnded:[''],
+        projectType:[''],
+        address:this.fb.group({
+          province:[''],
+          municipality:[''],
+          barangay:[''],
+        }),
         totalCost:[''],
         disbursement: this.fb.array([]),
       }),
-    });
     this.addDisbursement();
-    // this.projectForm.valueChanges.subscribe(console.log)
     this.projectService.selectedProject.subscribe(project => {
       if (project.id != null) {
         this.isNew = false;
-        this.projectForm.value.projectProfile = project.projectProfile
-        this.projectForm.value.projectCost = project.projectCost
+        this.projectForm = this.fb.group({
+          id: project.id,
+          projectName: project.projectName,
+          description: project.description,
+          dateStarted: project.dateStarted,
+          dateEnded: project.dateEnded,
+          projectType: project.projectType,
+            address:this.fb.group({
+              province: project.address.province,
+              municipality: project.address.municipality,
+              barangay: project.address.barangay
+            }),
+          totalCost: project.totalCost,
+          disbursement: this.fb.array([])
+        })
+        if(project.disbursement.length == undefined){
+          this.disbursements.push(this.fb.group(project.disbursement))
+         }else{
+           project.disbursement.forEach(element => {
+             this.disbursements.push(this.fb.group(element))
+           });
+         };
       }
     });
   }
   
   get disbursements(){
-    return this.projectForm.get('projectCost.disbursement') as FormArray
+    return this.projectForm.get('disbursement') as FormArray
   }
 
   addDisbursement(){
@@ -77,12 +88,17 @@ export class ProjectInformationComponent implements OnInit {
   onSubmit(){
     const newProject ={
       id: this.generateId(),
-      projectProfile: this.projectForm.value.projectProfile,
-      projectCost: this.projectForm.value.projectCost
+      projectName: this.projectForm.value.projectName,
+      description: this.projectForm.value.description,
+      dateStarted: this.projectForm.value.dateStarted,
+      dateEnded: this.projectForm.value.dateEnded,
+      projectType: this.projectForm.value.projectType,
+      address: this.projectForm.value.address,
+      totalCost: this.projectForm.value.totalCost,
+      disbursement: this.projectForm.value.disbursement
       }
       this.projectService.addProject(newProject);
       this.router.navigate(['/project'])
-      // console.log(this.projectService.projects);
     }
     generateId() {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../project';
 import { ProjectService } from '../project.service';
+import { BehaviorSubject } from 'rxjs';
+import { ProjectInformationComponent } from '../project-information/project-information.component';
+import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-project-list',
@@ -8,9 +12,15 @@ import { ProjectService } from '../project.service';
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
-  projects: Project []
+  projects: Project [];
+  selectedProject;
+  projectFormComponent: ProjectInformationComponent
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, 
+              public router:Router,
+              private fb: FormBuilder) {
+    this.selectedProject = this.projectService.projectSource
+  }
 
   ngOnInit() {
     this.projectService.getProjects().subscribe(project => {
@@ -21,6 +31,27 @@ export class ProjectListComponent implements OnInit {
   onEdit(index){
     this.projectService.selected = this.projects[index];
   }
+  newProject(){
+    this.projectService.projectSource.next({
+      id: null,
+      projectName: null,
+      description: null,
+      dateStarted: null,
+      dateEnded: null,
+      projectType: null,
+      address:{
+        province:null,
+        municipality: null,
+        barangay: null
+      },
+      totalCost: null,
+      disbursement: [{
+            cost: null,
+            date: null,
+        }]
+    })
+    this.router.navigate(['project/form'])
+  }
 
   onView(index){
     // const viewProject ={
@@ -28,6 +59,6 @@ export class ProjectListComponent implements OnInit {
     //   projectProfile: this.projects[index].projectProfile,
     //   projectCost: this.projects[index].projectCost
     //   }
-      this.projectService.selected = this.projects[index];
+      this.projectService.projectSource.next(this.projects[index])
   }
 }

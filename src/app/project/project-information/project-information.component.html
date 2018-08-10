@@ -23,13 +23,12 @@
           <small>Profile</small>
       </div>
     
-      <div class="container border border-secondary col-8 p-5" formGroupName="projectProfile">
+      <div class="container border border-secondary col-8 p-5">
         <div class="form-group row">
           <label for="project-name" 
           class="col-2 col-form-label">Project Name</label>
-          <input  type = "text"
-          [value]="projectForm.get('projectProfile.projectName').value"
-          formControlName="projectName" class="form-control col">
+          <input  type = "text" 
+          formControlName="projectName" class=" form-control col">
         </div>
     
         <div class="form-group row">
@@ -38,18 +37,33 @@
             <textarea name="description" class="form-control col"
             rows="5" formControlName="description"></textarea>
         </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-2" for="project-type">Project Type</label>
+          <select  class="form-control col-4" formControlName="projectType">
+            <option value="fa fa-building fa-lg">Building</option>
+            <option value="fa fa-road fa-lg">Local Access Road</option>
+            <option value="fa fa-hospital-o fa-lg">Hospital</option>
+          </select>
+          <h4 class="pl-2"><i [class]="projectForm.get('projectType').value"></i></h4>
+        </div>
+
+        <div class="form-group row" formGroupName="address">
+          <label class="col-form-label col-2" for="address">Address</label>
+          <input type="text" class="form-control col-3 " placeholder="Province" formControlName="province">
+          <input type="text" class="form-control col-3 ml-3" placeholder="Municipality" formControlName="municipality">
+          <input type="text" class="form-control col-3 ml-3" placeholder="Barangay" formControlName="barangay">
+        </div>
     
         <div class="form-group row">
             <label for="date-started"
             class="col-2 col-form-label">Date Started</label>
-            <input type="date" formControlName="dateStarted" class="form-control col-3"
-            [value]="projectProfile.date-started.value | date:'medium'">
+            <input type="date" formControlName="dateStarted" class="form-control col-3">
             <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>        
             <label for="date-ended"
             class="col-2 col-form-label">Date Ended</label>
-            <input type="date" formControlName="dateEnded" class="form-control col-3"
-            [value]="dateEnded.value">
-            <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
+            <input type="date" formControlName="dateEnded" class="form-control col-3">
+            <h3 class="ml-2" ><i  class="fa fa-calendar "></i></h3>
         </div>
       </div>
     
@@ -58,7 +72,7 @@
           <small>Cost Details</small>
       </div>
     
-      <div formGroupName="projectCost" class="container border border-secondary col-8 p-5">
+      <div class="container border border-secondary col-8 p-5">
           <div class="form-group row">
             <label for="total-cost"
             class="col-2 col-form-label">Total Cost</label>

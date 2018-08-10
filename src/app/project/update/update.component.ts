@@ -13,13 +13,12 @@ export class UpdateComponent implements OnInit {
   projectForm: FormGroup;
   project: Project;
   selectedProject;
-  disbursement;
+ 
 
 
   constructor(private fb: FormBuilder,
               private projectService: ProjectService,
               public router: Router) { 
-      this.disbursement = [];
       this.selectedProject=this.projectService.selected
     }
 
@@ -69,7 +68,7 @@ export class UpdateComponent implements OnInit {
       projectProfile: this.projectForm.value.projectProfile,
       projectCost: this.projectForm.value.projectCost
       }
-      this.projectService.updateProject(updatedProject)
+      // this.projectService.updateProject(updatedProject)
       this.router.navigate(['/project'])
   }
 

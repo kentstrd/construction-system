@@ -1,33 +1,20 @@
 export class Project {
     id: string;
-    projectProfile: {
-        projectName: string
-        description: string
-        dateStarted: string
-        dateEnded: string
+    projectName: string
+    description: string
+    dateStarted: string
+    dateEnded: string
+    projectType: string
+    totalCost: number
+    address:{
+      province: string
+      municipality: string
+      barangay: string
     }
-    projectCost: {
-        totalCost: number
-        disbursement:  {
-            cost: string
-            date: string
-        }
-    }
+    disbursement: disbursement[]
   }
 
-  export class ViewProject {
-    projectProfile: {
-        projectName: string
-        description: string
-        dateStarted: Date
-        dateEnded: Date
-    }
-    projectCost: {
-        totalCost: number
-        disbursement:  {
-            cost: string
-            date: Date
-        }
-    }
+  export class disbursement {
+    cost: string
+    date: string
   }
-  
