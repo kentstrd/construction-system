@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { SampleServices } from '../services/Sample.service';
-import { Employee, Contact } from '../models/sample';
-import { Address } from '../models/employee';
+import { Employee } from '../models/sample';
+import { Contact, Address } from '../models/employee';
 
 @Component({
   selector: 'app-employee-form',
@@ -12,7 +12,7 @@ import { Address } from '../models/employee';
 })
 export class EmployeeFormComponent implements OnInit {
   skillset: string[] = ['STRONG', 'SMART', 'ATHLETIC'];
-  default: string = 'STRONG';
+  default: string = '';
 
   id: string;
   firstName: string;
@@ -25,12 +25,16 @@ export class EmployeeFormComponent implements OnInit {
   form: FormGroup;
   employees: Employee[];
   public employee;
+
+  isNew: boolean = true;
+
   constructor(private fb: FormBuilder, private sampleServices: SampleServices) {}
 
   ngOnInit() {
     // Subscribe to the selectedEmployee
     this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
       if (employee.id != null) {
+        this.isNew = false;
         this.id = employee.id;
         this.firstName = employee.firstName;
         this.lastName = employee.lastName;
@@ -54,13 +58,15 @@ export class EmployeeFormComponent implements OnInit {
 
     // reactive Form
     this.form = this.fb.group({
+      id: '',
       firstName: [this.firstName],
       lastName: [this.lastName],
       skill: [this.skill],
       gender: [this.gender],
-      phones: this.fb.array([]),
+      contact: this.fb.array([]),
       address: this.fb.array([])
     });
+
     this.form.patchValue({
       skill: this.default
     });
@@ -76,7 +82,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   get phoneForms() {
-    return this.form.get('phones') as FormArray;
+    return this.form.get('contact') as FormArray;
   }
   addContact() {
     const number = this.fb.group({
@@ -104,9 +110,20 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit() {
     // console.log(this.sampleServices.addEmployee(employees));
-    const result: Employee = Object.assign({}, this.form.value);
+    const result = Object.assign({}, this.form.value);
+
+    this.sampleServices.addEmployee(Object.assign({}, this.form.value));
+    // this works tho
 
     console.log(result);
+  }
+
+  generateId() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
   }
 
   reset() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 
 import { Employee } from '../models/sample';
+import { Address } from '../models/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class SampleServices {
     lastName: null,
     gender: null,
     skill: null,
-    contact: null,
-    address: null
+    address: null,
+    contact: null
   });
 
   selectedEmployee = this.employeesSource.asObservable();
-  store = this.employeeSubject.asObservable();
+  // store = this.employeeSubject.asObservable();
 
   constructor() {
     this.employees = [
@@ -31,8 +32,8 @@ export class SampleServices {
         lastName: 'Cena',
         gender: 'Male',
         skill: 'ATHLETIC',
-        contact: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }],
-        address: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }]
+        address: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
+        contact: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
       },
       {
         id: '2',
@@ -40,8 +41,8 @@ export class SampleServices {
         lastName: 'Smith',
         gender: 'Female',
         skill: 'STRONG',
-        contact: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }],
-        address: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }]
+        address: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
+        contact: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }]
       }
     ];
   }
@@ -66,7 +67,7 @@ export class SampleServices {
 
   addEmployee(employees: Employee): void {
     for (const employee of [employees]) {
-      this.employees.push(employee);
+      this.employees.unshift(employee);
     }
   }
 
