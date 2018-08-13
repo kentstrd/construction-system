@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../project';
 import { ProjectService } from '../project.service';
-import { BehaviorSubject } from 'rxjs';
 import { ProjectInformationComponent } from '../project-information/project-information.component';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-project-list',
@@ -17,8 +15,7 @@ export class ProjectListComponent implements OnInit {
   projectFormComponent: ProjectInformationComponent
 
   constructor(private projectService: ProjectService, 
-              public router:Router,
-              private fb: FormBuilder) {
+              public router:Router,) {
     this.selectedProject = this.projectService.projectSource
   }
 
@@ -29,9 +26,11 @@ export class ProjectListComponent implements OnInit {
   }
 
   onEdit(index){
-    this.projectService.selected = this.projects[index];
+    this.projectService.projectSource.next(this.projects[index])
+    this.projectService.isReadonly = false
   }
   newProject(){
+    this.projectService.isReadonly = false
     this.projectService.projectSource.next({
       id: null,
       projectName: null,
@@ -39,11 +38,11 @@ export class ProjectListComponent implements OnInit {
       dateStarted: null,
       dateEnded: null,
       projectType: null,
-      address:{
-        province:null,
-        municipality: null,
-        barangay: null
-      },
+          address:{
+      province:null,
+      municipality: null,
+      barangay: null
+    },
       totalCost: null,
       disbursement: [{
             cost: null,
@@ -54,11 +53,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   onView(index){
-    // const viewProject ={
-    //   id: this.projects[index].id,
-    //   projectProfile: this.projects[index].projectProfile,
-    //   projectCost: this.projects[index].projectCost
-    //   }
-      this.projectService.projectSource.next(this.projects[index])
+    this.projectService.projectSource.next(this.projects[index])
+    this.projectService.isReadonly = true
   }
 }

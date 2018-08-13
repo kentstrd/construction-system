@@ -10,60 +10,46 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-information.component.scss']
 })
 export class ProjectInformationComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
-  formProps = [];
-  public projectForm: FormGroup;
+  projectForm: FormGroup;
   isNew: boolean = true;
-  data:{};
-  ProjectType;
-  
+  isReadOnly: boolean;
 
   constructor( private fb: FormBuilder, 
                private projectService: ProjectService, 
-               public router: Router) { 
+               public router: Router) {
+          
             }
 
   ngOnInit() {
+    this.isReadOnly = this.projectService.isReadonly
     this.projectForm = this.fb.group({
+        id:[''],
         projectName: [''],
-        description:[''],
-        dateStarted:[''],
-        dateEnded:[''],
+        description:[''],        
         projectType:[''],
         address:this.fb.group({
           province:[''],
           municipality:[''],
           barangay:[''],
         }),
+        dateStarted:[''],
+        dateEnded:[''],
         totalCost:[''],
-        disbursement: this.fb.array([]),
+        disbursement: this.fb.array([
+          this.fb.group({
+            cost: [''],
+            date: ['']            
+          })
+        ]),
       }),
-    this.addDisbursement();
     this.projectService.selectedProject.subscribe(project => {
       if (project.id != null) {
         this.isNew = false;
-        this.projectForm = this.fb.group({
-          id: project.id,
-          projectName: project.projectName,
-          description: project.description,
-          dateStarted: project.dateStarted,
-          dateEnded: project.dateEnded,
-          projectType: project.projectType,
-            address:this.fb.group({
-              province: project.address.province,
-              municipality: project.address.municipality,
-              barangay: project.address.barangay
-            }),
-          totalCost: project.totalCost,
-          disbursement: this.fb.array([])
-        })
-        if(project.disbursement.length == undefined){
-          this.disbursements.push(this.fb.group(project.disbursement))
-         }else{
-           project.disbursement.forEach(element => {
-             this.disbursements.push(this.fb.group(element))
-           });
-         };
+        project.disbursement.forEach(() => {
+          this.addDisbursement();
+        });
+        this.disbursementDeleteForm(0)
+        this.projectForm.patchValue(project)
       }
     });
   }
@@ -86,18 +72,14 @@ export class ProjectInformationComponent implements OnInit {
 
 
   onSubmit(){
-    const newProject ={
-      id: this.generateId(),
-      projectName: this.projectForm.value.projectName,
-      description: this.projectForm.value.description,
-      dateStarted: this.projectForm.value.dateStarted,
-      dateEnded: this.projectForm.value.dateEnded,
-      projectType: this.projectForm.value.projectType,
-      address: this.projectForm.value.address,
-      totalCost: this.projectForm.value.totalCost,
-      disbursement: this.projectForm.value.disbursement
-      }
+    if(this.isNew){      
+      this.projectForm.value.id = this.generateId
+      const newProject = this.projectForm.value
       this.projectService.addProject(newProject);
+      }else{
+      const updatedForm = this.projectForm.value
+      this.projectService.updateProject(updatedForm)
+      }
       this.router.navigate(['/project'])
     }
     generateId() {

@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class ProjectService {
   projects: Project[];
-  selected;
+  isReadonly: boolean = false
 
 
 
@@ -33,7 +33,6 @@ export class ProjectService {
   selectedProject = this.projectSource.asObservable();
 
   constructor() {
-    this.selected = [],
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',

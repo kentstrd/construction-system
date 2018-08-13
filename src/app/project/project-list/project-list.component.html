@@ -17,7 +17,7 @@
   *ngFor="let project of projects | slice:0:4; let i=index">
     <div class="card-header text-secondary p-1 pl-2 pt-2">
      <small class="text-uppercase"> {{project.projectName}} </small>
-    <a class="btn float-right text-secondary p-0" routerLink="/project/form/edit" (click)="onEdit(i)" >
+    <a class="btn float-right text-secondary p-0" routerLink="/project/form" (click)="onEdit(i)" >
      <h5 class="p-0 m-0"> <i class="fa fa-edit"></i></h5></a>      
     </div>
     <div class="card-body text-secondary row p-3">

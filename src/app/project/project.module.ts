@@ -9,9 +9,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ProjectInformationComponent } from './project-information/project-information.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ProjectFormComponent } from './project-form/project-form.component';
-import { ProjectFormViewComponent } from './project-form-view/project-form-view.component';
-import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   imports: [
@@ -26,9 +23,6 @@ import { UpdateComponent } from './update/update.component';
                  ProjectDashboardComponent, 
                  ProjectInformationComponent, 
                  ProjectListComponent,
-                 ProjectFormComponent,
-                 ProjectFormViewComponent,
-                 UpdateComponent
                 ]
 })
 export class ProjectModule {}
