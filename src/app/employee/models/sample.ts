@@ -2,9 +2,8 @@ export class Employee {
   id: string;
   firstName: string;
   lastName: string;
-  birthDate: any;
-  Gender: string;
-  skills: string;
+  gender: string;
+  skill: string;
   address: Address[];
   contact: Contact[];
 }

@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container mt-4">
   <div class="row">
     <div class="col">
       <h1>
-        <i class="fa fa-users"></i> Employee</h1>
+        <i class="fa fa-users mb-4"></i> Employee</h1>
     </div>
   </div>
   <div class="row">
@@ -15,38 +15,42 @@
     <div class="row">
       <div class="col">
 
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
           <thead class="thead-light">
             <tr>
               <th>Name
               </th>
               <th>Gender</th>
               <th>Skills</th>
-              <th>Addressess</th>
+              <th>Address</th>
               <th>Contact Number</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let employee of employees">
+            <tr *ngFor="let employee of employee">
               <td>
-                <a (click)="onSelect(employee)" class="nav-link">
-                  <i class="fa fa-arrow-circle-o-right"></i> {{ employee.firstName }} {{ employee.lastName}}</a>
+                <a (click)="onSelect(employee)" class="nav-link active" routerLink="/employee/form">
+                  {{ employee.firstName }} {{ employee.lastName}}</a>
                 <!--to get the data -->
               </td>
-              <td>{{ employee.Gender }}</td>
+              <td>{{ employee.gender }}</td>
               <td>
-                {{ employee.skills }}
+                {{ employee.skill }}
               </td>
-              <td>{{ employee.contacts }}</td>
-              <td>{{ employee.address }}</td>
+              <td>
+                <div *ngFor="let employeeAdd of employee.address">
+                  {{ employeeAdd.homeaddress }}
+                </div>
+              </td>
+              <td>
+                <div *ngFor="let contacts of employee.contact">
+                  {{ contacts.homenumber }}
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
-  <ng-template #noClients>
-    <hr>
-    <h5 class="text-danger">THERE ARE NO CLIENTS TO SHOW</h5>
-  </ng-template>
+  <app-pagination class="float-right"></app-pagination>

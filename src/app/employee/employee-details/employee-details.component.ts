@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../models/employee';
-import { EmployeeDetailsService } from '../services/Employee-details.service';
+import { Employee } from '../models/sample';
+import { SampleServices } from '../services/Sample.service';
 
 @Component({
   selector: 'app-employee-details',
@@ -10,15 +10,14 @@ import { EmployeeDetailsService } from '../services/Employee-details.service';
 export class EmployeeDetailsComponent implements OnInit {
   employees: Employee[];
 
-  constructor(private employeeDetailsService: EmployeeDetailsService) {}
+  employee;
+  constructor(public sampleService: SampleServices) {}
 
   ngOnInit() {
-    this.employeeDetailsService.getEmployees().subscribe(employees => {
-      this.employees = employees;
-    });
+    this.employee = this.sampleService.getEmployees();
   }
+
   onSelect(employee: Employee) {
-    this.employeeDetailsService.setFormEmployee(employee);
-    console.log(employee);
+    this.sampleService.setEmployee(employee);
   }
 }

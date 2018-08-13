@@ -1,105 +1,120 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 
+import { SampleServices } from '../services/Sample.service';
+import { Employee } from '../models/sample';
+import { Contact, Address } from '../models/sample';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss']
 })
 export class EmployeeFormComponent implements OnInit {
-  EmployeeForm: FormGroup;
+  skillset: string[] = ['STRONG', 'SMART', 'ATHLETIC'];
+  default: string = 'STRONG';
 
-  availSides = [
-    { display: 'None', value: '' },
-    { display: 'buhat', value: 'agek' },
-    { display: 'LUKSO', value: 'atarubs' }
-  ];
+  id: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  skill: string;
+  address: Address[];
+  contact: Contact[];
 
-  constructor(private employeeBuild: FormBuilder) {}
+  form: FormGroup;
+  employees: Employee[];
+  public employee;
+
+  isNew: boolean = true;
+
+  constructor(
+    private fb: FormBuilder,
+    private sampleServices: SampleServices,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.EmployeeForm = this.employeeBuild.group({
-      firstName: ['ATARUBS', Validators.required],
-      lastName: ['mekloks', Validators.required],
-      birtDate: ['1/20/2018', Validators.required],
-      Gender: ['', Validators.required],
-      addSkills: this.employeeBuild.array([], Validators.required),
-      contacts: this.employeeBuild.array([], Validators.minLength(10)),
-      addresses: this.employeeBuild.array([], Validators.required)
+    // Subscribe to the selectedEmployee
+    this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
+      this.isNew = false;
+      this.id = employee.id;
+      this.firstName = employee.firstName;
+      this.lastName = employee.lastName;
+      this.gender = employee.gender;
+      this.skill = employee.skill;
+      this.address = employee.address;
+      this.contact = employee.contact;
     });
-    this.addSkills();
+    // reactive Form
+    this.form = this.fb.group({
+      id: [''],
+      firstName: [this.firstName, [Validators.required]],
+      lastName: [this.lastName, [Validators.required]],
+      skill: [, [Validators.required]],
+      gender: [this.gender, [Validators.required]],
+      address: this.fb.array([]),
+      contact: this.fb.array([])
+    });
+
+    this.form.patchValue({
+      skill: this.default
+    });
+
+    this.form.controls['skill'].setValue(this.default, { onlySelf: true });
+
     this.addContact();
-    this.addAddress();
-
-    this.EmployeeForm.valueChanges.subscribe(console.log);
+    this.addNewAddress();
   }
 
-  // GET FORMS
-  get firstName() {
-    return this.EmployeeForm.get('firstName');
+  private displayEmployee(employees: any): void {
+    this.employees = employees;
   }
 
-  get lastName() {
-    return this.EmployeeForm.get('lastName');
+  get phoneForms() {
+    return this.form.get('contact') as FormArray;
   }
-
-  get birtDate() {
-    return this.EmployeeForm.get('birtDate');
-  }
-
-  get Gender() {
-    return this.EmployeeForm.get('Gender');
-  }
-
-  get skills() {
-    return this.EmployeeForm.get('addSkills') as FormArray;
-  }
-
-  get contacts() {
-    return this.EmployeeForm.get('contacts') as FormArray;
-  }
-  get addressForm() {
-    return this.EmployeeForm.get('addresses') as FormArray;
-  }
-
-  // ADD ITEMS
-  addSkills() {
-    const addSkills = this.employeeBuild.group({
-      skill: ['']
-    });
-    this.skills.push(addSkills);
-  }
-
   addContact() {
-    const phone = this.employeeBuild.group({
-      numbers: ['']
+    const number = this.fb.group({
+      homenumber: []
     });
-    this.contacts.push(phone);
+    this.phoneForms.push(number);
   }
 
-  addAddress() {
-    const add = this.employeeBuild.group({
-      newaddress: ['']
+  deleteContact(i) {
+    this.phoneForms.removeAt(i);
+  }
+
+  get addressForms() {
+    return this.form.get('address') as FormArray;
+  }
+  addNewAddress() {
+    const newAdd = this.fb.group({
+      homeaddress: []
     });
-
-    this.addressForm.push(add);
+    this.addressForms.push(newAdd);
+  }
+  deleteNewAddress(i) {
+    this.addressForms.removeAt(i);
   }
 
-  // DELETE ITEMS
-  deleteSkills(index) {
-    this.skills.removeAt(index);
-  }
-
-  deleteAddress(index) {
-    this.addressForm.removeAt(index);
-  }
-
-  deleteContact(index) {
-    this.contacts.removeAt(index);
-  }
-
-  // SUBMIT
   onSubmit() {
-    console.log(this.EmployeeForm.value);
+    // console.log(this.sampleServices.addEmployee(employees));
+    const result = Object.assign({}, this.form.value);
+
+    this.sampleServices.addEmployee(Object.assign({}, this.form.value));
+    // this works tho
+    this.router.navigate(['/employee/details']);
+
+    console.log(result);
+  }
+
+  reset() {
+    // RESET ALL INPUTS
+    this.form.reset();
+
+    // RESETS TO MODELS
   }
 }

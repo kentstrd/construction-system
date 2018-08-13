@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ProjectModule } from './project/project.module';
 import { EmployeeModule } from './employee/employee.module';
-import { EmployeeDetailsService } from './employee/services/Employee-details.service';
+import { SampleServices } from './employee/services/Sample.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +24,7 @@ import { EmployeeDetailsService } from './employee/services/Employee-details.ser
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [EmployeeDetailsService],
+  providers: [SampleServices],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
