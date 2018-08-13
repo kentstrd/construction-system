@@ -3,7 +3,9 @@ import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@ang
 
 import { SampleServices } from '../services/Sample.service';
 import { Employee } from '../models/sample';
-import { Contact, Address } from '../models/employee';
+import { Contact, Address } from '../models/sample';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-form',
@@ -12,7 +14,7 @@ import { Contact, Address } from '../models/employee';
 })
 export class EmployeeFormComponent implements OnInit {
   skillset: string[] = ['STRONG', 'SMART', 'ATHLETIC'];
-  default: string = '';
+  default: string = 'STRONG';
 
   id: string;
   firstName: string;
@@ -28,43 +30,33 @@ export class EmployeeFormComponent implements OnInit {
 
   isNew: boolean = true;
 
-  constructor(private fb: FormBuilder, private sampleServices: SampleServices) {}
+  constructor(
+    private fb: FormBuilder,
+    private sampleServices: SampleServices,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // Subscribe to the selectedEmployee
     this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
-      if (employee.id != null) {
-        this.isNew = false;
-        this.id = employee.id;
-        this.firstName = employee.firstName;
-        this.lastName = employee.lastName;
-        this.gender = employee.gender;
-        this.skill = employee.skill;
-        this.address = employee.address;
-        this.contact = employee.contact;
-      }
+      this.isNew = false;
+      this.id = employee.id;
+      this.firstName = employee.firstName;
+      this.lastName = employee.lastName;
+      this.gender = employee.gender;
+      this.skill = employee.skill;
+      this.address = employee.address;
+      this.contact = employee.contact;
     });
-    // SAMPLE VALUE CHANGES
-    // this.form.valueChanges.subscribe({
-
-    // });
-    // subscribe to subject on initialization
-    this.sampleServices.employeeSubject.subscribe({
-      next: employees => this.displayEmployee(employees),
-      error: error => console.log(error)
-    });
-    // INITIALIZE EMPLOYEE
-    // this.sampleServices.getEmployees();
-
     // reactive Form
     this.form = this.fb.group({
-      id: '',
-      firstName: [this.firstName],
-      lastName: [this.lastName],
-      skill: [this.skill],
-      gender: [this.gender],
-      contact: this.fb.array([]),
-      address: this.fb.array([])
+      id: [''],
+      firstName: [this.firstName, [Validators.required]],
+      lastName: [this.lastName, [Validators.required]],
+      skill: [, [Validators.required]],
+      gender: [this.gender, [Validators.required]],
+      address: this.fb.array([]),
+      contact: this.fb.array([])
     });
 
     this.form.patchValue({
@@ -114,16 +106,9 @@ export class EmployeeFormComponent implements OnInit {
 
     this.sampleServices.addEmployee(Object.assign({}, this.form.value));
     // this works tho
+    this.router.navigate(['/employee/details']);
 
     console.log(result);
-  }
-
-  generateId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = (Math.random() * 16) | 0,
-        v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
   }
 
   reset() {

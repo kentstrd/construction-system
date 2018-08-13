@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 
-import { Employee } from '../models/sample';
-import { Address } from '../models/employee';
+import { Employee, Address, Contact } from '../models/sample';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,7 @@ export class SampleServices {
         firstName: 'John',
         lastName: 'Cena',
         gender: 'Male',
-        skill: 'ATHLETIC',
+        skill: 'SMART',
         address: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
         contact: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
       },
@@ -56,8 +55,7 @@ export class SampleServices {
   //   }
   // }
 
-  public getEmployees() {
-    console.log('GETTING EMPLOYEES FROM SERVICE...');
+  getEmployees() {
     return this.employees;
   }
 

@@ -19,8 +19,9 @@
       <label class="col-2">First Name</label>
       <input class="col-3 form-control mb-4" type="text" formControlName="firstName">
 
+
       <label class="col-2">Last Name</label>
-      <input class="col-4 form-control mb-4" type="text" n formControlName="lastName">
+      <input class="col-4 form-control mb-4" type="text" formControlName="lastName">
 
 
       <label class="col-2 col-form-label">Gender</label>
@@ -30,7 +31,7 @@
             <input type="radio" class="ml-2" value=Male formControlName="gender"> Male
           </label>
           <label>
-            <input type="radio" value=Female formControlName="gender"> Female
+            <input type="radio" value="Female" formControlName="gender"> Female
           </label>
         </div>
       </div>
@@ -87,11 +88,10 @@
   <div class="container col-9 mt-4">
     <button type="submit" class="btn btn-sm btn-secondary offset-9 col-1" value="Add">
       Save</button>
-    <button class="btn btn-sm btn-dark ml-3 col-1" routerLink="/employee/details" (click)="reset()">
+    <button class="btn btn-sm btn-dark ml-3 col-1" routerLink="/employee/details">
       <i class="fa fa-long-arrow-left fa-lg"> </i>
     </button>
 
-
   </div>
   <pre>{{ this.form.value | json }}</pre>
-  </form>
+</form>
