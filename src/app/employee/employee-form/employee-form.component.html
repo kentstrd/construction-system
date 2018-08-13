@@ -39,8 +39,8 @@
     <div class="row">
       <label class="col-2 col-form-label">Skills</label>
       <select class="col-3 custom-select" formControlName="skill">
-        <option *ngFor="let powers of skillset" [ngValue]="powers">
-          {{ powers }}
+        <option *ngFor="let skill of skillset" [value]="skill">
+          {{ skill.name }}
         </option>
       </select>
     </div>

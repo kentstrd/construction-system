@@ -12,8 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./employee-form.component.scss']
 })
 export class EmployeeFormComponent implements OnInit {
-  skillset: string[] = ['STRONG', 'SMART', 'ATHLETIC'];
-  default: string = 'STRONG';
+  skillset = [
+    { name: 'Smile', abbrb: 'smile' },
+    { name: 'Jedai', abbrb: 'jedai' },
+    { name: 'Player', abbrb: 'player' },
+    { name: 'Killer', abbrb: 'killer' }
+  ];
 
   id: string;
   firstName: string;
@@ -36,6 +40,7 @@ export class EmployeeFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // FORM CREATE
     this.form = this.fb.group({
       id: [''],
       firstName: ['', [Validators.required]],
@@ -53,6 +58,7 @@ export class EmployeeFormComponent implements OnInit {
         })
       ])
     });
+
     // Subscribe to the selectedEmployee
     this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
       if (employee.id != null) {
@@ -62,12 +68,11 @@ export class EmployeeFormComponent implements OnInit {
         this.form.patchValue(employee);
       }
     });
-    // reactive Form
-    this.form.patchValue({
-      skill: this.default
-    });
+    // this.form.patchValue({
+    //   skill: this.default
+    // });
 
-    this.form.controls['skill'].setValue(this.default, { onlySelf: true });
+    // this.form.controls['skill'].setValue(this.default, { onlySelf: true });
   }
 
   get phoneForms() {
