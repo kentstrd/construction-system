@@ -1,5 +1,3 @@
-<!-- Copy the form from reactive Form File-->
-
 <div class="container mt-2">
   <div class="row">
     <h1>
@@ -17,29 +15,47 @@
   <div class="container border border-secondary col-8 p-5">
     <div class="form-group row">
       <label class="col-2">First Name</label>
-      <input class="col-3 form-control mb-4" type="text" formControlName="firstName">
-
+      <input class="col-3 form-control" type="text" formControlName="firstName" required>
 
       <label class="col-2">Last Name</label>
-      <input class="col-4 form-control mb-4" type="text" formControlName="lastName">
+      <input class="col-4 form-control" type="text" formControlName="lastName" required>
+    </div>
 
 
+    <div class="row ml-5">
+      <div class="col-5" *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">
+        <small *ngIf="form.controls['firstName'].hasError('required')" class="text-danger"> Please Fill Up the Text box</small>
+      </div>
+
+      <div class="col-5 pl-auto" *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">
+        <small *ngIf="form.controls['lastName'].hasError('required')" class="text-danger"> Please Fill Up the Text box</small>
+      </div>
+    </div>
+
+
+    <div class="row">
       <label class="col-2 col-form-label">Gender</label>
-      <div class="form-group mt-2">
+      <div class="form-group mt-4">
         <div class="radio">
           <label class="mr-4">
-            <input type="radio" class="ml-2" value=Male formControlName="gender"> Male
+            <input type="radio" class="ml-2" value=Male formControlName="gender" required> Male
           </label>
           <label>
-            <input type="radio" value="Female" formControlName="gender"> Female
+            <input type="radio" value="Female" formControlName="gender" required> Female
           </label>
+        </div>
+        <div *ngIf="form.controls['gender'].touched && !form.controls['gender'].valid">
+          <small *ngIf="form.controls['gender'].hasError('required')">
+            Please choose a Gender
+          </small>
         </div>
       </div>
     </div>
+
     <div class="row">
       <label class="col-2 col-form-label">Skills</label>
       <select class="col-3 custom-select" formControlName="skill">
-        <option *ngFor="let skill of skillset" [value]="skill">
+        <option *ngFor="let skill of skillset" [ngValue]="skill.value">
           {{ skill.name }}
         </option>
       </select>
@@ -56,14 +72,21 @@
       <div formArrayName="address">
         <label class="col-2 col-form-label">Address</label>
         <div *ngFor="let address of addressForms.controls; let i = index;" [formGroupName]="i">
-          <input class="col form-control mb-2" type="text" formControlName="homeaddress">
+          <input class="col form-control mb-2" type="text" formControlName="homeaddress" required>
           <div>
             <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" *ngIf="i > 0" (click)="deleteNewAddress()"></button>
+          </div>
+          <div class="row pl-3">
+            <div *ngIf="addressForms.touched && !addressForms.valid">
+              <small class="text-danger" *ngIf="addressForms.hasError('required')">PLEASE INPUT YOUR ADDRESS!</small>
+            </div>
+
           </div>
         </div>
         <div>
           <button type="button" class="btn fa fa-plus btn-success btn-sm mr-1 float-right " (click)="addNewAddress() ">
           </button>
+
         </div>
       </div>
     </div>
@@ -75,6 +98,12 @@
           <input class="col form-control mb-2" type="number" formControlName="homenumber">
           <div>
             <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" (click)="deleteContact()" *ngIf="i > 0"></button>
+          </div>
+          <div class="row pl-3">
+            <div *ngIf="phoneForms.touched && !phoneForms.valid">
+              <small class="text-danger" *ngIf="phoneForms.hasError('required')">PLEASE INPUT CONTACT!</small>
+            </div>
+
           </div>
         </div>
         <div>

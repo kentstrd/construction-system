@@ -13,10 +13,9 @@ import { Router } from '@angular/router';
 })
 export class EmployeeFormComponent implements OnInit {
   skillset = [
-    { name: 'Smile', abbrb: 'smile' },
-    { name: 'Jedai', abbrb: 'jedai' },
-    { name: 'Player', abbrb: 'player' },
-    { name: 'Killer', abbrb: 'killer' }
+    { name: 'Singer', value: 'Singer' },
+    { name: 'Athlete', value: 'Athlete' },
+    { name: 'Smart', value: 'Smart' }
   ];
 
   id: string;
@@ -27,7 +26,7 @@ export class EmployeeFormComponent implements OnInit {
   address: Address[];
   contact: Contact[];
 
-  form: FormGroup;
+  public form: FormGroup;
   employees: Employee[];
   public employee;
 
@@ -118,14 +117,13 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.sampleServices.addEmployee(employees));
-    const result = Object.assign({}, this.form.value);
-
-    this.sampleServices.addEmployee(Object.assign({}, this.form.value));
+    if (this.isNew) {
+      this.sampleServices.addEmployee(Object.assign({}, this.form.value));
+    } else {
+      this.sampleServices.update(Object.assign({}, this.form.value));
+    }
     // this works tho
     this.router.navigate(['/employee/details']);
-
-    console.log(result);
   }
 
   reset() {

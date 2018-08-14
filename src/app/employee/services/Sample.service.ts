@@ -30,7 +30,7 @@ export class SampleServices {
         firstName: 'John',
         lastName: 'Cena',
         gender: 'Male',
-        skill: 'SMART',
+        skill: 'Athlete',
         address: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
         contact: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
       },
@@ -39,7 +39,7 @@ export class SampleServices {
         firstName: 'Sarah',
         lastName: 'Smith',
         gender: 'Female',
-        skill: 'STRONG',
+        skill: 'Singer',
         address: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
         contact: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }]
       }
@@ -67,6 +67,14 @@ export class SampleServices {
     for (const employee of [employees]) {
       this.employees.unshift(employee);
     }
+  }
+
+  update(employee: Employee) {
+    this.employees.forEach((current, index) => {
+      if (employee.id === current.id) {
+        this.employees[index] = employee;
+      }
+    });
   }
 
   saveEmployee(employee) {
