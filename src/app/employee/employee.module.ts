@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
@@ -10,7 +11,19 @@ import { SharedModule } from '../shared/shared.module';
 import { SamplereactiveComponent } from './samplereactive/samplereactive.component';
 
 @NgModule({
-  imports: [CommonModule, EmployeeRoutingModule, ReactiveFormsModule, FormsModule, SharedModule],
-  declarations: [EmployeeDashboardComponent, EmployeeDetailsComponent, EmployeeFormComponent, SamplereactiveComponent]
+  imports: [
+    CommonModule,
+    EmployeeRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+    TextMaskModule
+  ],
+  declarations: [
+    EmployeeDashboardComponent,
+    EmployeeDetailsComponent,
+    EmployeeFormComponent,
+    SamplereactiveComponent
+  ]
 })
 export class EmployeeModule {}

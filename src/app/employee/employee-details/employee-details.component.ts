@@ -11,6 +11,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employees: Employee[];
 
   employee;
+
   constructor(public sampleService: SampleServices) {}
 
   ngOnInit() {
@@ -19,5 +20,6 @@ export class EmployeeDetailsComponent implements OnInit {
 
   onSelect(employee: Employee) {
     this.sampleService.setEmployee(employee);
+    this.sampleService.changeText();
   }
 }

@@ -15,20 +15,27 @@
   <div class="container border border-secondary col-8 p-5">
     <div class="form-group row">
       <label class="col-2">First Name</label>
-      <input class="col-3 form-control" type="text" formControlName="firstName" required>
+      <input class="col-3 form-control" type="text" formControlName="firstName" minlength="2" required>
 
       <label class="col-2">Last Name</label>
-      <input class="col-4 form-control" type="text" formControlName="lastName" required>
+      <input class="col-4 form-control" type="text" pattern="^[a-zA-Z]+$" formControlName="lastName" required minlength="2
+      ">
     </div>
 
 
     <div class="row ml-5">
       <div class="col-5" *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">
-        <small *ngIf="form.controls['firstName'].hasError('required')" class="text-danger"> Please Fill Up the Text box</small>
+        <small *ngIf="form.controls['firstName'].hasError('required')" class="text-danger"> Please Fill Up the Text box
+        </small>
+
+        <small class="text-danger" *ngIf="form.controls['firstName'].errors?.minlength">First Name must be at least 2 characters</small>
+
       </div>
 
       <div class="col-5 pl-auto" *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">
         <small *ngIf="form.controls['lastName'].hasError('required')" class="text-danger"> Please Fill Up the Text box</small>
+
+        <small class="text-danger" *ngIf="form.controls['lastName'].errors?.minlength">Last Name must be at least 2 characters</small>
       </div>
     </div>
 
@@ -69,6 +76,26 @@
 
   <div class="container border border-secondary col-8 p-5">
     <div class="form-group row">
+      <div formArrayName="contact">
+        <label class="col-2 col-form-label">Contacts</label>
+        <div *ngFor="let phone of phoneForms.controls; let i = index;" [formGroupName]="i">
+          <input class="form-control mb-2" type="text" [textMask]="{mask: mask}" pattern="\+\d \(\d{3}\) \d{3}-\d{4}" formControlName="homenumber">
+          <div>
+            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right mb-2" (click)="deleteContact()" *ngIf="i > 0"></button>
+          </div>
+          <div class="row pl-3">
+            <div *ngIf="phoneForms.touched && !phoneForms.valid">
+              <small class="text-danger" *ngIf="phoneForms.hasError('required')">PLEASE INPUT CONTACT!</small>
+            </div>
+
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn fa fa-plus btn-success btn-sm float-right" (click)="addContact()"></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
       <div formArrayName="address">
         <label class="col-2 col-form-label">Address</label>
         <div *ngFor="let address of addressForms.controls; let i = index;" [formGroupName]="i">
@@ -91,36 +118,16 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      <div formArrayName="contact">
-        <label class="col-2 col-form-label">Contacts</label>
-        <div *ngFor="let phone of phoneForms.controls; let i = index;" [formGroupName]="i">
-          <input class="col form-control mb-2" type="number" formControlName="homenumber">
-          <div>
-            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" (click)="deleteContact()" *ngIf="i > 0"></button>
-          </div>
-          <div class="row pl-3">
-            <div *ngIf="phoneForms.touched && !phoneForms.valid">
-              <small class="text-danger" *ngIf="phoneForms.hasError('required')">PLEASE INPUT CONTACT!</small>
-            </div>
-
-          </div>
-        </div>
-        <div>
-          <button type="button" class="btn fa fa-plus btn-success btn-sm mr-1 float-right" (click)="addContact()"></button>
-        </div>
-      </div>
-    </div>
   </div>
 
 
   <div class="container col-9 mt-4">
-    <button type="submit" class="btn btn-sm btn-secondary offset-9 col-1" value="Add">
-      Save</button>
+    <input type="submit" id="test" [disabled]="form.pristine" class="btn btn-sm btn-secondary offset-9 col-1" value="Save">
+
     <button class="btn btn-sm btn-dark ml-3 col-1" routerLink="/employee/details">
       <i class="fa fa-long-arrow-left fa-lg"> </i>
     </button>
 
   </div>
-  <pre>{{ this.form.value | json }}</pre>
+  <!-- <pre>{{ this.form.value | json }}</pre> -->
 </form>

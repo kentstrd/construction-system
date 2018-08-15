@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { SampleServices } from '../services/Sample.service';
 import { Employee } from '../models/sample';
 import { Contact, Address } from '../models/sample';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-employee-form',
@@ -17,6 +17,8 @@ export class EmployeeFormComponent implements OnInit {
     { name: 'Athlete', value: 'Athlete' },
     { name: 'Smart', value: 'Smart' }
   ];
+
+  mask: any[] = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   id: string;
   firstName: string;
@@ -42,8 +44,8 @@ export class EmployeeFormComponent implements OnInit {
     // FORM CREATE
     this.form = this.fb.group({
       id: [''],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
       skill: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       address: this.fb.array([
@@ -52,9 +54,12 @@ export class EmployeeFormComponent implements OnInit {
         })
       ]),
       contact: this.fb.array([
-        this.fb.group({
-          homenumber: ['']
-        })
+        this.fb.group(
+          {
+            homenumber: ['']
+          },
+          Validators.minLength(9)
+        )
       ])
     });
 
@@ -67,11 +72,6 @@ export class EmployeeFormComponent implements OnInit {
         this.form.patchValue(employee);
       }
     });
-    // this.form.patchValue({
-    //   skill: this.default
-    // });
-
-    // this.form.controls['skill'].setValue(this.default, { onlySelf: true });
   }
 
   get phoneForms() {
@@ -118,12 +118,17 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isNew) {
+      this.form.value.id = this.generateId;
       this.sampleServices.addEmployee(Object.assign({}, this.form.value));
+      document.getElementById('test').nodeValue = 'Save';
     } else {
       this.sampleServices.update(Object.assign({}, this.form.value));
+      document.getElementById('test').nodeValue = 'Update';
     }
     // this works tho
     this.router.navigate(['/employee/details']);
+    this.sampleServices.changeText();
+    this.form.reset();
   }
 
   reset() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 
-import { Employee, Address, Contact } from '../models/sample';
+import { Employee } from '../models/sample';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class SampleServices {
     address: null,
     contact: null
   });
+  public text: string = 'Update';
 
   selectedEmployee = this.employeesSource.asObservable();
-  // store = this.employeeSubject.asObservable();
 
   constructor() {
     this.employees = [
@@ -46,21 +46,20 @@ export class SampleServices {
     ];
   }
 
-  // getEmployee() {
-  //   console.log('FETCHING SERVICES ....');
-  //   try {
-  //     this.employeeSubject.next(this.employees);
-  //   } catch (error) {
-  //     this.employeeSubject.error(error);
-  //   }
-  // }
-
   getEmployees() {
     return this.employees;
   }
 
   setEmployee(employee: Employee) {
     this.employeesSource.next(employee);
+  }
+
+  changeText(): void {
+    if (this.text === 'Save') {
+      this.text = 'Update';
+    } else {
+      this.text = 'Save';
+    }
   }
 
   addEmployee(employees: Employee): void {
