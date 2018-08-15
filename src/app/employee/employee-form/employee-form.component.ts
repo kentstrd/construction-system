@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { SampleServices } from '../services/Sample.service';
 import { Employee } from '../models/sample';
 import { Contact, Address } from '../models/sample';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-form',
@@ -18,6 +18,7 @@ export class EmployeeFormComponent implements OnInit {
     { name: 'Smart', value: 'Smart' }
   ];
 
+  // text mask format
   mask: any[] = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   id: string;
@@ -128,15 +129,15 @@ export class EmployeeFormComponent implements OnInit {
     // this works tho
     this.router.navigate(['/employee/details']);
     this.sampleServices.changeText();
-    this.form.reset();
   }
 
-  reset() {
-    // RESET ALL INPUTS
-    this.form.reset();
+  // reset() {
+  //   // RESET ALL INPUTS
+  //   this.router.navigate(['/employee/details']);
+  //   this.form.reset();
 
-    // RESETS TO MODELS
-  }
+  //   // RESETS TO MODELS
+  // }
 
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

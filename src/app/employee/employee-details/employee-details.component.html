@@ -16,7 +16,7 @@
       <div class="col">
 
         <table class="table table-hover table-bordered">
-          <thead class="thead-light">
+          <thead class="thead-light text-center">
             <tr>
               <th>Name
               </th>
@@ -26,7 +26,7 @@
               <th>Contact Number</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             <tr *ngFor="let employee of employee">
               <td>
                 <a (click)="onSelect(employee)" class="nav-link active" routerLink="/employee/form">
@@ -53,4 +53,4 @@
       </div>
     </div>
   </div>
-  <app-pagination class="float-right"></app-pagination>
+  <app-pagination class="float-right mt-5"></app-pagination>
