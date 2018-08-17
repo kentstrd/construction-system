@@ -122,7 +122,6 @@ export class EmployeeFormComponent implements OnInit {
     this.addressForms.removeAt(i);
   }
 
- 
   onSubmit() {
     if (this.isNew) {
       this.form.value.id = this.generateId;
@@ -142,5 +141,5 @@ export class EmployeeFormComponent implements OnInit {
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
-  };
+  }
 }
