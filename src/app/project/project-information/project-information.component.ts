@@ -7,7 +7,6 @@ import { distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import { PesoPipe } from '../../shared/pipes/peso.pipe';
 
 
-
 @Component({
   selector: 'app-project-information',
   templateUrl: './project-information.component.html',
@@ -77,7 +76,7 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
     const disbursement = this.fb.group({
       cost: [''],
       date: ['']
-      })
+    });
     this.disbursements.push(disbursement);
   }
 
@@ -99,24 +98,14 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
     }
   }
 
-
-  onSubmit(){
-    if(this.isNew){      
-      this.projectForm.value.id = this.generateId
-      const newProject = this.projectForm.value
+  onSubmit() {
+    if (this.isNew) {
+      this.projectForm.value.id = this.generateId;
+      const newProject = this.projectForm.value;
       this.projectService.addProject(newProject);
-      }else{
-      const updatedForm = this.projectForm.value
-      this.projectService.updateProject(updatedForm)
-      }
-      this.router.navigate(['/project'])
-    }
-    generateId() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = (Math.random() * 16) | 0,
-          v = c === 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      });
+    } else {
+      const updatedForm = this.projectForm.value;
+      this.projectService.updateProject(updatedForm);
     }
     ngOnDestroy(){
       this.subscription.unsubscribe()
@@ -144,9 +133,11 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
       return this.projectForm.get('totalCost')
     }
   }
-
-  
-
-
-
-
+  generateId() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+}

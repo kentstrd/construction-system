@@ -7,9 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class ProjectService {
   projects: Project[];
-  isReadonly: boolean = false
-
-
+  isReadonly: boolean = false;
 
   public projectSource = new BehaviorSubject<Project>({
     id: null,
@@ -18,16 +16,18 @@ export class ProjectService {
     dateStarted: null,
     dateEnded: null,
     projectType: null,
-    address:{
-      province:null,
+    address: {
+      province: null,
       municipality: null,
       barangay: null
     },
     totalCost: null,
-    disbursement: [{
-          cost: null,
-          date: null,
-      }]
+    disbursement: [
+      {
+        cost: null,
+        date: null
+      }
+    ]
   });
 
   selectedProject = this.projectSource.asObservable();
@@ -137,7 +137,7 @@ export class ProjectService {
   updateProject(project: Project) {
     this.projects.forEach((current, index) => {
       if (project.id === current.id) {
-        this.projects[index] = project
+        this.projects[index] = project;
       }
     });
   }
