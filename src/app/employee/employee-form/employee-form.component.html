@@ -24,7 +24,7 @@
 
 
     <div class="row ml-5">
-      <div class="col-5" *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">
+      <div class="col-5 border rounded" *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">
         <small *ngIf="form.controls['firstName'].hasError('required')" class="text-danger"> Please Fill Up the Text box
         </small>
 
@@ -32,7 +32,7 @@
 
       </div>
 
-      <div class="col-5 pl-auto" *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">
+      <div class="col-5 pl-5 border rounded" *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">
         <small *ngIf="form.controls['lastName'].hasError('required')" class="text-danger"> Please Fill Up the Text box</small>
 
         <small class="text-danger" *ngIf="form.controls['lastName'].errors?.minlength">Last Name must be at least 2 characters</small>
@@ -99,7 +99,7 @@
       <div formArrayName="address">
         <label class="col-2 col-form-label">Address</label>
         <div *ngFor="let address of addressForms.controls; let i = index;" [formGroupName]="i">
-          <input class="col form-control mb-2" type="text" formControlName="homeaddress" required>
+          <input class="col form-control mb-2" type="text" formControlName="homeaddress" placeholder="YOUR ADDRESS" required>
           <div>
             <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" *ngIf="i > 0" (click)="deleteNewAddress()"></button>
           </div>

@@ -21,6 +21,9 @@ export class EmployeeFormComponent implements OnInit {
   // text mask format
   mask: any[] = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
+  // form empty value
+  emptyValue: string = '';
+
   id: string;
   firstName: string;
   lastName: string;
