@@ -7,8 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class ProjectService {
   projects: Project[];
-  isReadonly: boolean = false
-
+  isReadonly: boolean = false;
 
 
   public projectSource = new BehaviorSubject<Project>({
@@ -18,16 +17,19 @@ export class ProjectService {
     dateStarted: null,
     dateEnded: null,
     projectType: null,
-    address:{
-      province:null,
+    address: {
+      province: null,
       municipality: null,
       barangay: null
     },
     totalCost: null,
-    disbursement: [{
-          cost: null,
-          date: null,
-      }]
+
+    disbursement: [
+      {
+        cost: null,
+        date: null
+      }
+    ]
   });
 
   selectedProject = this.projectSource.asObservable();
@@ -36,26 +38,27 @@ export class ProjectService {
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
-          projectName: 'Building Project',
-          description: 'Building Project no.1',
-          dateStarted: '1997-07-13',
-          dateEnded: '2001-01-17',
-          projectType: 'fa fa-hospital-o fa-lg',
-          address:{
-            province:'Batangas',
-            municipality:'Bauan',
-            barangay: 'Manghinao proper'
-          },
-          totalCost: 123124,
-          disbursement: [{
-              cost: '123124',
-              date: '1997-07-23',
-          }]
-      },    
-    ]
-   }
 
-
+        projectName: 'Building Project',
+        description: 'Building Project no.1',
+        dateStarted: '1997-07-13',
+        dateEnded: '2001-01-17',
+        projectType: 'fa fa-hospital-o fa-lg',
+        address: {
+          province: 'Batangas',
+          municipality: 'Bauan',
+          barangay: 'Manghinao proper'
+        },
+        totalCost: 123124,
+        disbursement: [
+          {
+            cost: '123124',
+            date: '1997-07-23'
+          }
+        ]
+      }
+    ];
+  }
   addProject(project: Project) {
     this.projects.unshift(project);
   }
@@ -65,7 +68,7 @@ export class ProjectService {
   updateProject(project: Project) {
     this.projects.forEach((current, index) => {
       if (project.id === current.id) {
-        this.projects[index] = project
+        this.projects[index] = project;
       }
     });
   }
