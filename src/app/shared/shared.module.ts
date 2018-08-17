@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { ViewOptionsComponent } from './view-options/view-options.component';
-import { PaginationComponent } from './pagination/pagination.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ViewOptionsComponent } from './components/view-options/view-options.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule],

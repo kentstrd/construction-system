@@ -36,26 +36,97 @@ export class ProjectService {
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
-        projectName: 'Building Project',
-        description: 'Building Project no.1',
-        dateStarted: '1997-07-13',
-        dateEnded: '2001-01-17',
-        projectType: 'fa fa-hospital-o fa-lg',
-        address: {
-          province: 'Batangas',
-          municipality: 'Bauan',
-          barangay: 'Manghinao proper'
-        },
-        totalCost: 123124,
-        disbursement: [
-          {
-            cost: '123124',
-            date: '1997-07-23'
-          }
-        ]
-      }
-    ];
-  }
+          projectName: 'Building Project',
+          description: 'Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'fa fa-hospital-o fa-lg',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          totalCost: '123124',
+          disbursement: [{
+              cost: '123124',
+              date: '1997-07-23',
+          }]
+      },
+      {
+        id: 'c8e6449f-ae5d-499c-937b-13277338d1e1',
+          projectName: 'Building Project',
+          description: 'Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'fa fa-hospital-o fa-lg',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          totalCost: '123124',
+          disbursement: [{
+              cost: '123124',
+              date: '1997-07-23',
+          }]
+      },
+      {
+        id: 'c8e6449f-ae5d-499c-937b-18257338d1e1',
+          projectName: 'Building Project',
+          description: 'Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'fa fa-hospital-o fa-lg',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          totalCost: '123124',
+          disbursement: [{
+              cost: '123124',
+              date: '1997-07-23',
+          }]
+      },
+      {
+        id: 'c8e6449f-ae5d-499c-937b-18277338d1w1',
+          projectName: 'Building Project',
+          description: 'Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'fa fa-hospital-o fa-lg',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          totalCost: '123124',
+          disbursement: [{
+              cost: '123124',
+              date: '1997-07-23',
+          }]
+      },
+      {
+        id: 'c8e6449f-ae5d-499c-937b-18277338d1e2',
+          projectName: 'Building Project',
+          description: 'Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'fa fa-hospital-o fa-lg',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          totalCost: '123124',
+          disbursement: [{
+              cost: '123124',
+              date: '1997-07-23',
+          }]
+      },                    
+    ]
+   }
+
 
   addProject(project: Project) {
     this.projects.unshift(project);

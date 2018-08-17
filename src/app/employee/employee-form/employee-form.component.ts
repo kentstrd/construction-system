@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-
 import { SampleServices } from '../services/Sample.service';
 import { Employee } from '../models/sample';
 import { Contact, Address } from '../models/sample';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
@@ -78,6 +76,10 @@ export class EmployeeFormComponent implements OnInit {
     });
   }
 
+  private displayEmployee(employees: any): void {
+    this.employees = employees;
+  }
+
   get phoneForms() {
     return this.form.get('contact') as FormArray;
   }
@@ -120,6 +122,7 @@ export class EmployeeFormComponent implements OnInit {
     this.addressForms.removeAt(i);
   }
 
+ 
   onSubmit() {
     if (this.isNew) {
       this.form.value.id = this.generateId;
@@ -131,7 +134,6 @@ export class EmployeeFormComponent implements OnInit {
     }
     // this works tho
     this.router.navigate(['/employee/details']);
-    this.sampleServices.changeText();
   }
 
   generateId() {
@@ -140,5 +142,5 @@ export class EmployeeFormComponent implements OnInit {
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
-  }
+  };
 }
