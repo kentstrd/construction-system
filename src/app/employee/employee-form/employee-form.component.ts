@@ -134,14 +134,6 @@ export class EmployeeFormComponent implements OnInit {
     this.sampleServices.changeText();
   }
 
-  // reset() {
-  //   // RESET ALL INPUTS
-  //   this.router.navigate(['/employee/details']);
-  //   this.form.reset();
-
-  //   // RESETS TO MODELS
-  // }
-
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       const r = (Math.random() * 16) | 0,
