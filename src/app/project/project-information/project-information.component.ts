@@ -107,9 +107,11 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
       const updatedForm = this.projectForm.value;
       this.projectService.updateProject(updatedForm);
     }
-    ngOnDestroy(){
-      this.subscription.unsubscribe()
-    }
+    this.router.navigate(['/project'])
+  }
+  
+  ngOnDestroy(){
+    this.subscription.unsubscribe()
   }
 
     get disbursements(){

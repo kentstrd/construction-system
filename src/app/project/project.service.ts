@@ -53,7 +53,7 @@ export class ProjectService {
           }]
       },
       {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
+        id: 'c8e6449f-ae5d-499c-937b-13277338d1e1',
           projectName: 'Building Project',
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
@@ -71,7 +71,7 @@ export class ProjectService {
           }]
       },
       {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
+        id: 'c8e6449f-ae5d-499c-937b-18257338d1e1',
           projectName: 'Building Project',
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
@@ -89,7 +89,7 @@ export class ProjectService {
           }]
       },
       {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
+        id: 'c8e6449f-ae5d-499c-937b-18277338d1w1',
           projectName: 'Building Project',
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
@@ -107,7 +107,7 @@ export class ProjectService {
           }]
       },
       {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
+        id: 'c8e6449f-ae5d-499c-937b-18277338d1e2',
           projectName: 'Building Project',
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',

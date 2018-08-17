@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { SampleServices } from '../services/Sample.service';
 import { Employee } from '../models/sample';
 import { Contact, Address } from '../models/sample';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
@@ -81,10 +80,6 @@ export class EmployeeFormComponent implements OnInit {
     this.employees = employees;
   }
 
-  private displayEmployee(employees: any): void {
-    this.employees = employees;
-  }
-
   get phoneForms() {
     return this.form.get('contact') as FormArray;
   }
@@ -107,7 +102,7 @@ export class EmployeeFormComponent implements OnInit {
       });
       this.deleteNewAddress(1);
     }
-  };
+  }
 
   deleteContact(i) {
     this.phoneForms.removeAt(i);
@@ -147,5 +142,5 @@ export class EmployeeFormComponent implements OnInit {
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
-}
+  };
 }
