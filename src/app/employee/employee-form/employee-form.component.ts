@@ -76,10 +76,6 @@ export class EmployeeFormComponent implements OnInit {
     });
   }
 
-  private displayEmployee(employees: any): void {
-    this.employees = employees;
-  }
-
   get phoneForms() {
     return this.form.get('contact') as FormArray;
   }
@@ -88,20 +84,6 @@ export class EmployeeFormComponent implements OnInit {
       homenumber: ['']
     });
     this.phoneForms.push(number);
-  }
-
-  InitFormsValue(form, employee) {
-    if (form === 'contact') {
-      employee.contact.forEach(() => {
-        this.addContact();
-      });
-      this.deleteContact(1);
-    } else {
-      employee.address.forEach(() => {
-        this.addNewAddress();
-      });
-      this.deleteNewAddress(1);
-    }
   }
 
   deleteContact(i) {
@@ -122,15 +104,26 @@ export class EmployeeFormComponent implements OnInit {
     this.addressForms.removeAt(i);
   }
 
- 
+  InitFormsValue(form, employee) {
+    if (form === 'contact') {
+      employee.contact.forEach(() => {
+        this.addContact();
+      });
+      this.deleteContact(1);
+    } else {
+      employee.address.forEach(() => {
+        this.addNewAddress();
+      });
+      this.deleteNewAddress(1);
+    }
+  }
+
   onSubmit() {
     if (this.isNew) {
       this.form.value.id = this.generateId;
       this.sampleServices.addEmployee(Object.assign({}, this.form.value));
-      document.getElementById('test').nodeValue = 'Save';
     } else {
       this.sampleServices.update(Object.assign({}, this.form.value));
-      document.getElementById('test').nodeValue = 'Update';
     }
     // this works tho
     this.router.navigate(['/employee/details']);
@@ -142,5 +135,5 @@ export class EmployeeFormComponent implements OnInit {
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
-  };
+  }
 }

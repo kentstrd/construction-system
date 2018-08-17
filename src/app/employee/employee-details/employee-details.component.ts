@@ -21,6 +21,5 @@ export class EmployeeDetailsComponent implements OnInit {
 
   onSelect(employee: Employee) {
     this.sampleService.setEmployee(employee);
-    this.sampleService.changeText();
   }
 }

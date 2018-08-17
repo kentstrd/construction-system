@@ -54,14 +54,6 @@ export class SampleServices {
     this.employeesSource.next(employee);
   }
 
-  changeText(): void {
-    if (this.text === 'Save') {
-      this.text = 'Update';
-    } else {
-      this.text = 'Save';
-    }
-  }
-
   addEmployee(employees: Employee): void {
     for (const employee of [employees]) {
       this.employees.unshift(employee);

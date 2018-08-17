@@ -8,7 +8,6 @@ import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashbo
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { SamplereactiveComponent } from './samplereactive/samplereactive.component';
 
 @NgModule({
   imports: [
@@ -23,7 +22,6 @@ import { SamplereactiveComponent } from './samplereactive/samplereactive.compone
     EmployeeDashboardComponent,
     EmployeeDetailsComponent,
     EmployeeFormComponent,
-    SamplereactiveComponent
   ]
 })
 export class EmployeeModule {}
