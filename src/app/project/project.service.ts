@@ -9,6 +9,7 @@ export class ProjectService {
   projects: Project[];
   isReadonly: boolean = false;
 
+
   public projectSource = new BehaviorSubject<Project>({
     id: null,
     projectName: null,
@@ -22,6 +23,7 @@ export class ProjectService {
       barangay: null
     },
     totalCost: null,
+
     disbursement: [
       {
         cost: null,
@@ -36,6 +38,7 @@ export class ProjectService {
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
+
         projectName: 'Building Project',
         description: 'Building Project no.1',
         dateStarted: '1997-07-13',
@@ -56,7 +59,6 @@ export class ProjectService {
       }
     ];
   }
-
   addProject(project: Project) {
     this.projects.unshift(project);
   }
