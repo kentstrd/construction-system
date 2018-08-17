@@ -50,9 +50,9 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
               
  this.subscription = this.disbursements.valueChanges.pipe(
           distinctUntilChanged(),
-          debounceTime(800),
+          // debounceTime(800),
           ).subscribe(res =>{
-          this.computeDisbursement
+          this.computeDisbursement()
           res.forEach(element => {
               element.cost = this.peso.transform(element.cost)
               this.disbursements.patchValue(res ,{ emitEvent: false })
@@ -110,6 +110,7 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
     ngOnDestroy(){
       this.subscription.unsubscribe()
     }
+  }
 
     get disbursements(){
       return this.projectForm.get('disbursement') as FormArray
@@ -132,7 +133,6 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
     get totalCost(){
       return this.projectForm.get('totalCost')
     }
-  }
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       const r = (Math.random() * 16) | 0,
