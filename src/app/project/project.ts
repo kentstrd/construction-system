@@ -5,7 +5,7 @@ export class Project {
     dateStarted: string
     dateEnded: string
     projectType: string
-    totalCost: number
+    totalCost: string
     address:{
       province: string
       municipality: string

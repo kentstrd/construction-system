@@ -9,29 +9,34 @@
     </div>
     
     <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-      <div class="container col-8 p-0 mt-4 mb-2">
+      <fieldset [disabled] = isReadOnly>     
+       <div class="container col-8 p-0 mt-4 mb-2">
           <i class="fa fa-info-circle p-2"></i>
           <small>Profile</small>
       </div>
     
       <div class="container border border-secondary col-8 p-5">
         <div class="form-group row">
-          <label for="project-name" 
-          class="col-2 col-form-label">Project Name</label>
-          <input  type = "text" [readonly]="isReadOnly"
-          formControlName="projectName" class=" form-control col">
+          <label for="project-name"class="col-2 col-form-label">Project Name </label>
+          <input  type = "text" 
+          formControlName="projectName" class=" form-control col"
+          [ngClass]="{'border border-danger':!projectName.valid && projectName.touched,
+                      'border border-success': projectName.valid && projectName.touched}">
         </div>
     
         <div class="form-group row">
             <label for="description"
             class="col-2 col-form-label">Description</label>
             <textarea name="description" class="form-control col"
-            rows="5" formControlName="description"[readonly]="isReadOnly"></textarea>
+            [ngClass]="{'border border-success': projectForm.get('description').touched}"
+            rows="5" formControlName="description"></textarea>
         </div>
 
         <div class="form-group row">
           <label class="col-form-label col-2" for="project-type">Project Type</label>
-          <select  class="form-control col-4" formControlName="projectType" >
+          <select  class="form-control col-4" formControlName="projectType" 
+          [ngClass]="{'border border-danger':!projectType.valid && projectType.touched,
+                      'border border-success': projectType.valid && projectType.touched}">
             <option value="fa fa-building fa-lg">Building</option>
             <option value="fa fa-road fa-lg">Local Access Road</option>
             <option value="fa fa-hospital-o fa-lg">Hospital</option>
@@ -41,20 +46,31 @@
 
         <div class="form-group row" formGroupName="address">
           <label class="col-form-label col-2" for="address">Address</label>
-          <input [readonly]="isReadOnly" type="text" class="form-control col-3 " placeholder="Barangay" formControlName="barangay">
-          <input [readonly]="isReadOnly" type="text" class="form-control col-3 ml-3" placeholder="Municipality" formControlName="municipality">
-          <input [readonly]="isReadOnly" type="text" class="form-control col-3 ml-3" placeholder="Province" formControlName="province">
+          <input  type="text" class="form-control col-3 " 
+          placeholder="Barangay" formControlName="barangay"
+          [ngClass]="{'border border-danger':!barangay.valid && barangay.touched,
+                      'border border-success':barangay.valid && barangay.touched}">
+          <input  type="text" class="form-control col-3 ml-3" 
+          placeholder="Municipality" formControlName="municipality"
+          [ngClass]="{'border border-danger':!municipality.valid && municipality.touched,
+                      'border border-success':municipality.valid && municipality.touched}">
+          <input  type="text" class="form-control col-3 ml-3" 
+          placeholder="Province" formControlName="province" 
+          [ngClass]="{'border border-danger':!province.valid && province.touched,
+                      'border border-success':province.valid && province.touched}">
         </div>
     
         <div class="form-group row">
             <label for="date-started"
             class="col-2 col-form-label">Date Started</label>
-            <input [readonly]="isReadOnly" type="date" formControlName="dateStarted" class="form-control col-3">
-            <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>        
+            <input  type="date" formControlName="dateStarted" 
+            [ngClass]="{'border border-success': projectForm.get('dateStarted').touched}"
+            class="form-control col-3">
             <label for="date-ended"
             class="col-2 col-form-label">Date Ended</label>
-            <input [readonly]="isReadOnly" type="date" formControlName="dateEnded" class="form-control col-3">
-            <h3 class="ml-2" ><i  class="fa fa-calendar "></i></h3>
+            <input  type="date" formControlName="dateEnded" 
+            [ngClass]="{'border border-success': projectForm.get('dateEnded').touched}"            
+            class="form-control col-3">
         </div>
       </div>
     
@@ -67,7 +83,14 @@
           <div class="form-group row">
             <label for="total-cost"
             class="col-2 col-form-label">Total Cost</label>
-            <input [readonly]="isReadOnly" type="text" class="form-control col-4" formControlName="totalCost">
+            <input  type="text" class="form-control col-4" 
+            placeholder="₱0,000,000.00"
+            [ngClass]="{'border border-danger':!totalCost.valid && totalCost.touched || !computeDisbursement(),
+                        'border border-success':totalCost.valid && totalCost.touched }"
+            formControlName="totalCost" [value] = "totalCost.value| pesoPipe">
+            <span class="mt-1 ml-2 text-danger" *ngIf="!computeDisbursement()"> 
+              Disbursements should not be greater than <span>total cost</span>
+            </span>
           </div>
     
           <label>Disbursements</label>
@@ -76,13 +99,12 @@
              *ngFor="let disbursement of disbursements.controls; let i=index"
              [formGroupName]="i">
                <div class="row">
-                  <input type="text" formControlName="cost" [readonly]="isReadOnly"
+                  <input type="text" formControlName="cost"
+                   placeholder="₱0,000,000.00"
                    class="form-control offset-2 col-4">
-                   <input type="date" formControlName="date" [readonly]="isReadOnly"
+                   <input type="date" formControlName="date" 
                    class="form-control offset-2 col-3">
-                    
-                   <h3 class="ml-2"><i class="fa fa-calendar "></i></h3>
-                    
+                            
                    <button *ngIf="i > 0 " (click)="disbursementDeleteForm(i)"
                    type="button"class="close mb-2 ml-2" 
                    aria-label="Close">
@@ -100,9 +122,10 @@
     
         </div>
     
-    
+      </fieldset>    
         <div class="container col-9 mt-5 mb-5 ">
             <button class="btn btn-info col-1 float-right" routerLink="/project">Back</button>
-            <button *ngIf="!isReadOnly" type="submit" class=" mr-3 float-right btn btn-info col-1" >Save</button>
+            <button *ngIf="!isReadOnly" type="submit" [disabled]="!projectForm.valid || !computeDisbursement()"
+            class=" mr-3 float-right btn btn-info col-1" >Save</button>
         </div>
       </form>
