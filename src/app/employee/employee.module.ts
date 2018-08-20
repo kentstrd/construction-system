@@ -5,7 +5,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -18,10 +18,6 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     TextMaskModule
   ],
-  declarations: [
-    EmployeeDashboardComponent,
-    EmployeeDetailsComponent,
-    EmployeeFormComponent,
-  ]
+  declarations: [EmployeeDashboardComponent, EmployeeListComponent, EmployeeFormComponent]
 })
 export class EmployeeModule {}

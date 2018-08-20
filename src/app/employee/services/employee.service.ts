@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 
-import { Employee } from '../models/sample';
+import { Employee } from '../models/Employee';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SampleServices {
+export class EmployeeService {
   public employeeSubject: Subject<any> = new Subject();
   employees: Employee[];
 
@@ -16,8 +16,8 @@ export class SampleServices {
     lastName: null,
     gender: null,
     skill: null,
-    address: null,
-    contact: null
+    addresses: null,
+    contacts: null
   });
   public text: string = 'Update';
 
@@ -31,8 +31,8 @@ export class SampleServices {
         lastName: 'Cena',
         gender: 'Male',
         skill: 'Athlete',
-        address: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
-        contact: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
+        addresses: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
+        contacts: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
       },
       {
         id: '2',
@@ -40,8 +40,8 @@ export class SampleServices {
         lastName: 'Smith',
         gender: 'Female',
         skill: 'Singer',
-        address: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
-        contact: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }]
+        addresses: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
+        contacts: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }]
       }
     ];
   }
@@ -67,8 +67,16 @@ export class SampleServices {
       }
     });
   }
+  s;
 
   saveEmployee(employee) {
     this.employees = employee;
+  }
+  generateId() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
   }
 }

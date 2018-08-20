@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ProjectModule } from './project/project.module';
 import { EmployeeModule } from './employee/employee.module';
-import { SampleServices } from './employee/services/Sample.service';
+import { EmployeeService } from './employee/services/employee.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +25,7 @@ import { SampleServices } from './employee/services/Sample.service';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [SampleServices],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
