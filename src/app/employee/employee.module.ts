@@ -5,10 +5,9 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { SamplereactiveComponent } from './samplereactive/samplereactive.component';
 
 @NgModule({
   imports: [
@@ -19,11 +18,6 @@ import { SamplereactiveComponent } from './samplereactive/samplereactive.compone
     SharedModule,
     TextMaskModule
   ],
-  declarations: [
-    EmployeeDashboardComponent,
-    EmployeeDetailsComponent,
-    EmployeeFormComponent,
-    SamplereactiveComponent
-  ]
+  declarations: [EmployeeDashboardComponent, EmployeeListComponent, EmployeeFormComponent]
 })
 export class EmployeeModule {}

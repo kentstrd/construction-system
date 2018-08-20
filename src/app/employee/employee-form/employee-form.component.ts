@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { SampleServices } from '../services/Sample.service';
-import { Employee } from '../models/sample';
-import { Contact, Address } from '../models/sample';
+import { EmployeeService } from '../services/employee.service';
+import { Employee, Addresses, Contacts } from '../models/Employee';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
@@ -19,16 +19,14 @@ export class EmployeeFormComponent implements OnInit {
   // text mask format
   mask: any[] = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  // form empty value
-  emptyValue: string = '';
 
   id: string;
   firstName: string;
   lastName: string;
   gender: string;
   skill: string;
-  address: Address[];
-  contact: Contact[];
+  addresses: Addresses[];
+  contacts: Contacts[];
 
   public form: FormGroup;
   employees: Employee[];
@@ -38,24 +36,25 @@ export class EmployeeFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private sampleServices: SampleServices,
+    private employeeServices: EmployeeService,
     private router: Router
-  ) {}
-
-  ngOnInit() {
+  ) {
     // FORM CREATE
     this.form = this.fb.group({
       id: [''],
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      firstName: [
+        '',
+        [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z -\'] +')]
+      ],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      skill: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      address: this.fb.array([
+      skill: [''],
+      gender: [''],
+      addresses: this.fb.array([
         this.fb.group({
           homeaddress: ['']
         })
       ]),
-      contact: this.fb.array([
+      contacts: this.fb.array([
         this.fb.group(
           {
             homenumber: ['']
@@ -64,52 +63,37 @@ export class EmployeeFormComponent implements OnInit {
         )
       ])
     });
+  }
 
+  ngOnInit() {
     // Subscribe to the selectedEmployee
-    this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
+    this.employee = this.employeeServices.selectedEmployee.subscribe(employee => {
       if (employee.id != null) {
         this.isNew = false;
-        this.InitFormsValue('adddress', employee);
-        this.InitFormsValue('contact', employee);
+        this.InitFormsValue('adddresses', employee);
+        this.InitFormsValue('contacts', employee);
         this.form.patchValue(employee);
       }
     });
   }
 
-  private displayEmployee(employees: any): void {
-    this.employees = employees;
+  get contactsForm() {
+    return this.form.get('contacts') as FormArray;
   }
 
-  get phoneForms() {
-    return this.form.get('contact') as FormArray;
-  }
   addContact() {
     const number = this.fb.group({
       homenumber: ['']
     });
-    this.phoneForms.push(number);
-  }
-
-  InitFormsValue(form, employee) {
-    if (form === 'contact') {
-      employee.contact.forEach(() => {
-        this.addContact();
-      });
-      this.deleteContact(1);
-    } else {
-      employee.address.forEach(() => {
-        this.addNewAddress();
-      });
-      this.deleteNewAddress(1);
-    }
+    this.contactsForm.push(number);
   }
 
   deleteContact(i) {
-    this.phoneForms.removeAt(i);
+    this.contactsForm.removeAt(i);
   }
 
   get addressForms() {
-    return this.form.get('address') as FormArray;
+    return this.form.get('addresses') as FormArray;
   }
 
   addNewAddress() {
@@ -122,24 +106,30 @@ export class EmployeeFormComponent implements OnInit {
     this.addressForms.removeAt(i);
   }
 
-  onSubmit() {
-    if (this.isNew) {
-      this.form.value.id = this.generateId;
-      this.sampleServices.addEmployee(Object.assign({}, this.form.value));
-      document.getElementById('test').nodeValue = 'Save';
+
+  InitFormsValue(form, employee) {
+    if (form === 'contacts') {
+      employee.contacts.forEach(() => {
+        this.addContact();
+      });
+      this.deleteContact(0);
     } else {
-      this.sampleServices.update(Object.assign({}, this.form.value));
-      document.getElementById('test').nodeValue = 'Update';
+      employee.addresses.forEach(() => {
+        this.addNewAddress();
+      });
+      this.deleteNewAddress(0);
     }
-    // this works tho
-    this.router.navigate(['/employee/details']);
   }
 
-  generateId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = (Math.random() * 16) | 0,
-        v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
+
+  onSubmit() {
+    if (this.isNew) {
+      this.form.value.id = this.employeeServices.generateId;
+      this.employeeServices.addEmployee(Object.assign({}, this.form.value));
+    } else {
+      this.employeeServices.update(Object.assign({}, this.form.value));
+    }
+    // this works tho
+    this.router.navigate(['/employee/list']);
   }
 }

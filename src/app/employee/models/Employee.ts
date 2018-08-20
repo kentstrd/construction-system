@@ -4,14 +4,14 @@ export class Employee {
   lastName: string;
   gender: string;
   skill: string;
-  address: Address[];
-  contact: Contact[];
+  addresses: Addresses[];
+  contacts: Contacts[];
 }
 
-export class Address {
+export class Addresses {
   homeaddress: string;
 }
 
-export class Contact {
+export class Contacts {
   homenumber: string;
 }
