@@ -67,7 +67,6 @@ export class EmployeeService {
       }
     });
   }
-  s;
 
   saveEmployee(employee) {
     this.employees = employee;
