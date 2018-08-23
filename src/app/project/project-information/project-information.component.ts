@@ -1,10 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators} from '@angular/forms';
 import { ProjectService } from '../project.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { distinctUntilChanged, debounceTime} from 'rxjs/operators';
-import { PesoPipe } from '../../shared/pipes/peso.pipe';
 
 
 @Component({
@@ -12,53 +9,43 @@ import { PesoPipe } from '../../shared/pipes/peso.pipe';
   templateUrl: './project-information.component.html',
   styleUrls: ['./project-information.component.scss']
 })
-export class ProjectInformationComponent implements OnInit,OnDestroy {
+export class ProjectInformationComponent implements OnInit {
   projectForm: FormGroup;
   isNew: boolean = true;
   isReadOnly: boolean;
-  subscription: Subscription;
+  projectTypeGenerateIcon;
 
   constructor( private fb: FormBuilder, 
                private projectService: ProjectService, 
-               public router: Router,
-               private peso: PesoPipe) {
-          
-            }
+               public router: Router) 
+      {
+    
+    this.projectTypeGenerateIcon = this.projectService.projectTypeGenerateIcon
+        
+    this.projectForm = this.fb.group({
+      id:[''],
+      projectName: ['',Validators.required],
+      description:[''],        
+      projectType:['', Validators.required],
+      address:this.fb.group({
+        province:['',Validators.required],
+        municipality:['',Validators.required],
+        barangay:['',Validators.required],
+      }),
+      dateStarted:[''],
+      dateEnded:[''],
+      totalCost:['',Validators.required],
+      disbursement: this.fb.array([
+        this.fb.group({
+          cost: [''],
+          date: ['']            
+        })
+      ])
+    })
+  }
 
   ngOnInit() {
     this.isReadOnly = this.projectService.isReadonly
-    this.projectForm = this.fb.group({
-        id:[''],
-        projectName: ['',Validators.required],
-        description:[''],        
-        projectType:['', Validators.required],
-        address:this.fb.group({
-          province:['',Validators.required],
-          municipality:['',Validators.required],
-          barangay:['',Validators.required],
-        }),
-        dateStarted:[''],
-        dateEnded:[''],
-        totalCost:['',Validators.required],
-        disbursement: this.fb.array([
-          this.fb.group({
-            cost: [''],
-            date: ['']            
-          })
-        ]),
-      }),
-              
- this.subscription = this.disbursements.valueChanges.pipe(
-          distinctUntilChanged(),
-          // debounceTime(800),
-          ).subscribe(res =>{
-          this.computeDisbursement()
-          res.forEach(element => {
-              element.cost = this.peso.transform(element.cost)
-              this.disbursements.patchValue(res ,{ emitEvent: false })
-          });
-        })
-
     this.projectService.selectedProject.subscribe(project => {
       if (project.id != null) {
         this.isNew = false;
@@ -83,15 +70,23 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
   disbursementDeleteForm(i) {
     this.disbursements.removeAt(i);
   }
-  computeDisbursement(){
-    let cost = [];
-    this.disbursements.value.forEach(element =>{
-    cost.push(+element.cost.replace(/[^0-9.]/g,''))
-   })
-    let sum = cost.reduce((a, b) => a + b, 0)
-    let totalCost = this.projectForm.get('totalCost').value
-    .replace(/[^0-9.]/g,'')
-    if(sum > +totalCost){
+
+  getDisbursementCost(){
+    let disbursementCost = []
+    this.disbursements.value.forEach(element => {
+      disbursementCost.push(+element.cost.replace(/[^0-9.]/g,''))
+    });
+    return disbursementCost;
+  }
+  computeDisbursementCost(){
+    let disbursementCost = this.getDisbursementCost()
+    let sumOfdisbursementCost = disbursementCost.reduce((a, b) => a + b, 0)
+    return sumOfdisbursementCost
+  }
+
+  validateDisbursements(){
+    let totalCostOfDisbursements = this.totalCost.value.replace(/[^0-9.]/g,'')
+    if(this.computeDisbursementCost() > +totalCostOfDisbursements){
       return false
     }else{
       return true
@@ -110,10 +105,6 @@ export class ProjectInformationComponent implements OnInit,OnDestroy {
     this.router.navigate(['/project'])
   }
   
-  ngOnDestroy(){
-    this.subscription.unsubscribe()
-  }
-
     get disbursements(){
       return this.projectForm.get('disbursement') as FormArray
     } 

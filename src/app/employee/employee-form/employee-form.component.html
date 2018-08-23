@@ -81,7 +81,7 @@
         <div *ngFor="let phone of phoneForms.controls; let i = index;" [formGroupName]="i">
           <input class="form-control mb-2" type="text" [textMask]="{mask: mask}" pattern="\+\d \(\d{3}\) \d{3}-\d{4}" formControlName="homenumber">
           <div>
-            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right mb-2" (click)="deleteContact()" *ngIf="i > 0"></button>
+            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right mb-2" (click)="deleteContact(i)" *ngIf="i > 0"></button>
           </div>
           <div class="row pl-3">
             <div *ngIf="phoneForms.touched && !phoneForms.valid">

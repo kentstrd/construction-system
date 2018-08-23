@@ -20,18 +20,17 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe(project => {
-      this.projects = project;
-    });
+    this.projects = this.projectService.getProjects();
   }
 
-  onEdit(index){
-    this.projectService.projectSource.next(this.projects[index])
+  onEdit(project : Project){
+    this.selectedProject.next(project)
     this.projectService.isReadonly = false
+    this.router.navigate([`project/edit-${project.id}`])
   }
   newProject(){
     this.projectService.isReadonly = false
-    this.projectService.projectSource.next({
+    this.selectedProject.next({
       id: null,
       projectName: null,
       description: null,
@@ -52,8 +51,9 @@ export class ProjectListComponent implements OnInit {
     this.router.navigate(['project/form'])
   }
 
-  onView(index){
-    this.projectService.projectSource.next(this.projects[index])
+  onView(project: Project){
+    this.selectedProject.next(project)
     this.projectService.isReadonly = true
+    this.router.navigate([`project/view-${project.id}`])
   }
 }
