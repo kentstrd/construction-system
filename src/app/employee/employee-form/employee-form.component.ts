@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Contacts, Employee, Addresses } from '../models/employee';
+import { Contacts, Employee, Addresses } from '../models/Employee';
 import { EmployeeService } from '../services/employee.service';
 @Component({
   selector: 'app-employee-form',
