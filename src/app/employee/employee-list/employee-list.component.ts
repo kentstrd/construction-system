@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/Employee';
-import { SampleServices } from '../services/Sample.service';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,13 +13,13 @@ export class EmployeeListComponent implements OnInit {
 
   employee;
 
-  constructor(public sampleService: SampleServices, private router: Router) {}
+  constructor(public employeeService: EmployeeService, private router: Router) {}
 
   ngOnInit() {
-    this.employee = this.sampleService.getEmployees();
+    this.employee = this.employeeService.getEmployees();
   }
 
   onSelect(employee: Employee) {
-    this.sampleService.setEmployee(employee);
+    this.employeeService.setEmployee(employee);
   }
 }

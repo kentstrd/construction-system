@@ -19,7 +19,6 @@ export class EmployeeService {
     addresses: null,
     contacts: null
   });
-  public text: string = 'Update';
 
   selectedEmployee = this.employeesSource.asObservable();
 
@@ -30,7 +29,7 @@ export class EmployeeService {
         firstName: 'John',
         lastName: 'Cena',
         gender: 'Male',
-        skill: 'Athlete',
+        skill: 'Carpenter',
         addresses: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
         contacts: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
       },
@@ -39,7 +38,7 @@ export class EmployeeService {
         firstName: 'Sarah',
         lastName: 'Smith',
         gender: 'Female',
-        skill: 'Singer',
+        skill: 'Mason',
         addresses: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
         contacts: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }]
       }

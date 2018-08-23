@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { EmployeeService } from '../services/employee.service';
-import { Employee, Addresses, Contacts } from '../models/Employee';
 import { Router } from '@angular/router';
-
+import { Contacts, Employee, Addresses } from '../models/Employee';
+import { EmployeeService } from '../services/employee.service';
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
@@ -11,22 +10,25 @@ import { Router } from '@angular/router';
 })
 export class EmployeeFormComponent implements OnInit {
   skillset = [
-    { name: 'Singer', value: 'Singer' },
-    { name: 'Athlete', value: 'Athlete' },
-    { name: 'Smart', value: 'Smart' }
+    { name: 'Mason', value: 'Mason' },
+    { name: 'Helper', value: 'Helper' },
+    { name: 'Carpenter', value: 'Carpenter' },
+    { name: 'Designer', value: 'Designer' }
   ];
 
   // text mask format
   mask: any[] = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
+  // form empty value
+  emptyValue: string = '';
 
   id: string;
   firstName: string;
   lastName: string;
   gender: string;
   skill: string;
-  addresses: Addresses[];
-  contacts: Contacts[];
+  address: Addresses[];
+  contact: Contacts[];
 
   public form: FormGroup;
   employees: Employee[];
@@ -36,25 +38,24 @@ export class EmployeeFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private employeeServices: EmployeeService,
+    private employeeService: EmployeeService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit() {
     // FORM CREATE
     this.form = this.fb.group({
       id: [''],
-      firstName: [
-        '',
-        [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z -\'] +')]
-      ],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      skill: [''],
-      gender: [''],
-      addresses: this.fb.array([
+      skill: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      address: this.fb.array([
         this.fb.group({
           homeaddress: ['']
         })
       ]),
-      contacts: this.fb.array([
+      contact: this.fb.array([
         this.fb.group(
           {
             homenumber: ['']
@@ -63,37 +64,52 @@ export class EmployeeFormComponent implements OnInit {
         )
       ])
     });
-  }
 
-  ngOnInit() {
     // Subscribe to the selectedEmployee
-    this.employee = this.employeeServices.selectedEmployee.subscribe(employee => {
+    this.employee = this.employeeService.selectedEmployee.subscribe(employee => {
       if (employee.id != null) {
         this.isNew = false;
-        this.InitFormsValue('adddresses', employee);
-        this.InitFormsValue('contacts', employee);
+        this.InitFormsValue('adddress', employee);
+        this.InitFormsValue('contact', employee);
         this.form.patchValue(employee);
       }
     });
   }
 
-  get contactsForm() {
-    return this.form.get('contacts') as FormArray;
+  private displayEmployee(employees: any): void {
+    this.employees = employees;
   }
 
+  get phoneForms() {
+    return this.form.get('contact') as FormArray;
+  }
   addContact() {
     const number = this.fb.group({
       homenumber: ['']
     });
-    this.contactsForm.push(number);
+    this.phoneForms.push(number);
+  }
+
+  InitFormsValue(form, employee) {
+    if (form === 'contact') {
+      employee.contact.forEach(() => {
+        this.addContact();
+      });
+      this.deleteContact(1);
+    } else {
+      employee.address.forEach(() => {
+        this.addNewAddress();
+      });
+      this.deleteNewAddress(1);
+    }
   }
 
   deleteContact(i) {
-    this.contactsForm.removeAt(i);
+    this.phoneForms.removeAt(i);
   }
 
   get addressForms() {
-    return this.form.get('addresses') as FormArray;
+    return this.form.get('address') as FormArray;
   }
 
   addNewAddress() {
@@ -106,6 +122,7 @@ export class EmployeeFormComponent implements OnInit {
     this.addressForms.removeAt(i);
   }
 
+<<<<<<< HEAD
 
   InitFormsValue(form, employee) {
     if (form === 'contacts') {
@@ -122,14 +139,29 @@ export class EmployeeFormComponent implements OnInit {
   }
 
 
+=======
+>>>>>>> 264ba74c8b3d335254c5b6cf29d05e561f360800
   onSubmit() {
     if (this.isNew) {
-      this.form.value.id = this.employeeServices.generateId;
-      this.employeeServices.addEmployee(Object.assign({}, this.form.value));
+      this.form.value.id = this.generateId;
+      this.employeeService.addEmployee(Object.assign({}, this.form.value));
+      document.getElementById('test').nodeValue = 'Save';
     } else {
-      this.employeeServices.update(Object.assign({}, this.form.value));
+      this.employeeService.update(Object.assign({}, this.form.value));
+      document.getElementById('test').nodeValue = 'Update';
     }
     // this works tho
-    this.router.navigate(['/employee/list']);
+    this.router.navigate(['/employee/details']);
   }
+<<<<<<< HEAD
+=======
+
+  generateId() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+>>>>>>> 264ba74c8b3d335254c5b6cf29d05e561f360800
 }

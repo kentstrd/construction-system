@@ -1,9 +1,11 @@
 app-project-list {
-  .card-header {
-    color: white;
-    background: green;
-    a h5 i {
-      color: white;
+    background-color: red;
+
+    .card-header{    
+        color: white;
+        background-color: blue;
+          a h5 i{
+                color: white
+            }
     }
-  }
 }

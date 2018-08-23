@@ -35,12 +35,12 @@ export class ProjectService {
   constructor() {
     this.projects = [
       {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1e1',
+        id: 'c8e6449f-ae5d-499c-937b',
           projectName: 'Building Project',
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
-          projectType: 'fa fa-hospital-o fa-lg',
+          projectType: 'Building',
           address:{
             province:'Batangas',
             municipality:'Bauan',
@@ -58,7 +58,7 @@ export class ProjectService {
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
-          projectType: 'fa fa-hospital-o fa-lg',
+          projectType: 'Local Access Road',
           address:{
             province:'Batangas',
             municipality:'Bauan',
@@ -76,7 +76,7 @@ export class ProjectService {
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
-          projectType: 'fa fa-hospital-o fa-lg',
+          projectType: 'Hospital',
           address:{
             province:'Batangas',
             municipality:'Bauan',
@@ -94,7 +94,7 @@ export class ProjectService {
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
-          projectType: 'fa fa-hospital-o fa-lg',
+          projectType: 'Building',
           address:{
             province:'Batangas',
             municipality:'Bauan',
@@ -112,7 +112,7 @@ export class ProjectService {
           description: 'Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
-          projectType: 'fa fa-hospital-o fa-lg',
+          projectType: 'Hospital',
           address:{
             province:'Batangas',
             municipality:'Bauan',
@@ -127,12 +127,24 @@ export class ProjectService {
     ]
    }
 
+   projectTypeGenerateIcon(icon){
+
+    if(icon === 'Building'){
+      return "fa fa-building fa-lg"
+    }else if(icon === 'Local Access Road'){
+      return "fa fa-road fa-lg"
+    }else if(icon === 'Hospital'){
+      return "fa fa-hospital-o fa-lg"
+    }
+  }
+
 
   addProject(project: Project) {
     this.projects.unshift(project);
+    // this.projects.
   }
-  getProjects(): Observable<Project[]> {
-    return of(this.projects);
+  getProjects(){
+    return this.projects;
   }
   updateProject(project: Project) {
     this.projects.forEach((current, index) => {

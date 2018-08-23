@@ -6,34 +6,37 @@
   </div>
   
   <div class="row">
-      <app-view-options class="col-6"></app-view-options>
-      <a class="nav-link text-dark ml-auto btn"  (click)="newProject()" >
-        <i class="fa fa-plus-circle"></i> New Project</a>
+      <app-view-options 
+      class="col-12"></app-view-options>
+      <!-- <a class="nav-link text-dark ml-auto btn"  (click)="newProject()" >
+        <i class="fa fa-plus-circle"></i> New Project</a> -->
   </div>
   <!-- routerLink="/project/form" -->
-
-<div class="card-deck" >
-  <div class="card border-secondary mb-3" style="max-width: 18rem;"
-  *ngFor="let project of projects | slice:0:4; let i=index">
-    <div class="card-header text-secondary p-1 pl-2 pt-2">
-     <small class="text-uppercase"> {{project.projectName}} </small>
-    <a class="btn float-right text-secondary p-0" routerLink="/project/form" (click)="onEdit(i)" >
-     <h5 class="p-0 m-0"> <i class="fa fa-edit"></i></h5></a>      
-    </div>
-    <div class="card-body text-secondary row p-3">
-      <h2 class="col-3 p-3 pl-4"> <i [class]="project.projectType"></i> </h2>
-      <div class="col ml-3 p-0 pl-3">
-        <small class="card-text row">{{project.address.barangay}}</small>
-        <small class="card-text row">{{project.address.municipality}}, {{project.address.province}}</small>
-        <small class="card-text row pl-0 mt-1 col-11 border-bottom border-top"> 
-           <small class="font-italic p-1">{{project.totalCost | pesoPipe}} budget</small></small>      
-        <a class="btn p-0 row" routerLink="/project/form" (click)="onView(i)">
-         <small>view details</small></a>
+<div class="row">
+  <div class="card-deck col-3"
+  *ngFor="let project of projects; let i=index" >
+    <div class="card border-secondary mb-3">
+      <div class="card-header test p-1 pl-2 pt-2">
+       <small class="text-uppercase"> {{project.projectName}} </small>
+      <a class="btn float-right p-0" (click)="onEdit(project)" >
+       <h5 class="p-0 m-0"> <i class="fa fa-edit"></i></h5></a>      
+      </div>
+      <div class="card-body text-secondary row p-3">
+        <h2 class="col-3 p-3 pl-4"> <i [class]="project.projectType"></i> </h2>
+        <div class="col ml-3 p-0 pl-3">
+          <small class="card-text row">{{project.address.barangay}}</small>
+          <small class="card-text row">{{project.address.municipality}}, {{project.address.province}}</small>
+          <small class="card-text row pl-0 mt-1 col-11 border-bottom border-top"> 
+             <small class="font-italic p-1">{{project.totalCost}} budget</small></small>      
+          <a class="btn p-0 row" (click)="onView(project)">
+           <small>view details</small></a>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="card-deck" >
+
+<!-- <div class="card-deck" >
   <div class="card border-secondary mb-3" style="max-width: 18rem;"
   *ngFor="let project of projects | slice:4:8; let i=index">
   <div class="card-header text-secondary p-1 pl-2 pt-2">
@@ -53,6 +56,6 @@
      </div>
    </div>
   </div>
-</div>
+</div> -->
 <app-pagination class="float-right"></app-pagination>
 </div>

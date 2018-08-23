@@ -37,11 +37,11 @@
           <select  class="form-control col-4" formControlName="projectType" 
           [ngClass]="{'border border-danger':!projectType.valid && projectType.touched,
                       'border border-success': projectType.valid && projectType.touched}">
-            <option value="fa fa-building fa-lg">Building</option>
-            <option value="fa fa-road fa-lg">Local Access Road</option>
-            <option value="fa fa-hospital-o fa-lg">Hospital</option>
+            <option value="Building">Building</option>
+            <option value="Local Access Road">Local Access Road</option>
+            <option value="Hospital">Hospital</option>
           </select>
-          <h4 class="pl-2"><i [class]="projectForm.get('projectType').value"></i></h4>
+          <h4 class="pl-2"><i [class]="projectTypeGenerateIcon(projectType.value)"></i></h4>
         </div>
 
         <div class="form-group row" formGroupName="address">
@@ -85,10 +85,10 @@
             class="col-2 col-form-label">Total Cost</label>
             <input  type="text" class="form-control col-4" 
             placeholder="₱0,000,000.00"
-            [ngClass]="{'border border-danger':!totalCost.valid && totalCost.touched || !computeDisbursement(),
+            [ngClass]="{'border border-danger':!totalCost.valid && totalCost.touched || !validateDisbursements(),
                         'border border-success':totalCost.valid && totalCost.touched }"
-            formControlName="totalCost" [value] = "totalCost.value| pesoPipe">
-            <span class="mt-1 ml-2 text-danger" *ngIf="!computeDisbursement()"> 
+            formControlName="totalCost" [value] = "totalCost?.value| pesoPipe">
+            <span class="mt-1 ml-2 text-danger" *ngIf="!validateDisbursements()"> 
               Disbursements should not be greater than <span>total cost</span>
             </span>
           </div>
@@ -101,6 +101,7 @@
                <div class="row">
                   <input type="text" formControlName="cost"
                    placeholder="₱0,000,000.00"
+                   [value]="disbursement.value.cost | pesoPipe"
                    class="form-control offset-2 col-4">
                    <input type="date" formControlName="date" 
                    class="form-control offset-2 col-3">
@@ -125,7 +126,7 @@
       </fieldset>    
         <div class="container col-9 mt-5 mb-5 ">
             <button class="btn btn-info col-1 float-right" routerLink="/project">Back</button>
-            <button *ngIf="!isReadOnly" type="submit" [disabled]="!projectForm.valid || !computeDisbursement()"
+            <button *ngIf="!isReadOnly" type="submit" [disabled]="!projectForm.valid || !validateDisbursements()"
             class=" mr-3 float-right btn btn-info col-1" >Save</button>
         </div>
       </form>
