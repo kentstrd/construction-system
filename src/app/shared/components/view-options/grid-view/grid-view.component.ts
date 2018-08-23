@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../../project/project.service';
-import { SampleServices } from '../../../../employee/services/Sample.service';
+import { EmployeeService } from '../../../../employee/services/employee.service';
 
 @Component({
   selector: 'app-grid-view',
@@ -15,7 +15,7 @@ export class GridViewComponent implements OnInit {
   // activatedRoute: ActivatedRoute
   constructor(private activatedRoute: ActivatedRoute,
               private projectService: ProjectService,
-              private sampleService: SampleServices) {
+              private employeeService: EmployeeService) {
     // this.activatedRoute = ActivatedRoute
    }
 
@@ -40,6 +40,6 @@ export class GridViewComponent implements OnInit {
   }
 
   get Employees(){
-    return this.sampleService.getEmployees();
+    return this.employeeService.getEmployees();
   }
 }

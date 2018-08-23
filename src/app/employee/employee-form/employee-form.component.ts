@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { SampleServices } from '../services/Sample.service';
-import { Employee } from '../models/sample';
-import { Contact, Address } from '../models/sample';
 import { Router } from '@angular/router';
+import { Contacts, Employee, Addresses } from '../models/employee';
+import { EmployeeService } from '../services/employee.service';
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
@@ -27,8 +26,8 @@ export class EmployeeFormComponent implements OnInit {
   lastName: string;
   gender: string;
   skill: string;
-  address: Address[];
-  contact: Contact[];
+  address: Addresses[];
+  contact: Contacts[];
 
   public form: FormGroup;
   employees: Employee[];
@@ -38,7 +37,7 @@ export class EmployeeFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private sampleServices: SampleServices,
+    private employeeService: EmployeeService,
     private router: Router
   ) {}
 
@@ -66,7 +65,7 @@ export class EmployeeFormComponent implements OnInit {
     });
 
     // Subscribe to the selectedEmployee
-    this.employee = this.sampleServices.selectedEmployee.subscribe(employee => {
+    this.employee = this.employeeService.selectedEmployee.subscribe(employee => {
       if (employee.id != null) {
         this.isNew = false;
         this.InitFormsValue('adddress', employee);
@@ -126,10 +125,10 @@ export class EmployeeFormComponent implements OnInit {
   onSubmit() {
     if (this.isNew) {
       this.form.value.id = this.generateId;
-      this.sampleServices.addEmployee(Object.assign({}, this.form.value));
+      this.employeeService.addEmployee(Object.assign({}, this.form.value));
       document.getElementById('test').nodeValue = 'Save';
     } else {
-      this.sampleServices.update(Object.assign({}, this.form.value));
+      this.employeeService.update(Object.assign({}, this.form.value));
       document.getElementById('test').nodeValue = 'Update';
     }
     // this works tho

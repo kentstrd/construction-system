@@ -14,10 +14,10 @@
 
   <div class="container border border-secondary col-8 p-5">
     <div class="form-group row">
-      <label class="col-2">First Name</label>
+      <label class="col-2">*First Name</label>
       <input class="col-3 form-control" type="text" formControlName="firstName" minlength="2" required>
 
-      <label class="col-2">Last Name</label>
+      <label class="col-2">*Last Name</label>
       <input class="col-4 form-control" type="text" pattern="^[a-zA-Z]+$" formControlName="lastName" required minlength="2
       ">
     </div>
@@ -42,20 +42,20 @@
 
     <div class="row">
       <label class="col-2 col-form-label">Gender</label>
-      <div class="form-group mt-4">
+      <div class="form-group mt-2">
         <div class="radio">
           <label class="mr-4">
-            <input type="radio" class="ml-2" value=Male formControlName="gender" required> Male
+            <input type="radio" class="ml-2" value=Male formControlName="gender"> Male
           </label>
           <label>
-            <input type="radio" value="Female" formControlName="gender" required> Female
+            <input type="radio" value="Female" formControlName="gender"> Female
           </label>
         </div>
-        <div *ngIf="form.controls['gender'].touched && !form.controls['gender'].valid">
+        <!-- <div *ngIf="form.controls['gender'].touched && !form.controls['gender'].valid">
           <small *ngIf="form.controls['gender'].hasError('required')">
             Please choose a Gender
           </small>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -76,39 +76,39 @@
 
   <div class="container border border-secondary col-8 p-5">
     <div class="form-group row">
-      <div formArrayName="contact">
+      <div formArrayName="contacts">
         <label class="col-2 col-form-label">Contacts</label>
-        <div *ngFor="let phone of phoneForms.controls; let i = index;" [formGroupName]="i">
+        <div *ngFor="let phone of contactsForm.controls; let i = index;" [formGroupName]="i">
           <input class="form-control mb-2" type="text" [textMask]="{mask: mask}" pattern="\+\d \(\d{3}\) \d{3}-\d{4}" formControlName="homenumber">
           <div>
             <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right mb-2" (click)="deleteContact(i)" *ngIf="i > 0"></button>
           </div>
-          <div class="row pl-3">
-            <div *ngIf="phoneForms.touched && !phoneForms.valid">
-              <small class="text-danger" *ngIf="phoneForms.hasError('required')">PLEASE INPUT CONTACT!</small>
+          <!-- <div class="row pl-3">
+            <div *ngIf="contactsForm.touched && !contactsForm.valid">
+              <small class="text-danger" *ngIf="contactsForm.hasError('required')">PLEASE INPUT CONTACT!</small>
             </div>
 
-          </div>
+          </div> -->
         </div>
         <div>
-          <button type="button" class="btn fa fa-plus btn-success btn-sm float-right" (click)="addContact()"></button>
+          <button type="button" class="btn fa fa-plus btn-success btn-sm mr-1 float-right mr-1" (click)="addContact()"></button>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <div formArrayName="address">
+      <div formArrayName="addresses">
         <label class="col-2 col-form-label">Address</label>
         <div *ngFor="let address of addressForms.controls; let i = index;" [formGroupName]="i">
-          <input class="col form-control mb-2" type="text" formControlName="homeaddress" placeholder="YOUR ADDRESS" required>
+          <input class="form-control mb-2" type="text" formControlName="homeaddress" placeholder="YOUR ADDRESS" required>
           <div>
-            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" *ngIf="i > 0" (click)="deleteNewAddress()"></button>
+            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" *ngIf="i > 0" (click)="deleteNewAddress(i)"></button>
           </div>
-          <div class="row pl-3">
-            <div *ngIf="addressForms.touched && !addressForms.valid">
-              <small class="text-danger" *ngIf="addressForms.hasError('required')">PLEASE INPUT YOUR ADDRESS!</small>
+          <!-- <div class="row pl-3">
+            <div *ngIf="address.touched && !address.valid">
+              <small class="text-danger" *ngIf="address.hasError('required')">PLEASE INPUT YOUR ADDRESS!</small>
             </div>
 
-          </div>
+          </div> -->
         </div>
         <div>
           <button type="button" class="btn fa fa-plus btn-success btn-sm mr-1 float-right " (click)="addNewAddress() ">
@@ -122,10 +122,10 @@
 
 
   <div class="container col-9 mt-4">
-    <input type="submit" id="test" [disabled]="form.pristine" class="btn btn-sm btn-secondary offset-9 col-1" value="Save">
+    <button type="submit" [disabled]="form.pristine " (click)="onSubmit() " class="btn btn-sm btn-secondary offset-9 col-1 ">Save</button>
 
-    <button class="btn btn-sm btn-dark ml-3 col-1" routerLink="/employee/details" (click)="this.form.reset();">
-      <i class="fa fa-long-arrow-left fa-lg"> </i>
+    <button class="btn btn-sm btn-dark ml-3 col-1 " routerLink="/employee/list " (click)="this.form.reset(); ">
+      <i class="fa fa-long-arrow-left fa-lg "> </i>
     </button>
 
   </div>

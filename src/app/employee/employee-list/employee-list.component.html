@@ -20,8 +20,8 @@
               </th>
               <th>Gender</th>
               <th>Skills</th>
-              <th>Address</th>
-              <th>Contact Number</th>
+              <th>Addresses</th>
+              <th>Contacts</th>
             </tr>
           </thead>
           <tbody class="text-center">
@@ -36,12 +36,12 @@
                 {{ employee.skill }}
               </td>
               <td>
-                <div *ngFor="let employeeAdd of employee.address">
-                  {{ employeeAdd.homeaddress }}
+                <div *ngFor="let address of employee.addresses">
+                  {{ address.homeaddress }}
                 </div>
               </td>
               <td>
-                <div *ngFor="let contacts of employee.contact">
+                <div *ngFor="let contacts of employee.contacts">
                   {{ contacts.homenumber }}
                 </div>
               </td>

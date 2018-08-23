@@ -37,8 +37,8 @@ export class ListItemComponent implements OnInit {
       this.item.firstName,
       this.item.lastName, 
       this.item.skill,
-      this.item.address[0].homeaddress,
-      this.item.contact[0].homenumber
+      this.item.addresses[0].homeaddress,
+      this.item.contacts[0].homenumber
     ]
   }
 

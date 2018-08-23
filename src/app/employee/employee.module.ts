@@ -4,10 +4,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { SamplereactiveComponent } from './samplereactive/samplereactive.component';
 
 @NgModule({
   imports: [
@@ -19,9 +17,7 @@ import { SamplereactiveComponent } from './samplereactive/samplereactive.compone
     TextMaskModule
   ],
   declarations: [
-    EmployeeDetailsComponent,
     EmployeeFormComponent,
-    SamplereactiveComponent
   ]
 })
 export class EmployeeModule {}

@@ -35,10 +35,10 @@ export class GridItemComponent implements OnInit {
     }else{
       this.header = this.item.skill;
       this.icon = this.GenerateIconBasedOnGender(this.item.gender)
-      this.body_row_1 = this.item.address[0].homeaddress;
+      this.body_row_1 = this.item.addresses[0].homeaddress;
       this.body_row_2a = this.item.lastName;
       this.body_row_2b = this.item.firstName;
-      this.body_row_3 = this.item.contact[0].homenumber;
+      this.body_row_3 = this.item.contacts[0].homenumber;
     }
   }
 

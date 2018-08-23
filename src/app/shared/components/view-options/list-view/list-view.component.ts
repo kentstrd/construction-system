@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SampleServices } from '../../../../employee/services/Sample.service';
 import { ProjectService } from '../../../../project/project.service';
 import { ActivatedRoute } from '@angular/router';
+import { EmployeeService } from '../../../../employee/services/employee.service';
 
 @Component({
   selector: 'app-list-view',
@@ -16,7 +16,7 @@ tableHeaders;
 
   constructor(private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-    private sampleService: SampleServices) { }
+    private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.activatedRoute.parent.url.subscribe((urlPath) => {
@@ -47,7 +47,7 @@ tableHeaders;
   }
 
   get Employees(){
-    return this.sampleService.getEmployees();
+    return this.employeeService.getEmployees();
   }
 
   getEmployeeHeaders(): string[]{
