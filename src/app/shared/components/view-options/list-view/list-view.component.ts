@@ -3,59 +3,61 @@ import { ProjectService } from '../../../../project/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../../../employee/services/employee.service';
 
+
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss']
 })
 export class ListViewComponent implements OnInit {
-items;
-tableHeaders;
+  items;
+  tableHeaders;
 
+  p: number;
 
-
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-    private employeeService: EmployeeService) { }
+    private employeeService: EmployeeService
+  ) {}
 
   ngOnInit() {
-    this.activatedRoute.parent.url.subscribe((urlPath) => {
+    this.activatedRoute.parent.url.subscribe(urlPath => {
       const url = urlPath[urlPath.length - 1].path;
-      this.items = this.getItems(url)
-      this.tableHeaders = this.getHeaders(url)
-    })
+      this.items = this.getItems(url);
+      this.tableHeaders = this.getHeaders(url);
+    });
   }
 
-  getItems(chosenRoute){
-    console.log(chosenRoute)
-    if(chosenRoute == 'project'){
-      return this.Projects
-    }else{
-      return this.Employees
+  getItems(chosenRoute) {
+    console.log(chosenRoute);
+    if (chosenRoute == 'project') {
+      return this.Projects;
+    } else {
+      return this.Employees;
     }
   }
-  getHeaders(chosenRoute){
-    if(chosenRoute == 'project'){
-      return this.getProjectHeaders()
-    }else{
-      return this.getEmployeeHeaders()
+  getHeaders(chosenRoute) {
+    if (chosenRoute == 'project') {
+      return this.getProjectHeaders();
+    } else {
+      return this.getEmployeeHeaders();
     }
   }
-  
-  get Projects(){
+
+  get Projects() {
     return this.projectService.getProjects();
   }
 
-  get Employees(){
+  get Employees() {
     return this.employeeService.getEmployees();
   }
 
-  getEmployeeHeaders(): string[]{
-    return ["first Name", "last Name", "skill", "address","contact"]
+  getEmployeeHeaders(): string[] {
+    return ['first Name', 'last Name', 'skill', 'address', 'contact'];
   }
 
-  getProjectHeaders(): string[]{
-    return ["Project Name", "Project Type", "Address", "Project Cost","Date Started"]
+  getProjectHeaders(): string[] {
+    return ['Project Name', 'Project Type', 'Address', 'Project Cost', 'Date Started'];
   }
-
 }

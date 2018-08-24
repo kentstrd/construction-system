@@ -23,7 +23,7 @@ import { EmployeeService } from './employee/services/employee.service';
     HttpClientModule,
     HttpModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

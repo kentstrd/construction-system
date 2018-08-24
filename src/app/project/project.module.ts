@@ -10,17 +10,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PesoPipe } from '../shared/pipes/peso.pipe';
 
 @NgModule({
-  imports: [
-            CommonModule,
-            FormsModule, 
-            ProjectRoutingModule, 
-            SharedModule,
-            ReactiveFormsModule,
-          ],
+  imports: [CommonModule, FormsModule, ProjectRoutingModule, SharedModule, ReactiveFormsModule],
   providers: [CurrencyPipe, PesoPipe],
-  declarations: [
-                 ProjectInformationComponent, 
-                 ProjectListComponent,PesoPipe
-                ]
+  declarations: [ProjectInformationComponent, ProjectListComponent, PesoPipe]
 })
 export class ProjectModule {}

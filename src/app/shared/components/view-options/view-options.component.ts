@@ -8,20 +8,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./view-options.component.scss']
 })
 export class ViewOptionsComponent implements OnInit, OnDestroy {
-  @Output() activatedURL;
-  subscription: Subscription
+  @Output()
+  activatedURL;
+  subscription: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute) {
-   }
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-   this.subscription = this.activatedRoute.url.subscribe((urlPath) => {
+    this.subscription = this.activatedRoute.url.subscribe(urlPath => {
       const url = urlPath[urlPath.length - 1].path;
-      this.activatedURL = url  
-    })
+      this.activatedURL = url;
+    });
   }
-  ngOnDestroy(){
-    this.subscription.unsubscribe()
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
-
 }

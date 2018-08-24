@@ -8,10 +8,19 @@ import { GridViewComponent } from './components/view-options/grid-view/grid-view
 import { ListViewComponent } from './components/view-options/list-view/list-view.component';
 import { GridItemComponent } from './components/view-options/grid-item/grid-item.component';
 import { ListItemComponent } from './components/view-options/list-item/list-item.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgxPaginationModule],
   exports: [PaginationComponent, HeaderComponent, ViewOptionsComponent],
-  declarations: [HeaderComponent, ViewOptionsComponent, PaginationComponent, GridViewComponent, ListViewComponent, GridItemComponent, ListItemComponent]
+  declarations: [
+    HeaderComponent,
+    ViewOptionsComponent,
+    PaginationComponent,
+    GridViewComponent,
+    ListViewComponent,
+    GridItemComponent,
+    ListItemComponent
+  ]
 })
 export class SharedModule {}

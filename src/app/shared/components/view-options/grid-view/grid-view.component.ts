@@ -11,35 +11,39 @@ import { EmployeeService } from '../../../../employee/services/employee.service'
 export class GridViewComponent implements OnInit {
   // projects: Project [];
   items;
-  @Input() mode;
+  @Input()
+  mode;
+  p: number;
   // activatedRoute: ActivatedRoute
-  constructor(private activatedRoute: ActivatedRoute,
-              private projectService: ProjectService,
-              private employeeService: EmployeeService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private projectService: ProjectService,
+    private employeeService: EmployeeService
+  ) {
     // this.activatedRoute = ActivatedRoute
-   }
+  }
 
   ngOnInit() {
-    this.activatedRoute.parent.url.subscribe((urlPath) => {
+    this.activatedRoute.parent.url.subscribe(urlPath => {
       const url = urlPath[urlPath.length - 1].path;
-      this.items = this.getItems(url)
-    })
+      this.items = this.getItems(url);
+    });
   }
 
-  getItems(chosenRoute){
-    console.log(chosenRoute)
-    if(chosenRoute == 'project'){
-      return this.Projects
-    }else{
-      return this.Employees
+  getItems(chosenRoute) {
+    console.log(chosenRoute);
+    if (chosenRoute == 'project') {
+      return this.Projects;
+    } else {
+      return this.Employees;
     }
   }
-  
-  get Projects(){
+
+  get Projects() {
     return this.projectService.getProjects();
   }
 
-  get Employees(){
+  get Employees() {
     return this.employeeService.getEmployees();
   }
 }
