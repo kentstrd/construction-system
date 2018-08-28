@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../../../employee/services/employee.service';
 
 @Component({
-  selector: 'app-list-view',
-  templateUrl: './list-view.component.html',
-  styleUrls: ['./list-view.component.scss']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
-export class ListViewComponent implements OnInit {
+export class TableComponent implements OnInit {
 items;
 tableHeaders;
 

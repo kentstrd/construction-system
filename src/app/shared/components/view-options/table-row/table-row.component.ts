@@ -1,28 +1,28 @@
-import { Component, OnInit, Input, Directive } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../../../project/project.service';
 
 
 @Component({
-  selector: '[app-list-item]',
-  templateUrl: './list-item.component.html',
-  styleUrls: ['./list-item.component.scss']
+  selector: '[app-table-row]',
+  templateUrl: './table-row.component.html',
+  styleUrls: ['./table-row.component.scss']
 })
-export class ListItemComponent implements OnInit {
+export class TableRowComponent implements OnInit {
 @Input() item
 @Input() items
-@Input() row
+@Input() tableRow
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
     if(this.items === this.projectService.getProjects()){
-      this.row = this.getProjectTableRow()
+      this.tableRow = this.getProjectTableData()
     }else{
-      this.row = this.getEmployeeTableRow()
+      this.tableRow = this.getEmployeeTableData()
     }
   }
 
-  getProjectTableRow(): string[]{
+  getProjectTableData(): string[]{
     return [
       this.item.projectName,
       this.item.projectType,
@@ -32,7 +32,7 @@ export class ListItemComponent implements OnInit {
     ]
   }
 
-  getEmployeeTableRow(): string[]{
+  getEmployeeTableData(): string[]{
     return [
       this.item.firstName,
       this.item.lastName, 

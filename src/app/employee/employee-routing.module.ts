@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
-import { HeaderComponent } from '../shared/components/header/header.component';
 import { ViewOptionsComponent } from '../shared/components/view-options/view-options.component';
-import { GridViewComponent } from '../shared/components/view-options/grid-view/grid-view.component';
-import { ListViewComponent } from '../shared/components/view-options/list-view/list-view.component';
+import { GridLayoutComponent } from '../shared/components/view-options/grid-layout/grid-layout.component';
+import { TableComponent } from '../shared/components/view-options/table/table.component';
 
 const routes: Routes = [
   { path: 'employee', component: ViewOptionsComponent, children:[
     {path:'', redirectTo:'list', pathMatch:'full'},
-    {path:'grid', component: GridViewComponent},
-    {path:'list', component: ListViewComponent}
+    {path:'grid', component: GridLayoutComponent},
+    {path:'list', component: TableComponent}
   ]},
     {path:'employee/new', component: EmployeeFormComponent}
   // {

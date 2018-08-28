@@ -12,10 +12,10 @@
         </thead>
         <tbody class="text-center text-secondary text-capitalize" style="cursor: pointer;">
           <tr *ngFor="let item of items" 
-               app-list-item
+               app-table-row
                [item]="item"
                [items]="items"
-               [row]="tableHeaders">
+               [tableRow]="tableHeaders">
           </tr>
         </tbody>
       </table>

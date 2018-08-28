@@ -1,22 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../../project/project.service';
 import { EmployeeService } from '../../../../employee/services/employee.service';
 
 @Component({
-  selector: 'app-grid-view',
-  templateUrl: './grid-view.component.html',
-  styleUrls: ['./grid-view.component.scss']
+  selector: 'app-layout-view',
+  templateUrl: './grid-layout.component.html',
+  styleUrls: ['./grid-layout.component.scss']
 })
-export class GridViewComponent implements OnInit {
-  // projects: Project [];
+export class GridLayoutComponent implements OnInit {
   items;
-  @Input() mode;
-  // activatedRoute: ActivatedRoute
+
   constructor(private activatedRoute: ActivatedRoute,
               private projectService: ProjectService,
               private employeeService: EmployeeService) {
-    // this.activatedRoute = ActivatedRoute
    }
 
   ngOnInit() {
