@@ -1,17 +1,19 @@
-<div class="container">
   <div class="row">
     <div class="col">
 
-      <table class="table table-hover table-bordered">
-        <thead class="thead-light text-center">
+      <table class="table border rounded">
+        <thead class="bg-primary text-center">
           <tr>
-              <th class="text-capitalize" *ngFor="let tableHeader of tableHeaders">
+              <th class="text-uppercase border text-light small font-weight-bold" 
+                  *ngFor="let tableHeader of tableHeaders">
                   {{tableHeader}}
                 </th>
           </tr>
         </thead>
         <tbody class="text-center text-secondary text-capitalize" style="cursor: pointer;">
-          <tr *ngFor="let item of items" 
+          <tr *ngFor="let item of items"
+               routerLink="view" 
+               (click) = "view(item)"
                app-table-row
                [item]="item"
                [items]="items"
@@ -21,4 +23,3 @@
       </table>
     </div>
   </div>
-</div>

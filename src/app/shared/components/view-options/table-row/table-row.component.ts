@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProjectService } from '../../../../project/project.service';
+import { ProjectService } from '../../../../project-management/project.service';
 
 
 @Component({
@@ -12,6 +12,7 @@ export class TableRowComponent implements OnInit {
 @Input() items
 @Input() tableRow
 
+
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
@@ -20,13 +21,14 @@ export class TableRowComponent implements OnInit {
     }else{
       this.tableRow = this.getEmployeeTableData()
     }
+
   }
 
   getProjectTableData(): string[]{
     return [
       this.item.projectName,
       this.item.projectType,
-      this.item.address.province,
+      `${this.item.address.municipality}, ${this.item.address.province}`,
       this.item.totalCost,
       this.item.dateStarted
     ]
@@ -34,12 +36,19 @@ export class TableRowComponent implements OnInit {
 
   getEmployeeTableData(): string[]{
     return [
-      this.item.firstName,
-      this.item.lastName, 
       this.item.skill,
-      this.item.addresses[0].homeaddress,
+      `${this.item.firstName} ${this.item.lastName}`, 
+      this.item.gender,
+      `${this.item.addresses[0].homeaddress}  ${this.item.addresses[1].homeaddress}`,
       this.item.contacts[0].homenumber
     ]
+  }
+
+  view(){
+    this.projectService.setProject(this.item)
+  }
+  edit(){
+    this.projectService.setProject(this.item)
   }
 
 }

@@ -12,7 +12,7 @@ export class ViewOptionsComponent implements OnInit, OnDestroy {
   subscription: Subscription
 
   constructor(private activatedRoute: ActivatedRoute) {
-   }
+  }
 
   ngOnInit() {
    this.subscription = this.activatedRoute.url.subscribe((urlPath) => {

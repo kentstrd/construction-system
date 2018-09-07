@@ -1,15 +1,8 @@
 <div class="container">
+  <app-sub-header [subHeaderText]="activatedURL" ></app-sub-header>
+
   <div class="row">
-    <div class="col">
-      <!-- <h1><i class="fa fa-building-o"></i><span class="text-capitalize"> {{activatedURL}}</span></h1> -->
-      <h1><i class="fa" 
-        [ngClass]="{ 'fa-building-o' : activatedURL === 'project' ,
-                      'fa-users' : activatedURL === 'employee'}"></i>
-      <span class="text-capitalize"> {{activatedURL}}</span></h1>
-    </div>
-  </div>
-  <div class="row">
-    <nav class="nav mb-2 col-6">
+    <nav class="nav mb-2 col-6 small">
       <a class="nav-link text-dark" routerLink="grid">
         <i class="fa fa-th-large"></i> Grid View</a>
       <a class="nav-link text-dark" routerLink="list">
@@ -19,10 +12,9 @@
     </nav>
 
     <nav class="nav mb-2 offset-4">
-      <a class="nav-link text-success" routerLink="new">
+      <a class="nav-link text-success small" routerLink="new">
         <i class="fa fa-plus-circle"></i> New <span class="text-capitalize">{{activatedURL}}</span> </a>
     </nav>
   </div>
-
     <router-outlet></router-outlet>    
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Project } from '../../../../project/project';
-import { ProjectService } from '../../../../project/project.service';
+import { ProjectService } from '../../../../project-management/project.service';
 
 @Component({
   selector: 'app-grid-item',
@@ -24,14 +23,13 @@ export class GridItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    // console.log(this.projectService.getProjects())
     if(this.items === this.projectService.getProjects()){
       this.header = this.item.projectName;
       this.icon = this.projectTypeGenerateIcon(this.item.projectType);
       this.body_row_1 = this.item.address.barangay;
       this.body_row_2a = this.item.address.municipality;
       this.body_row_2b = this.item.address.province;
-      this.body_row_3 = `${this.item.totalCost} budget`  
+      this.body_row_3 = `${this.item.costDetails.totalCost} budget`  
     }else{
       this.header = this.item.skill;
       this.icon = this.GenerateIconBasedOnGender(this.item.gender)
@@ -40,6 +38,13 @@ export class GridItemComponent implements OnInit {
       this.body_row_2b = this.item.firstName;
       this.body_row_3 = this.item.contacts[0].homenumber;
     }
+  }
+
+  edit(){
+    this.projectService.setProject(this.item)
+  }
+  view(){
+    this.projectService.setProject(this.item)
   }
 
   GenerateIconBasedOnGender(gender){

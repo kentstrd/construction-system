@@ -1,4 +1,7 @@
+<td class="small pt-2 p-0 border-right bg-light" routerLink="edit" (click)="edit()">
+    <a class="btn m-0 p-0" routerLink="edit" (click)="edit()"> <i class="fa fa-edit"></i> </a>
+</td>
 
-<td *ngFor="let td of tableRow">
-    <small>{{td}}</small>
-  </td>
+<td class="small" *ngFor="let td of tableRow">
+  {{td}}
+</td>

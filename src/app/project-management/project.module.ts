@@ -4,10 +4,11 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProjectRoutingModule } from './project-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { ProjectInformationComponent } from './project-information/project-information.component';
-import { ProjectListComponent } from './project-list/project-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PesoPipe } from '../shared/pipes/peso.pipe';
+import { CreateComponent } from './create/create.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { ViewProjectComponent } from './view-project/view-project.component';
 
 @NgModule({
   imports: [
@@ -19,8 +20,8 @@ import { PesoPipe } from '../shared/pipes/peso.pipe';
           ],
   providers: [CurrencyPipe, PesoPipe],
   declarations: [
-                 ProjectInformationComponent, 
-                 ProjectListComponent,PesoPipe
+                 CreateComponent, 
+                 PesoPipe, EditProjectComponent, ViewProjectComponent
                 ]
 })
 export class ProjectModule {}

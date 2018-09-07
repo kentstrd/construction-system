@@ -8,15 +8,16 @@ import { DecimalPipe } from '@angular/common';
 export class PesoPipe extends DecimalPipe implements PipeTransform { amount: any;
 
   transform(value: any, args?: any): any {
-
-      let amount = String(value);
-      amount = amount.replace(/[^0-9\s.]/g,'')
-      if(amount != ''){
-        amount = super.transform(amount)
-        return `₱${amount}`
-      }else{
-          return amount
+    if(value != null ){
+      value = +value.replace(/[^0-9\s.]/g,'')
+      if( /^-?\d+\.?\d*$/.test(value) ){
+        value = super.transform(value)
+        // console.log(value)
+        if(value == 0 && value == '₱'){
+          return null
+        }return `₱${value}`
       }
-  }
+    }
 
+}
 }

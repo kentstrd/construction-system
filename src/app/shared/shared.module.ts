@@ -8,10 +8,37 @@ import { GridItemComponent } from './components/view-options/grid-item/grid-item
 import { GridLayoutComponent } from './components/view-options/grid-layout/grid-layout.component';
 import { TableComponent } from './components/view-options/table/table.component';
 import { TableRowComponent } from './components/view-options/table-row/table-row.component';
+import { SubHeaderComponent } from './components/sub-header/sub-header.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveInputComponent } from './fields/reactive-input.component';
+import { ValidationMessagesComponent } from './fields/validation-messages.component';
+import { ReactiveTextareaComponent } from './fields/reactive-textarea.component';
+import { ReactiveSelectComponent } from './fields/reactive-select.component';
+import { ReactiveAddressComponent } from './fields/reactive-address.component';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  exports: [PaginationComponent, HeaderComponent, ViewOptionsComponent],
-  declarations: [HeaderComponent, ViewOptionsComponent, PaginationComponent, GridLayoutComponent, TableComponent, GridItemComponent, TableRowComponent]
+  imports: [CommonModule, RouterModule,ReactiveFormsModule],
+  exports: [PaginationComponent,
+            HeaderComponent, 
+            ViewOptionsComponent,
+            SubHeaderComponent, 
+            ValidationMessagesComponent,
+            ReactiveInputComponent,
+            ReactiveTextareaComponent,
+            ReactiveSelectComponent,
+            ReactiveAddressComponent],
+  declarations: [HeaderComponent, 
+                 ViewOptionsComponent, 
+                 PaginationComponent,
+                 GridLayoutComponent,
+                 TableComponent, 
+                 GridItemComponent, 
+                 TableRowComponent,
+                 ValidationMessagesComponent, 
+                 SubHeaderComponent,
+                 ReactiveAddressComponent,
+                 ReactiveInputComponent,
+                 ReactiveTextareaComponent,
+                 ReactiveSelectComponent]
 })
 export class SharedModule {}

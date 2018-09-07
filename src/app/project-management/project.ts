@@ -5,13 +5,15 @@ export class Project {
     dateStarted: string
     dateEnded: string
     projectType: string
-    totalCost: string
     address:{
       province: string
       municipality: string
       barangay: string
     }
-    disbursement: disbursement[]
+    costDetails:{
+      totalCost: string
+      disbursement: disbursement[]
+    }
   }
 
   export class disbursement {

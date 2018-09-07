@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../../../project/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../../../employee/services/employee.service';
+import { ProjectService } from '../../../../project-management/project.service';
 
 @Component({
   selector: 'app-table',
@@ -51,11 +51,15 @@ tableHeaders;
   }
 
   getEmployeeHeaders(): string[]{
-    return ["first Name", "last Name", "skill", "address","contact"]
+    return ["","Skill", "Name", "gender", "address","contact"]
   }
 
   getProjectHeaders(): string[]{
-    return ["Project Name", "Project Type", "Address", "Project Cost","Date Started"]
+    return ["","Project Name", "Project Type", "Address", "Project Cost","Date Started"]
+  }
+
+  view(item){
+    this.projectService.setProject(item)
   }
 
 }
