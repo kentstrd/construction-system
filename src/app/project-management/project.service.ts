@@ -68,7 +68,7 @@ export class ProjectService {
 
     this.projects = [
       {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-a937b',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -87,7 +87,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-9d37b',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -106,7 +106,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-93f7b',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -125,7 +125,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-937gb',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -144,7 +144,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-937bz',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -163,7 +163,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-937bs',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -182,7 +182,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'c8e6449f-ae5d-499c-937be',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
@@ -201,7 +201,7 @@ export class ProjectService {
             }]
           }
       },      {
-        id: 'c8e6449f-ae5d-499c-937b',
+        id: 'tc8e6449f-ae5d-499c-937b',
           projectName: 'Building Project',
           description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
