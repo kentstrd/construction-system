@@ -86,51 +86,10 @@ export class ProjectService {
                 date: '1997-07-23',
             }]
           }
-      },
-      {
-        id: 'c8e6449f-ae5d-499c-937b-13277338d1e1',
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
           projectName: 'Building Project',
-          description: 'Building Project no.1',
-          dateStarted: '1997-07-13',
-          dateEnded: '2001-01-17',
-          projectType: 'Local Access Road',
-          address:{
-            province:'Batangas',
-            municipality:'Bauan',
-            barangay: 'Manghinao proper'
-          },
-          costDetails:{
-            totalCost: '₱123,124.00',
-            disbursement: [{
-                cost: '₱123,124.00',
-                date: '1997-07-23',
-            }]
-          }
-      },
-      {
-        id: 'c8e6449f-ae5d-499c-937b-18257338d1e1',
-          projectName: 'Building Project',
-          description: 'Building Project no.1',
-          dateStarted: '1997-07-13',
-          dateEnded: '2001-01-17',
-          projectType: 'Hospital',
-          address:{
-            province:'Batangas',
-            municipality:'Bauan',
-            barangay: 'Manghinao proper'
-          },
-          costDetails:{
-            totalCost: '₱123,124.00',
-            disbursement: [{
-                cost: '₱123,124.00',
-                date: '1997-07-23',
-            }]
-          }
-      },
-      {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1w1',
-          projectName: 'Building Project',
-          description: 'Building Project no.1',
+          description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
           projectType: 'Building',
@@ -146,14 +105,13 @@ export class ProjectService {
                 date: '1997-07-23',
             }]
           }
-      },
-      {
-        id: 'c8e6449f-ae5d-499c-937b-18277338d1e2',
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
           projectName: 'Building Project',
-          description: 'Building Project no.1',
+          description: 'Building Project no.1 Building Project no.1',
           dateStarted: '1997-07-13',
           dateEnded: '2001-01-17',
-          projectType: 'Hospital',
+          projectType: 'Building',
           address:{
             province:'Batangas',
             municipality:'Bauan',
@@ -166,7 +124,102 @@ export class ProjectService {
                 date: '1997-07-23',
             }]
           }
-      },                    
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
+          projectName: 'Building Project',
+          description: 'Building Project no.1 Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'Building',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          costDetails:{
+            totalCost: '₱123,124.00',
+            disbursement: [{
+                cost: '₱123,124.00',
+                date: '1997-07-23',
+            }]
+          }
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
+          projectName: 'Building Project',
+          description: 'Building Project no.1 Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'Building',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          costDetails:{
+            totalCost: '₱123,124.00',
+            disbursement: [{
+                cost: '₱123,124.00',
+                date: '1997-07-23',
+            }]
+          }
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
+          projectName: 'Building Project',
+          description: 'Building Project no.1 Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'Building',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          costDetails:{
+            totalCost: '₱123,124.00',
+            disbursement: [{
+                cost: '₱123,124.00',
+                date: '1997-07-23',
+            }]
+          }
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
+          projectName: 'Building Project',
+          description: 'Building Project no.1 Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'Building',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          costDetails:{
+            totalCost: '₱123,124.00',
+            disbursement: [{
+                cost: '₱123,124.00',
+                date: '1997-07-23',
+            }]
+          }
+      },      {
+        id: 'c8e6449f-ae5d-499c-937b',
+          projectName: 'Building Project',
+          description: 'Building Project no.1 Building Project no.1',
+          dateStarted: '1997-07-13',
+          dateEnded: '2001-01-17',
+          projectType: 'Building',
+          address:{
+            province:'Batangas',
+            municipality:'Bauan',
+            barangay: 'Manghinao proper'
+          },
+          costDetails:{
+            totalCost: '₱123,124.00',
+            disbursement: [{
+                cost: '₱123,124.00',
+                date: '1997-07-23',
+            }]
+          }
+      },                  
     ]
    }
 

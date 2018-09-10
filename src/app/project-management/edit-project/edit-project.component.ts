@@ -58,7 +58,7 @@ export class EditProjectComponent implements OnInit {
   onSubmit() {
       const newProject = this.projectForm.value;
       this.projectService.updateProject(newProject);
-      this.router.navigate(['/project'])
+      this.router.navigate(['../'])
   }
   
     get disbursements(){

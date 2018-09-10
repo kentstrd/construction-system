@@ -54,18 +54,6 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.isReadOnly = this.projectService.isReadonly
-    // this.projectService.selectedProject.subscribe(project => {
-    //   if (project.id != null) {
-    //     this.isNew = false;
-    //     project.disbursement.forEach(() => {
-    //       this.addDisbursement();
-    //     });
-    //     this.disbursementDeleteForm(0)
-    //     this.projectForm.patchValue(project)
-    //   }
-    // });
-
   }
 
 
@@ -108,7 +96,7 @@ export class CreateComponent implements OnInit {
       this.projectForm.value.id = this.generateId();
       const newProject = this.projectForm.value;
       this.projectService.addProject(newProject);
-    this.router.navigate(['/project'])
+    this.router.navigate(['../'])
   }
   get disbursements(){
     return this.projectForm.get('costDetails.disbursement') as FormArray
