@@ -104,7 +104,7 @@ export class EmployeeFormComponent implements OnInit {
     this.contactsForm.removeAt(i);
   }
 
-  get addressForms() {
+  get addressesForm() {
     return this.form.get('addresses') as FormArray;
   }
 
@@ -112,10 +112,10 @@ export class EmployeeFormComponent implements OnInit {
     const newAdd = this.fb.group({
       homeaddress: ['']
     });
-    this.addressForms.push(newAdd);
+    this.addressesForm.push(newAdd);
   }
   deleteNewAddress(i) {
-    this.addressForms.removeAt(i);
+    this.addressesForm.removeAt(i);
   }
 
   onSubmit() {
@@ -126,6 +126,6 @@ export class EmployeeFormComponent implements OnInit {
       this.employeeService.update(Object.assign({}, this.form.value));
     }
     // this works tho
-    this.router.navigate(['../']);
+    this.router.navigate(['/employee']);
   }
 }

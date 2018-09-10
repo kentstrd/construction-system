@@ -9,57 +9,59 @@ import { ProjectService } from '../../../../project-management/project.service';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-items;
-tableHeaders;
+  items;
+  tableHeaders;
 
-
-
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-    private employeeService: EmployeeService) { }
+    private employeeService: EmployeeService
+  ) {}
 
   ngOnInit() {
-    this.activatedRoute.parent.url.subscribe((urlPath) => {
+    this.activatedRoute.parent.url.subscribe(urlPath => {
       const url = urlPath[urlPath.length - 1].path;
-      this.items = this.getItems(url)
-      this.tableHeaders = this.getHeaders(url)
-    })
+      this.items = this.getItems(url);
+      this.tableHeaders = this.getHeaders(url);
+    });
   }
 
-  getItems(chosenRoute){
-    console.log(chosenRoute)
-    if(chosenRoute == 'project'){
-      return this.Projects
-    }else{
-      return this.Employees
+  getItems(chosenRoute) {
+    if (chosenRoute == 'project') {
+      return this.Projects;
+    } else {
+      return this.Employees;
     }
   }
-  getHeaders(chosenRoute){
-    if(chosenRoute == 'project'){
-      return this.getProjectHeaders()
-    }else{
-      return this.getEmployeeHeaders()
+  getHeaders(chosenRoute) {
+    if (chosenRoute == 'project') {
+      return this.getProjectHeaders();
+    } else {
+      return this.getEmployeeHeaders();
     }
   }
-  
-  get Projects(){
+
+  get Projects() {
     return this.projectService.getProjects();
   }
 
-  get Employees(){
+  get Employees() {
     return this.employeeService.getEmployees();
   }
 
-  getEmployeeHeaders(): string[]{
-    return ["","Skill", "Name", "gender", "address","contact"]
+  getEmployeeHeaders(): string[] {
+    return ['', 'Skill', 'Name', 'gender', 'address', 'contact'];
   }
 
-  getProjectHeaders(): string[]{
-    return ["","Project Name", "Project Type", "Address", "Project Cost","Date Started"]
+  getProjectHeaders(): string[] {
+    return ['', 'Project Name', 'Project Type', 'Address', 'Project Cost', 'Date Started'];
   }
 
-  view(item){
-    this.projectService.setProject(item)
+  view(item) {
+    if (this.items === this.projectService.getProjects()) {
+      this.projectService.setProject(item);
+    } else {
+      this.employeeService.setEmployee(item);
+    }
   }
-
 }

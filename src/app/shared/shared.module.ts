@@ -15,30 +15,35 @@ import { ValidationMessagesComponent } from './fields/validation-messages.compon
 import { ReactiveTextareaComponent } from './fields/reactive-textarea.component';
 import { ReactiveSelectComponent } from './fields/reactive-select.component';
 import { ReactiveAddressComponent } from './fields/reactive-address.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  imports: [CommonModule, RouterModule,ReactiveFormsModule],
-  exports: [PaginationComponent,
-            HeaderComponent, 
-            ViewOptionsComponent,
-            SubHeaderComponent, 
-            ValidationMessagesComponent,
-            ReactiveInputComponent,
-            ReactiveTextareaComponent,
-            ReactiveSelectComponent,
-            ReactiveAddressComponent],
-  declarations: [HeaderComponent, 
-                 ViewOptionsComponent, 
-                 PaginationComponent,
-                 GridLayoutComponent,
-                 TableComponent, 
-                 GridItemComponent, 
-                 TableRowComponent,
-                 ValidationMessagesComponent, 
-                 SubHeaderComponent,
-                 ReactiveAddressComponent,
-                 ReactiveInputComponent,
-                 ReactiveTextareaComponent,
-                 ReactiveSelectComponent]
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, NgxPaginationModule],
+  exports: [
+    PaginationComponent,
+    HeaderComponent,
+    ViewOptionsComponent,
+    SubHeaderComponent,
+    ValidationMessagesComponent,
+    ReactiveInputComponent,
+    ReactiveTextareaComponent,
+    ReactiveSelectComponent,
+    ReactiveAddressComponent
+  ],
+  declarations: [
+    HeaderComponent,
+    ViewOptionsComponent,
+    PaginationComponent,
+    GridLayoutComponent,
+    TableComponent,
+    GridItemComponent,
+    TableRowComponent,
+    ValidationMessagesComponent,
+    SubHeaderComponent,
+    ReactiveAddressComponent,
+    ReactiveInputComponent,
+    ReactiveTextareaComponent,
+    ReactiveSelectComponent
+  ]
 })
 export class SharedModule {}

@@ -28,14 +28,16 @@
         <small *ngIf="form.controls['firstName'].hasError('required')" class="text-danger"> Please Fill Up the Text box
         </small>
 
-        <small class="text-danger" *ngIf="form.controls['firstName'].errors?.minlength">First Name must be at least 2 characters</small>
+        <small class="text-danger" *ngIf="form.controls['firstName'].errors?.minlength">First Name must be at least 2
+          characters</small>
 
       </div>
 
       <div class="col-5 pl-5 border rounded" *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">
         <small *ngIf="form.controls['lastName'].hasError('required')" class="text-danger"> Please Fill Up the Text box</small>
 
-        <small class="text-danger" *ngIf="form.controls['lastName'].errors?.minlength">Last Name must be at least 2 characters</small>
+        <small class="text-danger" *ngIf="form.controls['lastName'].errors?.minlength">Last Name must be at least 2
+          characters</small>
       </div>
     </div>
 
@@ -79,9 +81,11 @@
       <div formArrayName="contacts">
         <label class="col-2 col-form-label">Contacts</label>
         <div *ngFor="let phone of contactsForm.controls; let i = index;" [formGroupName]="i">
-          <input class="form-control mb-2" type="text" [textMask]="{mask: mask}" pattern="\+\d \(\d{3}\) \d{3}-\d{4}" formControlName="homenumber">
+          <input class="form-control mb-2" type="text" [textMask]="{mask: mask}" pattern="\+\d \(\d{3}\) \d{3}-\d{4}"
+            formControlName="homenumber">
           <div>
-            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right mb-2" (click)="deleteContact(i)" *ngIf="i > 0"></button>
+            <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right mb-2" (click)="deleteContact(i)"
+              *ngIf="i > 0"></button>
           </div>
           <!-- <div class="row pl-3">
             <div *ngIf="contactsForm.touched && !contactsForm.valid">
@@ -98,8 +102,9 @@
     <div class="form-group">
       <div formArrayName="addresses">
         <label class="col-2 col-form-label">Address</label>
-        <div *ngFor="let address of addressForms.controls; let i = index;" [formGroupName]="i">
-          <input class="form-control mb-2" type="text" formControlName="homeaddress" placeholder="YOUR ADDRESS" required>
+        <div *ngFor="let address of addressesForm.controls; let i = index;" [formGroupName]="i">
+          <input class="form-control mb-2" type="text" formControlName="homeaddress" placeholder="YOUR ADDRESS"
+            required>
           <div>
             <button type="button" class="btn fa fa-trash btn-secondary btn-sm float-right" *ngIf="i > 0" (click)="deleteNewAddress(i)"></button>
           </div>
