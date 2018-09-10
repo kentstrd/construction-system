@@ -1,7 +1,10 @@
 <div class="row">
-  <app-grid-item class="card-deck col-3"
-  *ngFor="let item of items" 
-  [item]="item"
-  [items]="items">
+  <app-grid-item class="card-deck col-3" *ngFor="let item of items | paginate: { itemsPerPage: 2, currentPage: p }
+"
+    [item]="item" [items]="items">
   </app-grid-item>
+</div>
+
+<div class="float-right mt-2">
+  <pagination-controls></pagination-controls>
 </div>

@@ -11,6 +11,7 @@ import { ProjectService } from '../../../../project-management/project.service';
 export class TableComponent implements OnInit {
   items;
   tableHeaders;
+  p: number = 0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
