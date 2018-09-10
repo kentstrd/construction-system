@@ -6,12 +6,16 @@ import { GridLayoutComponent } from '../shared/components/view-options/grid-layo
 import { TableComponent } from '../shared/components/view-options/table/table.component';
 
 const routes: Routes = [
-  { path: 'employee', component: ViewOptionsComponent, children:[
-    {path:'', redirectTo:'list', pathMatch:'full'},
-    {path:'grid', component: GridLayoutComponent},
-    {path:'list', component: TableComponent}
-  ]},
-    {path:'employee/new', component: EmployeeFormComponent}
+  {
+    path: 'employee',
+    component: ViewOptionsComponent,
+    children: [
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'grid', component: GridLayoutComponent },
+      { path: 'list', component: TableComponent }
+    ]
+  },
+  { path: 'employee/new', component: EmployeeFormComponent }
   // {
   //   path: 'employee',
   //   component: HeaderComponent,

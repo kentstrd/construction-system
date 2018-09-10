@@ -27,8 +27,8 @@ export class EmployeeFormComponent implements OnInit {
   lastName: string;
   gender: string;
   skill: string;
-  address: Addresses[];
-  contact: Contacts[];
+  addresses: Addresses[];
+  contacts: Contacts[];
 
   public form: FormGroup;
   employees: Employee[];
@@ -50,12 +50,12 @@ export class EmployeeFormComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       skill: ['', [Validators.required]],
       gender: ['', [Validators.required]],
-      address: this.fb.array([
+      addresses: this.fb.array([
         this.fb.group({
           homeaddress: ['']
         })
       ]),
-      contact: this.fb.array([
+      contacts: this.fb.array([
         this.fb.group(
           {
             homenumber: ['']
@@ -69,35 +69,31 @@ export class EmployeeFormComponent implements OnInit {
     this.employee = this.employeeService.selectedEmployee.subscribe(employee => {
       if (employee.id != null) {
         this.isNew = false;
-        this.InitFormsValue('adddress', employee);
-        this.InitFormsValue('contact', employee);
+        this.InitFormsValue('adddresses', employee);
+        this.InitFormsValue('contacts', employee);
         this.form.patchValue(employee);
       }
     });
   }
 
-  private displayEmployee(employees: any): void {
-    this.employees = employees;
-  }
-
-  get phoneForms() {
-    return this.form.get('contact') as FormArray;
+  get contactsForm() {
+    return this.form.get('contacts') as FormArray;
   }
   addContact() {
     const number = this.fb.group({
       homenumber: ['']
     });
-    this.phoneForms.push(number);
+    this.contactsForm.push(number);
   }
 
   InitFormsValue(form, employee) {
-    if (form === 'contact') {
-      employee.contact.forEach(() => {
+    if (form === 'contacts') {
+      employee.contacts.forEach(() => {
         this.addContact();
       });
       this.deleteContact(1);
     } else {
-      employee.address.forEach(() => {
+      employee.addresses.forEach(() => {
         this.addNewAddress();
       });
       this.deleteNewAddress(1);
@@ -105,11 +101,11 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   deleteContact(i) {
-    this.phoneForms.removeAt(i);
+    this.contactsForm.removeAt(i);
   }
 
   get addressForms() {
-    return this.form.get('address') as FormArray;
+    return this.form.get('addresses') as FormArray;
   }
 
   addNewAddress() {
@@ -124,22 +120,12 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isNew) {
-      this.form.value.id = this.generateId;
+      this.form.value.id = this.employeeService.generateId;
       this.employeeService.addEmployee(Object.assign({}, this.form.value));
-      document.getElementById('test').nodeValue = 'Save';
     } else {
       this.employeeService.update(Object.assign({}, this.form.value));
-      document.getElementById('test').nodeValue = 'Update';
     }
     // this works tho
-    this.router.navigate(['/employee/details']);
-  }
-
-  generateId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = (Math.random() * 16) | 0,
-        v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
+    this.router.navigate(['../']);
   }
 }
