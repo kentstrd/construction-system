@@ -5,6 +5,8 @@ import { ViewOptionsComponent } from '../shared/components/view-options/view-opt
 import { GridLayoutComponent } from '../shared/components/view-options/grid-layout/grid-layout.component';
 import { TableComponent } from '../shared/components/view-options/table/table.component';
 
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+
 const routes: Routes = [
   {
     path: 'employee',
@@ -12,7 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'grid', component: GridLayoutComponent },
-      { path: 'list', component: TableComponent }
+      { path: 'list', component: EmployeeListComponent }
     ]
   },
   { path: 'employee/new', component: EmployeeFormComponent },

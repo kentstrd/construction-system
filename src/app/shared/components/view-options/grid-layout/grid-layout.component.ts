@@ -4,7 +4,7 @@ import { EmployeeService } from '../../../../employee/services/employee.service'
 import { ProjectService } from '../../../../project-management/project.service';
 
 @Component({
-  selector: 'app-layout-view',
+  selector: 'app-shared-grid-view',
   templateUrl: './grid-layout.component.html',
   styleUrls: ['./grid-layout.component.scss']
 })
@@ -27,7 +27,7 @@ export class GridLayoutComponent implements OnInit {
 
   getItems(chosenRoute) {
     console.log(chosenRoute);
-    if (chosenRoute == 'project') {
+    if (chosenRoute === 'project') {
       return this.Projects;
     } else {
       return this.Employees;

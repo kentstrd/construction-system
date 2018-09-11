@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Contacts, Employee, Addresses } from '../models/Employee';
 import { EmployeeService } from '../services/employee.service';
@@ -120,8 +120,15 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isNew) {
-      this.form.value.id = this.employeeService.generateId;
-      this.employeeService.addEmployee(Object.assign({}, this.form.value));
+      // this.form.value.id = this.employeeService.generateId;
+      this.employeeService.addEmployeeToDB(
+        this.form.value.firstName,
+        this.form.value.lastName,
+        this.form.value.gender,
+        this.form.value.skill,
+        this.form.value.addresses,
+        this.form.value.contacts
+      );
     } else {
       this.employeeService.update(Object.assign({}, this.form.value));
     }

@@ -7,6 +7,9 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { EmployeeGridComponent } from './employee-grid/employee-grid.component';
+import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,8 +18,14 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-    TextMaskModule
+    TextMaskModule,
+    HttpClientModule
   ],
-  declarations: [EmployeeFormComponent, EmployeeListComponent]
+  declarations: [
+    EmployeeFormComponent,
+    EmployeeListComponent,
+    EmployeeGridComponent,
+    EmployeeEditComponent
+  ]
 })
 export class EmployeeModule {}
