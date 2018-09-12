@@ -2,6 +2,25 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const Employee = require('./models/employee');
+const mongoose = require('mongoose');
+
+/* connect to mongoDB local */
+mongoose
+  .connect(
+    'mongodb://localhost:27017/constructionSystem',
+    { useNewUrlParser: true }
+  )
+  // mongoose
+  //   .connect(
+  //     'mongodb+srv://admin:TgFHcWlz1Wfgyu1G@cluster.mongodb.net/',
+  //     { dbName: 'node-angular', useNewUrlParser: true }
+  //   )
+  .then(() => {
+    console.log('connected to cloud!');
+  })
+  .catch(() => {
+    console.log('connection fail!');
+  });
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,7 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ATLAS ADMIN PASSWORD: N8lLsAJjt3dD0X5Z
+// ATLAS ADMIN PASSWORD: TgFHcWlz1Wfgyu1G
 
 app.get('/api/employee', (req, res, next) => {
   const employee = [
