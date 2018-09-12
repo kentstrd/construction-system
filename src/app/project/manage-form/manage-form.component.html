@@ -1,0 +1,78 @@
+<div class="container mt-2">
+  <app-shared-sub-header icon="fa fa-building-o" subHeaderText="Project Information"></app-shared-sub-header>
+</div>
+
+<form [formGroup]="projectForm" class="text-secondary" (ngSubmit)="onSubmit()">
+
+  <div class="text-info container col-8 p-0 mt-4 mb-2">
+    <i class="fa fa-info-circle p-2"></i>
+    <small>Profile</small>
+  </div>
+
+  <div class="container border border-secondary rounded col-8 p-5">
+    <reactive-input [control]="projectName" [value]="projectName.value" validation_req_msg="Project name is required*"
+      validation_min_msg="Project name must be at least 4 characters long*" type="text" inputClass="col-10" label="Project Name"></reactive-input>
+
+    <reactive-textarea [control]="description" validation_req_msg="Description is required*" validation_min_msg="Description must be at least 30 characters long*"
+      inputClass="col-10" rows="4" label="Description"></reactive-textarea>
+
+    <reactive-select [control]="projectType" validation_req_msg="Project Type is required*" [icon]="projectTypeGenerateIcon(projectType.value)"
+      selectClass="col-4" label="Project Type" [options]="projectTypeOptions"></reactive-select>
+
+    <reactive-address [group]="address" label="Address" validation_req_msg="Complete address is required*"
+      validation_min_msg="Project name must be at least 4 characters long*"></reactive-address>
+
+    <div class="row">
+      <reactive-input [control]="dateStarted" [value]="dateStarted.value" validation_req_msg="Date Started is required*"
+        dualColumn="true" type="date" label="Date Started" inputClass="col-6" class="col-6"></reactive-input>
+
+      <reactive-input [control]="dateEnded" [value]="dateEnded.value" validation_req_msg="Date Ended is required*"
+        dualColumn="true" type="date" label="Date Ended" inputClass="col-6" class="col-6"></reactive-input>
+    </div>
+  </div>
+
+  <div class="text-info container col-8 p-0 mt-2 mb-2">
+    <i class="fa fa-money p-2"></i>
+    <small>Cost Details</small>
+  </div>
+
+  <div class="container border border-secondary col-8 p-5" formGroupName="costDetails">
+    <reactive-input [control]="totalCost" [value]="totalCost.value | pesoPipe" validation_req_msg="Total cost is required*"
+      validation_min_msg="Total cost must be greater than ₱99*" validation_pat_msg="Total cost must be numbers*"
+      validation_cus_msg="Disbursements should not be greater than total cost*" placeholder="₱0,000,000.00"
+      [customValidation]="costDetails.hasError('validDisburesment')" label="Total Cost" inputClass="col-9"></reactive-input>
+
+    <label class="small">Disbursements</label>
+    <div formArrayName="disbursement">
+      <div class="form-group" *ngFor="let disbursement of disbursements.controls; let i=index" [formGroupName]="i">
+        <div class="row">
+
+          <reactive-input [control]="disbursement.controls.cost" validation_req_msg="Cost is required*"
+            validation_pat_msg="Cost must be numbers*" [customValidation]="costDetails.hasError('validDisburesment')"
+            placeholder="₱0,000,000.00" [value]="disbursement?.controls.cost?.value | pesoPipe" inputClass="col-8"
+            class="col-6" dualColumn="true"></reactive-input>
+
+          <reactive-input [control]="disbursement.controls.date" [value]="disbursement.controls.date.value"
+            [customValidation]="(disbursement.value.cost !== '' 
+                && !disbursement.controls.cost.invalid) && disbursement.value.date === ''"
+            validation_req_msg="Disbursement date is required*" type="date" inputClass="col-8" class="col-5" dualColumn="true"></reactive-input>
+          <a *ngIf="i > 0 " (click)="disbursementDeleteForm(i)" class="close text-danger m-0 pl-1" aria-label="Close">
+            <small aria-hidden="true">&times;</small>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <a class="btn nav-link text-success small offset-9 col-2 pl-5" (click)="addDisbursement()">
+        <small><i class="fa fa-plus-circle"></i> Disbursement</small> </a>
+    </div>
+
+  </div>
+
+  <div class="container col-8 mt-4 mb-5 ">
+    <button class="btn btn-sm btn-info col-1 float-right" routerLink="../../">Back</button>
+    <button type="submit" [disabled]="projectForm.invalid || (costDetails.value.disbursement[0].date === '' && costDetails.value.disbursement[0].cost !== '' )"
+      class=" mr-3 float-right btn btn-sm btn-info col-1">Update</button>
+  </div>
+</form>
