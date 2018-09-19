@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../project/project.service';
 
 @Component({
   selector: 'app-shared-view-options',
@@ -8,8 +9,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ViewOptionsComponent implements OnInit {
   @Input()
   for;
+  active;
 
-  constructor() {}
+  constructor(private projectServie: ProjectService) {
+    this.active = 'grid';
+  }
 
   ngOnInit() {}
 }
+// [routerLink] = "[active,'create','new']"

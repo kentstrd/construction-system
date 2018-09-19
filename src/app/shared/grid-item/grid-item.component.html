@@ -1,21 +1,21 @@
 <div class="card  mb-3">
   <div class="card-header bg-primary text-light p-1 pl-2 pt-2">
     <small class="text-uppercase"> {{header}} </small>
-    <a class="btn float-right p-0" [routerLink]="['update',item.id]" (click)="edit()">
+    <a class="btn float-right p-0" [routerLink]="['../../',for,'manage',item.id]">
       <h5 class="p-0 m-0 text-light"> <i class="fa fa-edit"></i></h5>
     </a>
   </div>
 
   <div class="container p-0 m-0 border rounded-bottom">
-    <div class="card-body text-secondary row m-0 p-0 pt-3 pb-3" [routerLink]="['view',item.id]" (click)="view()">
-      <h2 class="col-3 p-0 m-0 pl-3 pt-2"> <i [class]="icon"></i> </h2>
+    <div class="card-body text-secondary row m-0 p-0 pt-3 pb-3" [routerLink]="['../../',for,'view',item.id]">
+      <h2 class="col-3 p-0 m-0 pl-3 pt-2"> <i class="fa fa-lg" [class]="icon"></i> </h2>
       <div class=" offset-1 col-7">
         <small class="card-text row">{{body_row_1}}</small>
         <small class="card-text row">{{body_row_2a}}, {{body_row_2b}}</small>
         <small class="card-text row border-bottom border-top">
           <small class="font-italic p-1">{{body_row_3}}</small>
         </small>
-        <a class="btn p-0 row" [routerLink]="['view',item.id]" (click)="view()">
+        <a class="btn p-0 row" [routerLink]="['../../',for,'view',item.id]">
           <small>view details</small>
         </a>
       </div>

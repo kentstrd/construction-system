@@ -1,0 +1,67 @@
+<div class="container mt-2">
+  <app-shared-sub-header icon="fa fa-building-o" subHeaderText="Employee Information"></app-shared-sub-header>
+</div>
+<form [formGroup]="employeeForm" class="text-secondary" (ngSubmit)="onSubmit()">
+
+  <div class="text-info container col-8 p-0 mt-4 mb-2">
+    <i class="fa fa-info-circle p-2"></i>
+    <small>Profile</small>
+  </div>
+
+  <div class="container border border-secondary rounded col-8 p-5">
+    <div class="row">
+      <reactive-fullname [group]=fullName label="Full Name" class="col-12"></reactive-fullname>
+    </div>
+
+    <reactive-gender [control]=gender></reactive-gender>
+
+    <reactive-select label="Skill" [control]=skill [options]=skillOptions selectClass="col-2"></reactive-select>
+
+  </div>
+
+  <div class="text-info container col-8 p-0 mt-4 mb-2">
+    <i class="fa fa-info-circle p-2"></i>
+    <small>Contact Information</small>
+  </div>
+  <div class="container border border-secondary rounded col-8 p-5">
+    <div formArrayName="addresses">
+      <div *ngFor="let address of addresses.controls; let i=index" [formGroupName]="i">
+        <div class="row">
+          <label *ngIf="i === 0 " class="col-2 col-form-label-sm">Addresses</label>
+          <div *ngIf="i > 0 " class="col-2"></div>
+          <reactive-input [control]=address.controls.homeaddress class="col-6" noLabel=true></reactive-input>
+          <a *ngIf="i === 0 " (click)="addAddress()" class="btn text-success small pt-0 pl-1">
+            <small><i class="fa fa-plus-circle"></i> address</small>
+          </a>
+          <a *ngIf="i > 0 " (click)="deleteAddress(i)" class="close text-danger m-0 pl-1" aria-label="Close">
+            <small aria-hidden="true">&times;</small>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="contacts">
+      <div *ngFor="let contact of contacts.controls; let i=index" [formGroupName]="i">
+        <div class="row">
+          <label *ngIf="i === 0 " class="col-2 col-form-label-sm">Contacts</label>
+          <div *ngIf="i > 0 " class="col-2"></div>
+          <input class="form-control col-3 form-control-sm mb-2" type="text" [textMask]="{mask: mask}" pattern="\+\d \(\d{3}\) \d{3}-\d{4}"
+            formControlName="homenumber">
+          <a *ngIf="i === 0 " (click)="addContact()" class="btn text-success small pt-0 pl-1">
+            <small><i class="fa fa-plus-circle"></i> conctact</small>
+          </a>
+          <a *ngIf="i > 0 " (click)="deleteContact(i)" class="close text-danger m-0 pl-1" aria-label="Close">
+            <small aria-hidden="true">&times;</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container col-8 mt-4 mb-5 ">
+    <button class="btn btn-sm btn-info col-1 float-right" click="back()">Back</button>
+    <button *ngIf=" !isNew" type="submit" [disabled]="employeeForm.pristine" class=" mr-3 float-right btn btn-sm btn-info col-1">Update</button>
+
+    <button *ngIf="isNew" type="submit" [disabled]="employeeForm.pristine" class=" mr-3 float-right btn btn-sm btn-info col-1">Create</button>
+  </div>
+</form>

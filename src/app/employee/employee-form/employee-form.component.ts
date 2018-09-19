@@ -66,14 +66,14 @@ export class EmployeeFormComponent implements OnInit {
     });
 
     // Subscribe to the selectedEmployee
-    this.employee = this.employeeService.selectedEmployee.subscribe(employee => {
-      if (employee.id != null) {
-        this.isNew = false;
-        this.InitFormsValue('adddresses', employee);
-        this.InitFormsValue('contacts', employee);
-        this.form.patchValue(employee);
-      }
-    });
+    // this.employee = this.employeeService.selectedEmployee.subscribe(employee => {
+    //   if (employee.id != null) {
+    //     this.isNew = false;
+    //     this.InitFormsValue('adddresses', employee);
+    //     this.InitFormsValue('contacts', employee);
+    //     this.form.patchValue(employee);
+    //   }
+    // });
   }
 
   get contactsForm() {
@@ -123,7 +123,7 @@ export class EmployeeFormComponent implements OnInit {
       this.form.value.id = this.employeeService.generateId;
       this.employeeService.addEmployee(Object.assign({}, this.form.value));
     } else {
-      this.employeeService.update(Object.assign({}, this.form.value));
+      this.employeeService.updateEmployee(Object.assign({}, this.form.value));
     }
     // this works tho
     this.router.navigate(['/employee']);

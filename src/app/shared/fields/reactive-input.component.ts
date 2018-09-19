@@ -6,14 +6,14 @@ import { FormControl } from '@angular/forms';
   template: `
   <div class="form-group row">
       
-      <label [ngClass]="{'col-4': dualColumn}" 
-      class="col-2 col-form-label-sm">{{label}}</label>
+      <label [ngClass]="{'col-4': dualColumn, 'col-2':!dualColumn && !noLabel}" 
+      class=" col-form-label-sm">{{label}}</label>
     
-      <input [type] = "type"
-      [value] = "value"
-      [placeholder] = "placeholder"
-      [formControl]="control" 
-      [class]="inputClass"
+      <input [type] = type
+      [value] = value
+      [placeholder] = placeholder
+      [formControl]= control 
+      [class]= inputClass
       class="form-control form-control-sm"
       [ngClass]="{'invalid' : customValidation}">
 
@@ -33,27 +33,43 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./fields.component.scss']
 })
 export class ReactiveInputComponent implements OnInit {
-  @Input() customValidation : boolean;
-  @Input() value : string;
-  @Input() dualColumn : boolean;
-  @Input() type : string;
-  @Input() validation_cus_msg : string;
-  @Input() validation_pat_msg : string;
-  @Input() validation_req_msg : string;
-  @Input() validation_min_msg : string;
-  @Input() placeholder : string;
-  @Input() label : string;
-  @Input() inputClass : string;
-  @Input('control') 
-  public control : FormControl 
-    
+  @Input()
+  noLabel: boolean;
+  @Input()
+  customValidation: boolean;
+  @Input()
+  value: string;
+  @Input()
+  dualColumn: boolean;
+  @Input()
+  type: string;
+  @Input()
+  validation_cus_msg: string;
+  @Input()
+  validation_pat_msg: string;
+  @Input()
+  validation_req_msg: string;
+  @Input()
+  validation_min_msg: string;
+  @Input()
+  placeholder: string;
+  @Input()
+  label: string;
+  @Input()
+  inputClass: string;
+  @Input('control')
+  public control: FormControl;
+
   constructor() {
-    this.value = ''
-    this.placeholder = ''
-    this.dualColumn = false
+    this.value = '';
+    this.placeholder = '';
+    this.dualColumn = false;
+    this.type = 'text';
+    this.noLabel = false;
   }
 
   ngOnInit() {
+    this.value = this.value === '' ? this.control.value : this.value;
+    console.log(this.control.value);
   }
-
 }

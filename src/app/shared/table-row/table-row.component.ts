@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProjectService } from '../../project/project.service';
-import { EmployeeService } from '../../employee/services/employee.service';
 
 @Component({
   selector: '[app-shared-table-row]',
@@ -11,18 +9,15 @@ export class TableRowComponent implements OnInit {
   @Input()
   item;
   @Input()
-  items;
-  @Input()
-  tableRow;
+  for;
+  tableRow: string[];
 
-  constructor(private projectService: ProjectService, private employeeService: EmployeeService) {}
+  constructor() {}
 
   ngOnInit() {
-    if (this.items === this.projectService.getProjects()) {
-      this.tableRow = this.getProjectTableData();
-    } else {
-      this.tableRow = this.getEmployeeTableData();
-    }
+    this.for === 'project'
+      ? (this.tableRow = this.getProjectTableData())
+      : (this.tableRow = this.getEmployeeTableData());
   }
 
   getProjectTableData(): string[] {
@@ -38,25 +33,10 @@ export class TableRowComponent implements OnInit {
   getEmployeeTableData(): string[] {
     return [
       this.item.skill,
-      `${this.item.firstName} ${this.item.lastName}`,
+      `${this.item.fullname.firstName} ${this.item.fullname.lastName}`,
       this.item.gender,
-      `${this.item.addresses[0].homeaddress}`,
+      this.item.addresses[0].homeaddress,
       this.item.contacts[0].homenumber
     ];
-  }
-
-  view() {
-    if (this.items === this.projectService.getProjects()) {
-      this.projectService.setProject(this.item);
-    } else {
-      this.employeeService.setEmployee(this.item);
-    }
-  }
-  edit() {
-    if (this.items === this.projectService.getProjects()) {
-      this.projectService.setProject(this.item);
-    } else {
-      this.employeeService.setEmployee(this.item);
-    }
   }
 }

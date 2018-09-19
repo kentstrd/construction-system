@@ -71,8 +71,11 @@
   </div>
 
   <div class="container col-8 mt-4 mb-5 ">
-    <button class="btn btn-sm btn-info col-1 float-right" routerLink="../../">Back</button>
-    <button type="submit" [disabled]="projectForm.invalid || (costDetails.value.disbursement[0].date === '' && costDetails.value.disbursement[0].cost !== '' )"
+    <button class="btn btn-sm btn-info col-1 float-right" click="back()">Back</button>
+    <button *ngIf=" !isNew" type="submit" [disabled]="projectForm.invalid || (costDetails.value.disbursement[0].date === '' && costDetails.value.disbursement[0].cost !== '' )"
       class=" mr-3 float-right btn btn-sm btn-info col-1">Update</button>
+
+    <button *ngIf="isNew" type="submit" [disabled]="projectForm.invalid || (costDetails.value.disbursement[0].date === '' && costDetails.value.disbursement[0].cost !== '' )"
+      class=" mr-3 float-right btn btn-sm btn-info col-1">Create</button>
   </div>
 </form>

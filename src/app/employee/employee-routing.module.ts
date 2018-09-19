@@ -1,8 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { EmployeeComponent } from './employee.component';
+import { GridComponent } from './grid/grid.component';
+import { ListComponent } from './list/list.component';
+import { ManageFormComponent } from './manage-form/manage-form.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
+  {
+    path: 'employee',
+    component: EmployeeComponent,
+    children: [
+      { path: '', redirectTo: 'grid', pathMatch: 'full' },
+      { path: 'grid', component: GridComponent },
+      { path: 'list', component: ListComponent },
+      { path: 'view/:id', component: ViewComponent },
+      { path: 'manage/:id', component: ManageFormComponent }
+    ]
+  }
   // {
   //   path: 'employee',
   //   component: ViewOptionsComponent,

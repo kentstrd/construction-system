@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../project.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
-  selector: 'app-project-list',
+  selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
@@ -11,7 +11,7 @@ export class ListComponent implements OnInit {
   tableHeaders;
   p: number = 0;
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private emmployeeService: EmployeeService) {}
 
   ngOnInit() {
     this.items = this.getItems();
@@ -19,13 +19,9 @@ export class ListComponent implements OnInit {
   }
 
   getItems() {
-    return this.Projects;
+    return this.emmployeeService.getEmployees();
   }
   getHeaders() {
-    return ['', '', 'Project Name', 'Project Type', 'Address', 'Project Cost', 'Date Started'];
-  }
-
-  get Projects() {
-    return this.projectService.getProjects();
+    return ['', '', 'Skill', 'Name', 'gender', 'address', 'contact'];
   }
 }

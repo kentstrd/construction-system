@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ProjectService } from '../project.service';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ValidateDisbursements } from '../disbursements.validator';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Project } from '../project.model';
 
 @Component({
   selector: 'app-project-manage-form',
@@ -11,38 +13,80 @@ import { Location } from '@angular/common';
 })
 export class ManageFormComponent implements OnInit {
   projectForm: FormGroup;
-  isNew: boolean = true;
-  projectTypeGenerateIcon;
-  projectTypeOptions;
-  patternForPesoValidation;
+  isNew: boolean = false;
+  previousUrl: string;
+  projectTypeOptions = ['Building', 'Local Access Road', 'Hospital'];
+  patternForPesoValidation = /^[0-9₱,.]*$/;
 
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.projectTypeOptions = ['Building', 'Local Access Road', 'Hospital'];
-    this.patternForPesoValidation = /^[0-9₱,.]*$/;
-    this.projectTypeGenerateIcon = projectService.projectTypeGenerateIcon;
-
-    this.projectForm = projectService.projectForm;
+    this.projectForm = this.fb.group({
+      id: [''],
+      projectName: ['', [Validators.required, Validators.minLength(4)]],
+      description: ['', [Validators.required, Validators.minLength(30)]],
+      projectType: ['', Validators.required],
+      address: this.fb.group(
+        {
+          province: ['', Validators.required],
+          municipality: ['', Validators.required],
+          barangay: ['', Validators.required]
+        },
+        Validators.required
+      ),
+      dateStarted: ['', Validators.required],
+      dateEnded: ['', Validators.required],
+      costDetails: this.fb.group(
+        {
+          totalCost: [
+            '',
+            [
+              Validators.pattern(this.patternForPesoValidation),
+              Validators.minLength(4),
+              Validators.required
+            ]
+          ],
+          disbursement: this.fb.array([
+            this.fb.group({
+              cost: ['', [Validators.pattern(this.patternForPesoValidation)]],
+              date: ['']
+            })
+          ])
+        },
+        { validator: ValidateDisbursements }
+      )
+    });
   }
 
   ngOnInit() {
-    this.projectService.selectedProject.subscribe(project => {
-      if (project.id != null) {
-        project.costDetails.disbursement.forEach(() => {
-          this.addDisbursement();
-        });
-        this.disbursementDeleteForm(1);
-        this.projectForm.patchValue(project);
-      }
+    this.activatedRoute.params.subscribe(params => {
+      params.id === 'new'
+        ? (this.isNew = true)
+        : this.projectService.projects.forEach(project => {
+            project.id === params.id ? this.generateForm(project) : null;
+          });
     });
+  }
+
+  generateForm(project: Project) {
+    project.costDetails.disbursement.forEach(() => this.addDisbursement());
+    this.disbursementDeleteForm(1);
+    this.projectForm.patchValue(project);
   }
 
   addDisbursement() {
     const disbursement = this.fb.group({
-      cost: ['', [Validators.pattern(/^[0-9₱,.]*$/), Validators.minLength(2), Validators.required]],
+      cost: [
+        '',
+        [
+          Validators.pattern(this.patternForPesoValidation),
+          Validators.minLength(2),
+          Validators.required
+        ]
+      ],
       date: ['', Validators.required]
     });
     this.disbursements.push(disbursement);
@@ -53,8 +97,15 @@ export class ManageFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const newProject = this.projectForm.value;
-    this.projectService.updateProject(newProject);
+    if (this.isNew && this.projectForm.valid) {
+      this.projectForm.value.id = this.generateId();
+      this.projectService.addProject(this.projectForm.value);
+    } else {
+      this.projectService.updateProject(this.projectForm.value);
+    }
+    this.location.back();
+  }
+  back() {
     this.location.back();
   }
 
@@ -91,5 +142,14 @@ export class ManageFormComponent implements OnInit {
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
+  }
+  projectTypeGenerateIcon(icon) {
+    if (icon === 'Building') {
+      return 'fa fa-building fa-lg';
+    } else if (icon === 'Local Access Road') {
+      return 'fa fa-road fa-lg';
+    } else if (icon === 'Hospital') {
+      return 'fa fa-hospital-o fa-lg';
+    }
   }
 }

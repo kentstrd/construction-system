@@ -1,10 +1,10 @@
 <div class="container">
-  <app-shared-sub-header subHeaderText="project"></app-shared-sub-header>
-  <app-shared-view-options for="project"></app-shared-view-options>
+  <app-shared-sub-header subHeaderText="employee"></app-shared-sub-header>
+  <app-shared-view-options for="employee"></app-shared-view-options>
   <div class="row">
     <app-shared-grid-item class="card-deck col-3" *ngFor="let item of items | paginate: { itemsPerPage: 8, currentPage: p }
   "
-      [item]="item" for="project">
+      [item]="item" for="employee">
     </app-shared-grid-item>
   </div>
 

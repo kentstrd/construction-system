@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProjectService } from '../../project/project.service';
-import { EmployeeService } from '../../employee/services/employee.service';
 
 @Component({
   selector: 'app-shared-grid-item',
@@ -11,8 +9,8 @@ export class GridItemComponent implements OnInit {
   @Input()
   item;
   @Input()
-  items;
-  projectTypeGenerateIcon;
+  for;
+
   header;
   icon;
   body_row_1;
@@ -20,12 +18,11 @@ export class GridItemComponent implements OnInit {
   body_row_2b;
   body_row_3;
 
-  constructor(private projectService: ProjectService, private employeeService: EmployeeService) {
-    this.projectTypeGenerateIcon = this.projectService.projectTypeGenerateIcon;
-  }
+  constructor() {}
 
   ngOnInit() {
-    if (this.items === this.projectService.getProjects()) {
+    console.log(this.item);
+    if (this.for === 'project') {
       this.header = this.item.projectName;
       this.icon = this.projectTypeGenerateIcon(this.item.projectType);
       this.body_row_1 = this.item.address.barangay;
@@ -36,32 +33,19 @@ export class GridItemComponent implements OnInit {
       this.header = this.item.skill;
       this.icon = this.GenerateIconBasedOnGender(this.item.gender);
       this.body_row_1 = this.item.addresses[0].homeaddress;
-      this.body_row_2a = this.item.lastName;
-      this.body_row_2b = this.item.firstName;
+      this.body_row_2a = this.item.fullname.lastName;
+      this.body_row_2b = this.item.fullname.firstName;
       this.body_row_3 = this.item.contacts[0].homenumber;
     }
   }
 
-  view() {
-    if (this.items === this.projectService.getProjects()) {
-      this.projectService.setProject(this.item);
-    } else {
-      this.employeeService.setEmployee(this.item);
-    }
-  }
-  edit() {
-    if (this.items === this.projectService.getProjects()) {
-      this.projectService.setProject(this.item);
-    } else {
-      this.employeeService.setEmployee(this.item);
-    }
+  GenerateIconBasedOnGender(gender) {
+    return `fa ${gender == 'Female' ? 'fa-female' : 'fa-male'} fa-lg`;
   }
 
-  GenerateIconBasedOnGender(gender) {
-    if (gender === 'Female') {
-      return `fa fa-female fa-lg`;
-    } else {
-      return `fa fa-male fa-lg`;
-    }
+  projectTypeGenerateIcon(icon) {
+    return `fa ${
+      icon == 'Building' ? 'fa-building' : icon == 'Hospital' ? 'fa-hospital-o' : 'fa-road'
+    } fa-lg`;
   }
 }

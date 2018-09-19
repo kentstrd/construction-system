@@ -13,7 +13,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'grid', pathMatch: 'full' },
       { path: 'grid', component: GridComponent },
-      { path: 'list', component: ListComponent }
+      { path: 'list', component: ListComponent },
+      { path: 'view/:id', component: ViewComponent },
+      { path: 'manage/:id', component: ManageFormComponent }
     ]
   }
 ];

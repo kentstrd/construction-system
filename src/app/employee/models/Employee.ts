@@ -1,7 +1,6 @@
 export class Employee {
   id: string;
-  firstName: string;
-  lastName: string;
+  fullname: { firstName: string; lastName: string };
   gender: string;
   skill: string;
   addresses: Addresses[];

@@ -1,7 +1,13 @@
-<td class="small pt-2 p-0 border-right bg-light" [routerLink]="['update',item.id]" (click)="edit()">
-  <a class="btn m-0 p-0" [routerLink]="['update',item.id]" (click)="edit()"> <i class="fa fa-edit"></i> </a>
+<td class="small pt-2 p-0 border-right bg-light">
+  <a class="btn m-0 p-0 text-primary">
+    <i class="fa fa-trash-o"></i>
+  </a>
+</td>
+<td class="small pt-2 p-0 border-right bg-light" [routerLink]="['../../',for,'manage',item.id]">
+  <a class="btn m-0 p-0" [routerLink]="['../../',for,'manage',item.id]"> <i class="fa fa-edit"></i> </a>
 </td>
 
-<td class="small" *ngFor="let td of tableRow">
+
+<td class="small border-right" *ngFor="let td of tableRow">
   {{td}}
 </td>

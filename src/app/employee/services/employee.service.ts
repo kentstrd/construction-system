@@ -10,24 +10,14 @@ export class EmployeeService {
   public employeeSubject: Subject<any> = new Subject();
   employees: Employee[];
 
-  public employeesSource = new BehaviorSubject<Employee>({
-    id: null,
-    firstName: null,
-    lastName: null,
-    gender: null,
-    skill: null,
-    addresses: null,
-    contacts: null
-  });
-
-  selectedEmployee = this.employeesSource.asObservable();
-
   constructor() {
     this.employees = [
       {
         id: '1',
-        firstName: 'John',
-        lastName: 'Cena',
+        fullname: {
+          firstName: 'John',
+          lastName: 'Cena'
+        },
         gender: 'Male',
         skill: 'Carpenter',
         addresses: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
@@ -35,8 +25,10 @@ export class EmployeeService {
       },
       {
         id: '2',
-        firstName: 'Sarah',
-        lastName: 'Smith',
+        fullname: {
+          firstName: 'John',
+          lastName: 'Cena'
+        },
         gender: 'Female',
         skill: 'Mason',
         addresses: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
@@ -49,17 +41,13 @@ export class EmployeeService {
     return this.employees;
   }
 
-  setEmployee(employee: Employee) {
-    this.employeesSource.next(employee);
-  }
-
   addEmployee(employees: Employee): void {
     for (const employee of [employees]) {
       this.employees.unshift(employee);
     }
   }
 
-  update(employee: Employee) {
+  updateEmployee(employee: Employee) {
     this.employees.forEach((current, index) => {
       if (employee.id === current.id) {
         this.employees[index] = employee;

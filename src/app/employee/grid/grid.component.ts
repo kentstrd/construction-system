@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../project.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
-  selector: 'app-project-grid',
+  selector: 'app-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
@@ -10,13 +10,13 @@ export class GridComponent implements OnInit {
   items;
   p: number = 0;
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
     this.items = this.getItems();
   }
 
   getItems() {
-    return this.projectService.getProjects();
+    return this.employeeService.getEmployees();
   }
 }

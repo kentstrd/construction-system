@@ -14,6 +14,9 @@ import { ViewOptionsComponent } from './view-options/view-options.component';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
 import { GridItemComponent } from './grid-item/grid-item.component';
 import { TableRowComponent } from './table-row/table-row.component';
+import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
+import { ReactiveFullnameComponent } from './fields/reactive-fullname.component';
+import { ReactiveGenderComponent } from './fields/reactive-gender.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule, NgxPaginationModule],
@@ -26,9 +29,12 @@ import { TableRowComponent } from './table-row/table-row.component';
     ReactiveTextareaComponent,
     ReactiveSelectComponent,
     ReactiveAddressComponent,
+    ReactiveFullnameComponent,
+    ReactiveGenderComponent,
     GridItemComponent,
     TableRowComponent,
-    PesoPipe
+    PesoPipe,
+    ConfirmModalComponent
   ],
   declarations: [
     HeaderComponent,
@@ -37,11 +43,14 @@ import { TableRowComponent } from './table-row/table-row.component';
     TableRowComponent,
     ValidationMessagesComponent,
     SubHeaderComponent,
+    ReactiveGenderComponent,
+    ReactiveFullnameComponent,
     ReactiveAddressComponent,
     ReactiveInputComponent,
     ReactiveTextareaComponent,
     ReactiveSelectComponent,
-    PesoPipe
+    PesoPipe,
+    ConfirmModalComponent
   ]
 })
 export class SharedModule {}

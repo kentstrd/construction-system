@@ -1,82 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Project } from './project.model';
-import { ValidateDisbursements } from './disbursements.validator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   projects: Project[];
-  isReadonly: boolean = false;
-  projectForm: FormGroup;
-  patternForPesoValidation;
 
-  public projectSource = new BehaviorSubject<Project>({
-    id: null,
-    projectName: null,
-    description: null,
-    dateStarted: null,
-    dateEnded: null,
-    projectType: null,
-    address: {
-      province: null,
-      municipality: null,
-      barangay: null
-    },
-    costDetails: {
-      totalCost: null,
-      disbursement: [
-        {
-          cost: null,
-          date: null
-        }
-      ]
-    }
-  });
-
-  selectedProject = this.projectSource.asObservable();
-
-  constructor(private fb: FormBuilder) {
-    this.patternForPesoValidation = /^[0-9₱,.]*$/;
-
-    this.projectForm = this.fb.group({
-      id: [''],
-      projectName: ['', [Validators.required, Validators.minLength(4)]],
-      description: ['', [Validators.required, Validators.minLength(30)]],
-      projectType: ['', Validators.required],
-      address: this.fb.group(
-        {
-          province: ['', Validators.required],
-          municipality: ['', Validators.required],
-          barangay: ['', Validators.required]
-        },
-        Validators.required
-      ),
-      dateStarted: ['', Validators.required],
-      dateEnded: ['', Validators.required],
-      costDetails: this.fb.group(
-        {
-          totalCost: [
-            '',
-            [
-              Validators.pattern(this.patternForPesoValidation),
-              Validators.minLength(4),
-              Validators.required
-            ]
-          ],
-          disbursement: this.fb.array([
-            this.fb.group({
-              cost: ['', [Validators.pattern(this.patternForPesoValidation)]],
-              date: ['']
-            })
-          ])
-        },
-        { validator: ValidateDisbursements }
-      )
-    });
-
+  constructor() {
     this.projects = [
       {
         id: 'c8e6449f-ae5d-499c-a937b',
@@ -257,23 +188,8 @@ export class ProjectService {
     ];
   }
 
-  projectTypeGenerateIcon(icon) {
-    if (icon === 'Building') {
-      return 'fa fa-building fa-lg';
-    } else if (icon === 'Local Access Road') {
-      return 'fa fa-road fa-lg';
-    } else if (icon === 'Hospital') {
-      return 'fa fa-hospital-o fa-lg';
-    }
-  }
-
-  setProject(project: Project) {
-    this.projectSource.next(project);
-  }
-
   addProject(project: Project) {
     this.projects.unshift(project);
-    // this.projects.
   }
   getProjects() {
     return this.projects;

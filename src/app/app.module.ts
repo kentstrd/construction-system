@@ -11,6 +11,7 @@ import { EmployeeModule } from './employee/employee.module';
 import { EmployeeService } from './employee/services/employee.service';
 import { ProjectModule } from './project/project.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [AppComponent],
