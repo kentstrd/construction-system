@@ -24,11 +24,15 @@
               <th>Contacts</th>
             </tr>
           </thead>
-          <tbody class="text-center">
+          <tbody class="">
             <tr *ngFor="let employee of employee">
               <td>
-                <a (click)="onSelect(employee)" class="nav-link active" routerLink="/employee/form">
-                  {{ employee.firstName }} {{ employee.lastName}}</a>
+                <div>
+                  <button type="button" class="btn fa fa-trash btn-danger btn-sm" (click)="onDelete(employee.id)"></button>
+                  <span class="text-center">
+                    {{ employee.firstName }} {{ employee.lastName}}
+                  </span>
+                </div>
                 <!--to get the data -->
               </td>
               <td>{{ employee.gender }}</td>
@@ -51,4 +55,6 @@
       </div>
     </div>
   </div>
+  <pre>{{ this.employees | json }}</pre>
+  <p>asdad</p>
   <app-pagination class="float-right mt-5"></app-pagination>

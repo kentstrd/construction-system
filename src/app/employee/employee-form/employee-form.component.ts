@@ -121,14 +121,7 @@ export class EmployeeFormComponent implements OnInit {
   onSubmit() {
     if (this.isNew) {
       // this.form.value.id = this.employeeService.generateId;
-      this.employeeService.addEmployeeToDB(
-        this.form.value.firstName,
-        this.form.value.lastName,
-        this.form.value.gender,
-        this.form.value.skill,
-        this.form.value.addresses,
-        this.form.value.contacts
-      );
+      this.employeeService.addEmployeeToDB(this.form.value);
     } else {
       this.employeeService.update(Object.assign({}, this.form.value));
     }

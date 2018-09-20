@@ -13,7 +13,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   employees: Employee[];
 
   employee;
-
   private EmployeePeps: Subscription;
   constructor(public employeeService: EmployeeService, private router: Router) {}
 
@@ -22,12 +21,21 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     this.EmployeePeps = this.employeeService
       .getEmployeeUpdateListener()
       .subscribe((employee: Employee[]) => {
-        this.employee = employee;
+        console.log((this.employee = employee));
+        const employeeResponseProps = Object.keys(employee);
+        const employeeResponse = [];
+        for (const prop of employeeResponseProps) {
+          employeeResponse.unshift(employeeResponse[prop]);
+        }
       });
   }
 
   ngOnDestroy() {
     this.EmployeePeps.unsubscribe();
+  }
+
+  onDelete(employeeId: string) {
+    this.employeeService.deleteEmployee(employeeId);
   }
 
   onSelect(employee: Employee) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../../../employee/services/employee.service';
 import { ProjectService } from '../../../../project-management/project.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shared-grid-view',
@@ -11,7 +12,6 @@ import { ProjectService } from '../../../../project-management/project.service';
 export class GridLayoutComponent implements OnInit {
   items;
   p: number = 0;
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
@@ -35,7 +35,7 @@ export class GridLayoutComponent implements OnInit {
   }
 
   get Projects() {
-    return this.projectService.getProjects();
+    return this.projectService.getProjectsfromDB();
   }
 
   get Employees() {

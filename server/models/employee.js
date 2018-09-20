@@ -5,8 +5,16 @@ const employeeSchema = mongoose.Schema({
   lastName: { type: String, required: true },
   gender: String,
   skill: String,
-  addresses: [String],
-  contacts: [String]
+  addresses: [
+    {
+      homeaddress: String
+    }
+  ],
+  contacts: [
+    {
+      homenumber: String
+    }
+  ]
 });
 
 module.exports = mongoose.model('Employee', employeeSchema);

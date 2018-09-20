@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Employee } from '../models/Employee';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +13,7 @@ export class EmployeeService {
   employees: Employee[];
 
   private employeeUpdated = new Subject<Employee[]>();
+
   public employeesSource = new BehaviorSubject<Employee>({
     id: null,
     firstName: null,
@@ -24,28 +26,7 @@ export class EmployeeService {
 
   selectedEmployee = this.employeesSource.asObservable();
 
-  constructor(private http: HttpClient) {
-    // this.employees = [
-    //   {
-    //     id: '1',
-    //     firstName: 'John',
-    //     lastName: 'Cena',
-    //     gender: 'Male',
-    //     skill: 'Carpenter',
-    //     addresses: [{ homeaddress: 'Manila' }, { homeaddress: 'Pasay' }],
-    //     contacts: [{ homenumber: '09209218201' }, { homenumber: '09292927152' }]
-    //   },
-    //   {
-    //     id: '2',
-    //     firstName: 'Sarah',
-    //     lastName: 'Smith',
-    //     gender: 'Female',
-    //     skill: 'Mason',
-    //     addresses: [{ homeaddress: 'Mindoro' }, { homeaddress: 'Batangas' }],
-    //     contacts: [{ homenumber: '09230291261' }, { homenumber: '09212532622' }]
-    //   }
-    // ];
-  }
+  constructor(private http: HttpClient) {}
 
   public get(url: string): Observable<any> {
     return this.http.get(url);
@@ -53,9 +34,24 @@ export class EmployeeService {
 
   getEmployees() {
     this.http
-      .get<{ message: string; employee: Employee[] }>('http://localhost:3000/api/employee')
+      .get<{ message: string; employee: any }>('http://localhost:3000/api/employee')
+      .pipe(
+        map(employeeData => {
+          return employeeData.employee.map(employees => {
+            return {
+              id: employees._id,
+              firstName: employees.firstName,
+              lastName: employees.lastName,
+              gender: employees.gender,
+              skill: employees.skill,
+              addresses: employees.addresses,
+              contacts: employees.contacts
+            };
+          });
+        })
+      )
       .subscribe(employee => {
-        this.employees = employee.employee;
+        this.employees = employee;
         this.employeeUpdated.next([...this.employees]);
         console.log([...this.employees]);
       });
@@ -74,32 +70,34 @@ export class EmployeeService {
       this.employees.unshift(employee);
     }
   }
-
   // add employee to mongoDB
-  addEmployeeToDB(
-    firstname: string,
-    lastName: string,
-    gender: string,
-    skill: string,
-    addresses: any,
-    contacts: any
-  ) {
+  addEmployeeToDB(employeeModel: Employee) {
     const employee: Employee = {
       id: null,
-      firstName: firstname,
-      lastName: lastName,
-      gender: gender,
-      skill: skill,
-      addresses: addresses,
-      contacts: contacts
+      firstName: employeeModel.firstName,
+      lastName: employeeModel.lastName,
+      gender: employeeModel.gender,
+      skill: employeeModel.skill,
+      addresses: employeeModel.addresses,
+      contacts: employeeModel.contacts
     };
     this.http
-      .post<{ message: string }>('http://localhost:3000/api/employee', employee)
+      .post<{ message: string; employeeId: string }>('http://localhost:3000/api/employee', employee)
       .subscribe(employeeRespData => {
-        console.log([employeeRespData]);
-        this.employees.push(employee);
+        const employeeId = employeeRespData.employeeId;
+        employee.id = employeeId;
         this.employeeUpdated.next([...this.employees]);
       });
+  }
+
+  // DELETE EMPLOYEE FROM DB
+  deleteEmployee(employeeId: string) {
+    this.http.delete('http://localhost:3000/api/employee/' + employeeId).subscribe(() => {
+      console.log('DELETED!!');
+      const updatedEmployee = this.employees.filter(employee => employee.id !== employeeId);
+      this.employees = updatedEmployee;
+      this.employeeUpdated.next([...this.employees]);
+    });
   }
 
   update(employee: Employee) {
@@ -110,9 +108,6 @@ export class EmployeeService {
     });
   }
 
-  saveEmployee(employee) {
-    this.employees = employee;
-  }
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       const r = (Math.random() * 16) | 0,
