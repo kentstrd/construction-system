@@ -22,11 +22,11 @@ export class EmployeeService {
 
   getEmployees() {
     this.http
-      .get<{ message: string; employee: Employee[] }>('http://localhost:3002/api/employee')
-      .subscribe(employee => {
-        this.employees = employee.employee;
-        this.employeeUpdated.next([...this.employees]);
-        console.log([...this.employees]);
+      .get<{ message: string; employee: Employee[] }>('http://localhost:3000/api/employee')
+      .subscribe(resultData => {
+        this.employees = resultData.employee;
+        this.employeeUpdated.next(resultData.employee);
+        // console.log([...this.employees]);
       });
   }
 
@@ -53,17 +53,17 @@ export class EmployeeService {
       addresses: employeeModel.addresses
     };
     this.http
-      .post<{ message: string; employeeId: string }>('http://localhost:3002/api/employee', employee)
+      .post<{ message: string; employeeId: string }>('http://localhost:3000/api/employee', employee)
       .subscribe(employeeRespData => {
         const employeeId = employeeRespData.employeeId;
         employee._id = employeeId;
-        this.employeeUpdated.next([...this.employees]);
+        this.employeeUpdated.next([employee, ...this.employees]);
       });
   }
 
   // DELETE EMPLOYEE FROM DB
   deleteEmployee(employeeId: string) {
-    this.http.delete('http://localhost:3002/api/employee/' + employeeId).subscribe(() => {
+    this.http.delete('http://localhost:3000/api/employee/' + employeeId).subscribe(() => {
       console.log('DELETED!!');
       const updatedEmployee = this.employees.filter(employee => employee._id !== employeeId);
       this.employees = updatedEmployee;

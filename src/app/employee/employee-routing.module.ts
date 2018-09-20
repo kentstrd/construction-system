@@ -6,8 +6,6 @@ import { ListComponent } from './list/list.component';
 import { ManageFormComponent } from './manage-form/manage-form.component';
 import { ViewComponent } from './view/view.component';
 
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-
 const routes: Routes = [
   {
     path: 'employee',

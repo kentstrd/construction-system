@@ -61,7 +61,7 @@ export class ProjectService {
   // get projects from DB
   getProjects() {
     this.http
-      .get<{ message: string; project: any }>('http://localhost:3002/api/project')
+      .get<{ message: string; project: any }>('http://localhost:3000/api/project')
       .subscribe(project => {
         this.projects = project.project;
         this.projectUpdated.next([...this.projects]);
@@ -70,7 +70,7 @@ export class ProjectService {
   }
 
   deleteProject(projectId: string) {
-    this.http.delete('http://localhost:3002/api/project/' + projectId).subscribe(() => {
+    this.http.delete('http://localhost:3000/api/project/' + projectId).subscribe(() => {
       console.log('DELETED!!');
       const fetchedProject = this.projects.filter(projects => projects._id !== projectId);
       this.projects = fetchedProject;
@@ -81,7 +81,7 @@ export class ProjectService {
   // add employee to mongoDB
   addProjectToDB(project: Project) {
     this.http
-      .post<{ message: string; projectId: string }>('http://localhost:3002/api/project', project)
+      .post<{ message: string; projectId: string }>('http://localhost:3000/api/project', project)
       .subscribe(projectRespData => {
         const projectId = projectRespData.projectId;
         project._id = projectId;
