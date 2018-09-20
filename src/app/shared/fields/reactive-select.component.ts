@@ -28,20 +28,25 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./fields.component.scss']
 })
 export class ReactiveSelectComponent implements OnInit {
-  @Input() icon;
-  @Input() options;
-  @Input() validation_req_msg;
-  @Input() placeholder;
-  @Input() label;
-  @Input() selectClass;
-  @Input('control') 
-  public control : FormControl 
-    
+  @Input()
+  icon;
+  @Input()
+  options;
+  @Input()
+  validation_req_msg;
+  @Input()
+  placeholder;
+  @Input()
+  label;
+  @Input()
+  selectClass;
+  @Input('control')
+  public control: FormControl;
+
   constructor() {
-    this.placeholder = ''
+    this.placeholder = '';
+    this.selectClass = 'col-6';
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

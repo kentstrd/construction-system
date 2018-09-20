@@ -34,22 +34,26 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./fields.component.scss']
 })
 export class ValidationMessagesComponent implements OnInit {
-  @Input() validation_cus_msg;
-  @Input() validation_pat_msg;
-  @Input() validation_req_msg;
-  @Input() validation_min_msg;
-  @Input() customValidation : boolean;
-  @Input('control') 
-  public control : FormControl 
-    
+  @Input()
+  validation_cus_msg;
+  @Input()
+  validation_pat_msg;
+  @Input()
+  validation_req_msg;
+  @Input()
+  validation_min_msg;
+  @Input()
+  customValidation: boolean;
+  @Input('control')
+  public control: FormControl;
+
   constructor() {
-    this.customValidation = false
-    this.validation_req_msg = ''
-    this.validation_min_msg = ''
-    this.validation_pat_msg = ''
+    this.customValidation = false;
+    this.validation_req_msg = '';
+    this.validation_min_msg = '';
+    this.validation_pat_msg = '';
+    this.validation_cus_msg = '';
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

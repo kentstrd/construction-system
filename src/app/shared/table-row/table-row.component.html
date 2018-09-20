@@ -1,0 +1,11 @@
+<td class="small pt-2 p-0 border-right bg-light">
+  <app-shared-delete [for]=for [id]=item._id></app-shared-delete>
+</td>
+<td class="small pt-2 p-0 border-right bg-light" [routerLink]="['../../',for,'manage',item._id]">
+  <a class="btn m-0 p-0" [routerLink]="['../../',for,'manage',item._id]"> <i class="fa fa-edit"></i> </a>
+</td>
+
+
+<td class="small border-right" *ngFor="let td of tableRow">
+  {{td}}
+</td>

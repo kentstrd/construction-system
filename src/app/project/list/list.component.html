@@ -1,0 +1,28 @@
+<div class="container">
+  <app-shared-sub-header subHeaderText="project"></app-shared-sub-header>
+  <app-shared-view-options for="project"></app-shared-view-options>
+  <div class="row">
+    <div class="col">
+
+      <table class="table border rounded">
+        <thead class="bg-primary text-center">
+          <tr>
+            <th class="text-uppercase text-light small font-weight-bold" *ngFor="let tableHeader of tableHeaders">
+              {{tableHeader}}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-center text-secondary text-capitalize" style="cursor: pointer;">
+          <tr *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p }" app-shared-table-row [item]="item"
+            for="project">
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="float-right mt-2">
+
+    <pagination-controls class="small" (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

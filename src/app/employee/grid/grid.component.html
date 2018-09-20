@@ -1,0 +1,14 @@
+<div class="container">
+  <app-shared-sub-header subHeaderText="employee"></app-shared-sub-header>
+  <app-shared-view-options for="employee"></app-shared-view-options>
+  <div class="row">
+    <app-shared-grid-item class="card-deck col-3" *ngFor="let item of items | paginate: { itemsPerPage: 8, currentPage: p }
+  "
+      [item]="item" for="employee">
+    </app-shared-grid-item>
+  </div>
+
+  <div class="float-right mt-2">
+    <pagination-controls class="small" (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
