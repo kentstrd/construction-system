@@ -103,7 +103,6 @@ export class ManageFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.isNew) {
-      this.employeeForm.value.id = this.generateId();
       this.employeeService.addEmployeeToDB(this.employeeForm.value);
     } else {
       this.employeeService.updateEmployee(this.employeeForm.value);

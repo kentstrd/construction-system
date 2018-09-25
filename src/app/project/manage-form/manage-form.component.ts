@@ -25,7 +25,7 @@ export class ManageFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.projectForm = this.fb.group({
-      id: [''],
+      _id: [''],
       projectName: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
       projectType: ['', Validators.required],
@@ -98,7 +98,6 @@ export class ManageFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isNew && this.projectForm.valid) {
-      this.projectForm.value.id = this.generateId();
       this.projectService.addProjectToDB(this.projectForm.value);
     } else {
       this.projectService.updateProject(this.projectForm.value);

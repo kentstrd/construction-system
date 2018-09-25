@@ -18,45 +18,7 @@ export class ProjectService {
 
   private projectUpdated = new Subject<Project[]>();
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
-    this.patternForPesoValidation = /^[0-9₱,.]*$/;
-
-    this.projectForm = this.fb.group({
-      id: [''],
-      projectName: ['', [Validators.required, Validators.minLength(4)]],
-      description: ['', [Validators.required, Validators.minLength(30)]],
-      projectType: ['', Validators.required],
-      address: this.fb.group(
-        {
-          province: ['', Validators.required],
-          municipality: ['', Validators.required],
-          barangay: ['', Validators.required]
-        },
-        Validators.required
-      ),
-      dateStarted: ['', Validators.required],
-      dateEnded: ['', Validators.required],
-      costDetails: this.fb.group(
-        {
-          totalCost: [
-            '',
-            [
-              Validators.pattern(this.patternForPesoValidation),
-              Validators.minLength(4),
-              Validators.required
-            ]
-          ],
-          disbursement: this.fb.array([
-            this.fb.group({
-              cost: ['', [Validators.pattern(this.patternForPesoValidation)]],
-              date: ['']
-            })
-          ])
-        },
-        { validator: ValidateDisbursements }
-      )
-    });
-  }
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   // get projects from DB
   getProjects() {
@@ -65,7 +27,6 @@ export class ProjectService {
       .subscribe(project => {
         this.projects = project.project;
         this.projectUpdated.next([...this.projects]);
-        console.log([...this.projects]);
       });
   }
 
@@ -93,10 +54,12 @@ export class ProjectService {
     return this.projectUpdated.asObservable();
   }
   updateProject(project: Project) {
-    this.projects.forEach((current, index) => {
-      if (project._id === current._id) {
-        this.projects[index] = project;
-      }
+    console.log(project._id);
+    this.http.patch('http://localhost:3000/api/project/' + project._id, project).subscribe(() => {
+      console.log('EDITED!!');
+      const fetchedProject = this.projects.filter(projects => projects._id !== project._id);
+      this.projects = fetchedProject;
+      this.projectUpdated.next([...this.projects]);
     });
   }
 }
