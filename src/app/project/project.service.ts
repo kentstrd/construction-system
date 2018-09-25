@@ -46,7 +46,7 @@ export class ProjectService {
       .subscribe(projectRespData => {
         const projectId = projectRespData.projectId;
         project._id = projectId;
-        this.projectUpdated.next([...this.projects]);
+        this.projectUpdated.next([project, ...this.projects]);
       });
   }
 

@@ -21,7 +21,7 @@ export class GridItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.item);
+    // console.log(this.item);
     if (this.for === 'project') {
       this.header = this.item.projectName;
       this.icon = this.projectTypeGenerateIcon(this.item.projectType);

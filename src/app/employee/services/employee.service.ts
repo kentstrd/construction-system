@@ -40,18 +40,7 @@ export class EmployeeService {
     }
   }
   // add employee to mongoDB
-  addEmployeeToDB(employeeModel: Employee) {
-    const employee: Employee = {
-      _id: null,
-      fullname: {
-        firstName: employeeModel.fullname.firstName,
-        lastName: employeeModel.fullname.lastName
-      },
-      gender: employeeModel.gender,
-      skill: employeeModel.skill,
-      contacts: employeeModel.contacts,
-      addresses: employeeModel.addresses
-    };
+  addEmployeeToDB(employee: Employee) {
     this.http
       .post<{ message: string; employeeId: string }>('http://localhost:3000/api/employee', employee)
       .subscribe(employeeRespData => {
@@ -72,11 +61,15 @@ export class EmployeeService {
   }
 
   updateEmployee(employee: Employee) {
-    this.employees.forEach((current, index) => {
-      if (employee._id === current._id) {
-        this.employees[index] = employee;
-      }
-    });
+    console.log(employee._id);
+    this.http
+      .patch('http://localhost:3000/api/employee/' + employee._id, employee)
+      .subscribe(() => {
+        console.log('EDITED!!');
+        const fetchEmployee = this.employees.filter(employees => employees._id !== employee._id);
+        this.employees = fetchEmployee;
+        this.employeeUpdated.next([...this.employees]);
+      });
   }
 
   generateId() {

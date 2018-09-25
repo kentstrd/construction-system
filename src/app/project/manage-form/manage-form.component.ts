@@ -98,6 +98,7 @@ export class ManageFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isNew && this.projectForm.valid) {
+      this.projectForm.value._id = null;
       this.projectService.addProjectToDB(this.projectForm.value);
     } else {
       this.projectService.updateProject(this.projectForm.value);

@@ -98,21 +98,4 @@ export class ViewComponent implements OnInit {
   back() {
     this.location.back();
   }
-  onSubmit() {
-    if (this.isNew && this.employeeForm.valid) {
-      this.employeeForm.value.id = this.generateId();
-      this.employeeService.addEmployee(this.employeeForm.value);
-    } else {
-      this.employeeService.updateEmployee(this.employeeForm.value);
-    }
-    this.location.back();
-  }
-
-  generateId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = (Math.random() * 16) | 0,
-        v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-  }
 }

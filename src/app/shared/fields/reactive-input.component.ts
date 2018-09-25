@@ -70,6 +70,5 @@ export class ReactiveInputComponent implements OnInit {
 
   ngOnInit() {
     this.value = this.value === '' ? this.control.value : this.value;
-    console.log(this.control.value);
   }
 }

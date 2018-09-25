@@ -25,6 +25,7 @@ export class ManageFormComponent implements OnInit {
     private location: Location
   ) {
     this.employeeForm = this.fb.group({
+      _id: [''],
       fullname: this.fb.group({
         firstName: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', [Validators.required, Validators.minLength(2)]]
@@ -36,11 +37,7 @@ export class ManageFormComponent implements OnInit {
           homeaddress: ['', [Validators.required]]
         })
       ]),
-      contacts: this.fb.array([
-        this.fb.group({
-          homenumber: ['']
-        })
-      ])
+      contacts: this.fb.array([this.fb.group({ homenumber: [''] })])
     });
   }
   ngOnInit() {
@@ -103,6 +100,7 @@ export class ManageFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.isNew) {
+      this.employeeForm.value._id = null;
       this.employeeService.addEmployeeToDB(this.employeeForm.value);
     } else {
       this.employeeService.updateEmployee(this.employeeForm.value);
